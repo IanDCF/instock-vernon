@@ -1,7 +1,7 @@
 import "./AddNewButton.scss"
-const AddNewButton = () => {
+const AddNewButton = ({ text }) => {
     return (
-        <button className="add-new">+ Add New Warehouse</button>
+        <button className="add-new">+ { text }</button>
     )
 }
 
