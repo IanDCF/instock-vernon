@@ -1,0 +1,130 @@
+@use "../../styles/globals.scss";
+
+.wh-details {
+  //   @include globals.mixins-display-flex($gap: 2rem);
+  background-color: globals.$light-grey;
+  border-radius: 3px;
+
+  // Title Card
+
+  &__title-wrapper {
+    border-bottom: 1px solid globals.$cloud;
+    padding-top: 2rem;
+    padding-bottom: 1.5rem;
+  }
+  &__title {
+    padding: 0rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  // Meta Information
+
+  &__meta-info {
+    border-bottom: 1px solid globals.$cloud;
+  }
+
+  &__meta-info-wrapper {
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__address {
+    flex-basis: 100%;
+    width: 100%;
+    padding-bottom: 2rem;
+  }
+
+  &__contact-name {
+    flex: 1;
+  }
+
+  &__contact-info {
+    flex: 1;
+  }
+
+  // Labels
+  &__meta-label {
+    margin: 0px;
+    margin-bottom: 4px;
+    color: globals.$slate;
+    font-weight: 600;
+    font-size: 0.6875rem;
+    line-height: 1rem;
+  }
+
+  // Actual Meta Content
+  &__meta-content {
+    margin: 0px;
+  }
+
+  // Table
+  &__table {
+  }
+
+  &__column-labels {
+    border-bottom: 1px solid globals.$cloud;
+    // display none on mobile
+  }
+
+  &__column-labels-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  &__mobile-label {
+    // display none on tablet and bigger
+    color: globals.$slate;
+    font-weight: 600;
+    font-size: 0.6875rem;
+    line-height: 1rem;
+  }
+
+  //  Row Items
+
+  //   Row Item Wrappers
+  &__item-row-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid globals.$cloud;
+  }
+
+  &__item-wrapper {
+    width: 50%;
+    margin-bottom: 1.25rem;
+  }
+
+  &__category-wrapper {
+    width: 50%;
+    margin-bottom: 1.25rem;
+  }
+
+  &__status-wrapper {
+    width: 50%;
+  }
+
+  &__quantity-wrapper {
+    width: 50%;
+  }
+
+  &__actions-wrapper {
+    flex-basis: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+  }
+
+  //   Information and Labels
+  &__mobile-label {
+  }
+  &__information {
+    margin: 0px;
+    margin-top: 0.25rem;
+  }
+}

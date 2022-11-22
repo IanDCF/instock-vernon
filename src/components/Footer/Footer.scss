@@ -1,0 +1,18 @@
+@use "../../styles/partials/colors.scss" as colors;
+@use "../../styles/partials/fonts.scss" as fonts;
+@use "../../styles/partials/breakpoints.scss" as breakpoints;
+
+.footer {
+  color: colors.$slate;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  line-height: 1rem;
+  text-align: center;
+}
+
+@include breakpoints.tablet {
+  .footer {
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+  }
+}
