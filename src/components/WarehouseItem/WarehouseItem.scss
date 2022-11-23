@@ -53,6 +53,7 @@
       padding: 1.1875rem 0rem 1.6875rem;
     }
     &__icons {
+      cursor: pointer;
       max-width: 1.125rem;
       max-height: 1.125rem;
     }
@@ -126,10 +127,8 @@
       padding-left: 0.625rem;
       align-items: center;
     }
-    &__delete {
-      width: 18px;
-      height: 1.125rem;
-      margin-right: 1.5rem;
+    &__icons {
+      cursor: pointer;
     }
     &__delete {
       width: 18px;
