@@ -26,22 +26,10 @@ function App() {
           element={<EditWarehousePage />}
         />
 
-        <Route
-          path="/warehouse/:warehouseId/inventory"
-          element={<InventoryPage />}
-        />
-        <Route
-          path="/warehouse/:warehouseId/inventory/add"
-          element={<AddItemPage />}
-        />
-        <Route
-          path="/warehouse/:warehouseId/inventory/:itemId"
-          element={<ItemDetailsPage />}
-        />
-        <Route
-          path="/warehouse/:warehouseId/inventory/:itemId/edit"
-          element={<EditItemPage />}
-        />
+        <Route path="/inventory" element={<InventoryPage />} />
+        <Route path="inventory/add" element={<AddItemPage />} />
+        <Route path="/inventory/:itemId" element={<ItemDetailsPage />} />
+        <Route path="/inventory/:itemId/edit" element={<EditItemPage />} />
       </Routes>
       {/* Footer Component */}
     </BrowserRouter>
