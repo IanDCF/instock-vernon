@@ -1,0 +1,84 @@
+@use "../../styles/globals.scss";
+
+.add-wh {
+  padding: 0 1rem;
+
+  &__wrapper {
+    background-color: globals.$white;
+
+    box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
+    border-radius: 3px;
+  }
+
+  &__title {
+    color: globals.$instock-black;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 2.25rem;
+    margin: 0;
+  }
+
+  &__subtitle {
+    color: globals.$instock-black;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.75rem;
+    margin: 0;
+    padding: 1rem 0 0.5rem;
+  }
+
+  &__heading-wrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid globals.$cloud;
+    padding: 1.5rem;
+  }
+
+  &__details-wrapper {
+    border-bottom: 1px solid globals.$cloud;
+    padding: 0 1.5rem 1rem;
+  }
+
+  &__label {
+    color: globals.$instock-black;
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    padding: 1rem 0 0.25rem;
+  }
+
+  &__input {
+    border: 1px solid globals.$cloud;
+    border-radius: 20px;
+    display: block;
+    font-family: "Tillium Web";
+    height: 2.25rem;
+    padding: 0 1rem;
+
+    &:focus {
+      outline: none;
+      border: 1px solid globals.$instock-indigo;
+    }
+
+    &--required {
+      border: 1px solid globals.$red;
+    }
+
+    &::placeholder {
+      color: globals.$slate;
+    }
+  }
+
+  &__cancel-button {
+    background-color: globals.$white;
+    border: 1px solid globals.$cloud;
+    border-radius: 20px;
+    color: globals.$slate;
+    height: 36px;
+    padding: 8px 16px;
+    width: 50%;
+  }
+}
