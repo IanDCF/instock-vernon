@@ -6,35 +6,35 @@ import editIcon from "../../assets/icons/edit-24px.svg";
 import chevronIcon from "../../assets/icons/chevron_right-24px.svg";
 
 const WarehouseItem = ({ warehouse }) => {
-    const addres = `${warehouse.address} ${warehouse.city} ${warehouse.country}`
+    const address = `${warehouse.address} ${warehouse.city} ${warehouse.country}`
     return (
         <li className="warehouse">
             <section className="warehouse__info">
                 <ul className="warehouse__list-items">
                     <li className="warehouse__item warehouse__item">
                         <span className="warehouse__item-label">WAREHOUSE</span>
-                        <a className="warehouse__link">
-                            <span>{ warehouse.warehouse_name }</span>
+                        <Link className="warehouse__link">
+                            <span className="warehouse__link-warehouse">{ warehouse.warehouse_name }</span>
                             <img src={ chevronIcon } alt="" />
-                        </a>
+                        </Link>
                     </li>
                     <li className="warehouse__item warehouse__item--address">
                         <span className="warehouse__item-label">ADDRESS</span>
                         <span className="warehouse__item-value">
-                            { addres }
+                            { address }
                         </span>
                     </li>
                 </ul>
                 <ul className="warehouse__list-items">
                     <li className="warehouse__item">
                         <span className="warehouse__item-label">CONTACT NAME</span>
-                        <span>{ warehouse.contact_name }</span>
+                        <span className="warehouse__contact-name">{ warehouse.contact_name }</span>
                     </li>
                     <li className="warehouse__item">
                         <span className="warehouse__item-label">CONTACT INFORMATION</span>
                         <span>
-                            +1 (629) 555-0129 <br />
-                            paujla@instock.com
+                            { warehouse.contact_phone }<br />
+                            { warehouse.contact_email }
                         </span>
                     </li>
                 </ul>
