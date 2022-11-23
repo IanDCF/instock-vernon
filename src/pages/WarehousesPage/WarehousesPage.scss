@@ -1,4 +1,4 @@
-@use "../../styles//globals.scss" as globals;
+@use "../../styles/globals.scss" as globals;
 
 @include globals.mobile {
   .warehouses {
@@ -68,6 +68,8 @@
       display: flex;
       flex-direction: row;
       align-items: center;
+      width: 100%;
+      justify-content: right;
     }
     &__header-form {
       width: 100%;
@@ -82,6 +84,7 @@
       right: 0.5rem;
     }
     &__header-input {
+      width: 100%;
       height: 2.375rem;
       padding-left: 1rem;
       border-radius: 1.25rem;
@@ -100,7 +103,7 @@
       display: flex;
       width: 100%;
       padding: 0 2rem;
-      // justify-content: space-between;
+      height: 2.5rem;
     }
     &__header-list {
       display: flex;
@@ -122,6 +125,12 @@
     }
     &__list-value {
       display: flex;
+      color: globals.$slate;
+      font-weight: 600;
+      @include globals.tablet-table-header;
+      &--address {
+        padding-left: 1.5rem;
+      }
     }
     &__list-action {
       padding-left: 2rem;
@@ -129,6 +138,29 @@
     &__sort-icon {
       display: flex;
       height: 0.875rem;
+    }
+  }
+}
+
+@include globals.desktop {
+  .warehouses {
+    &__header-form {
+      width: 100%;
+      max-width: 275px;
+      position: relative;
+      margin-right: 1rem;
+    }
+    &__list-value {
+      display: flex;
+      &--address {
+        padding-left: 0;
+      }
+    }
+    &__list-value {
+      display: flex;
+      &--contact {
+        padding-left: 2rem;
+      }
     }
   }
 }

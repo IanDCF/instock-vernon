@@ -25,10 +25,10 @@ const WarehousesPage = ({ warehouses }) => {
                     <ul className="warehouses__header-list">
                         <li className="warehouses__list-container">
                             <div className="warehouses__title-item"><span className="warehouses__list-value">WAREHOUSE</span><img className="warehouses__sort-icon" src={ sortIcon } alt="" /></div>
-                            <div className="warehouses__title-item"><span className="warehouses__list-value">ADDRESS</span><img className="warehouses__sort-icon" src={ sortIcon } alt="" /></div>
+                            <div className="warehouses__title-item"><span className="warehouses__list-value warehouses__list-value--address">ADDRESS</span><img className="warehouses__sort-icon" src={ sortIcon } alt="" /></div>
                         </li>
                         <li className="warehouses__list-container">
-                            <div className="warehouses__title-item"><span className="warehouses__list-value">CONTACT NAME</span><img className="warehouses__sort-icon" src={ sortIcon } alt="" /></div>
+                            <div className="warehouses__title-item"><span className="warehouses__list-value warehouses__list-value--contact">CONTACT NAME</span><img className="warehouses__sort-icon" src={ sortIcon } alt="" /></div>
                             <div className="warehouses__title-item"><span className="warehouses__list-value">CONTACT INFORMATION</span><img className="warehouses__sort-icon" src={ sortIcon } alt="" /></div>
                         </li>
                     </ul>
