@@ -12,15 +12,14 @@ import { useEffect, useState } from "react";
 import getWarehouses from "./utils/getWarehouses";
 
 function App() {
-  const [warehouses, setWarehouses] = useState([]);
-
+  const [warehouses, setWarehouses] = useState([])
   useEffect(() => {
     const fetchWarehouses = async () => {
-      const data = await getWarehouses();
-      setWarehouses(data);
-    };
-    fetchWarehouses();
-  }, []);
+      const data = await getWarehouses()
+      setWarehouses(data)
+    }
+    fetchWarehouses()
+  }, [])
   return (
     <BrowserRouter>
       {/* Header Component */ }
