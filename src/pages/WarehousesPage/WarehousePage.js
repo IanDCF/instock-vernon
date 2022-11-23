@@ -1,28 +1,46 @@
-import "./WarehousesPage.scss"
-import searchIcon from "../../assets/icons/search-24px.svg"
-import AddNewButton from "../../components/Buttons/AddNew/AddNewButton"
-import WarehouseItem from "../../components/WarehouseItem/WarehouseItem"
-const WarehousesPage = () => {
-    const warehouselist = [1, 2, 3]
+import "./WarehousesPage.scss";
+import searchIcon from "../../assets/icons/search-24px.svg";
+import AddNewButton from "../../components/Buttons/AddNew/AddNewButton";
+import WarehouseItem from "../../components/WarehouseItem/WarehouseItem";
+import sortIcon from "../../assets/icons/sort-24px.svg"
+const WarehousesPage = ({ warehouses }) => {
+
     return (
-        <section className='warehouses'>
-            <article className='warehouses__header'>
-                <h1 className='warehouses__header-title'>
-                    Warehouses
-                </h1>
+        <section className="warehouses">
+            <article className="warehouses__header">
+                <h1 className="warehouses__header-title">Warehouses</h1>
                 <section className="warehouses__form-search">
-                    <form className='warehouses__header-form'>
-                        <img className='warehouses__search-icon' src={ searchIcon } alt="" />
-                        <input className='warehouses__header-input' placeholder="Search..." />
+                    <form className="warehouses__header-form">
+                        <img className="warehouses__search-icon" src={ searchIcon } alt="" />
+                        <input
+                            className="warehouses__header-input"
+                            placeholder="Search..."
+                        />
                     </form>
                     <AddNewButton text={ "Add New Warehouse" } />
                 </section>
             </article>
             <ul className="warehouses__list">
-                { warehouselist && warehouselist.map((warehouse, index) => <WarehouseItem key={ index } warehouse={ warehouse } />) }
+                <li className="warehouses__title-list">
+                    <ul className="warehouses__header-list">
+                        <li className="warehouses__list-container">
+                            <div className="warehouses__title-item"><span className="warehouses__list-value">WAREHOUSE</span><img className="warehouses__sort-icon" src={ sortIcon } alt="" /></div>
+                            <div className="warehouses__title-item"><span className="warehouses__list-value">ADDRESS</span><img className="warehouses__sort-icon" src={ sortIcon } alt="" /></div>
+                        </li>
+                        <li className="warehouses__list-container">
+                            <div className="warehouses__title-item"><span className="warehouses__list-value">CONTACT NAME</span><img className="warehouses__sort-icon" src={ sortIcon } alt="" /></div>
+                            <div className="warehouses__title-item"><span className="warehouses__list-value">CONTACT INFORMATION</span><img className="warehouses__sort-icon" src={ sortIcon } alt="" /></div>
+                        </li>
+                    </ul>
+                    <div className="warehouses__title-item"><span className="warehouses__list-action">ACTIONS</span></div>
+                </li>
+                { warehouses &&
+                    warehouses.map((warehouse, index) => (
+                        <WarehouseItem key={ index } warehouse={ warehouse } />
+                    )) }
             </ul>
         </section>
-    )
-}
+    );
+};
 
-export default WarehousesPage
+export default WarehousesPage;
