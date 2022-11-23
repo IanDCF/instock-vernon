@@ -1,6 +1,6 @@
 import "./App.scss";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import WarehousesPage from "./pages/WarehousesPage/WarehousePage"
+import WarehousesPage from "./pages/WarehousesPage/WarehousePage";
 import WarehouseDetailsPage from "./pages/WarehouseDetailsPage/WarehouseDetailsPage";
 import EditWarehousePage from "./pages/EditWarehousePage/EditWarehousePage";
 import AddWarehousePage from "./pages/AddWarehousePage/AddWarehousePage";
@@ -12,20 +12,24 @@ import { useEffect, useState } from "react";
 import getWarehouses from "./utils/getWarehouses";
 
 function App() {
-  const [warehouses, setWarehouses] = useState([])
+  const [warehouses, setWarehouses] = useState([]);
+
   useEffect(() => {
     const fetchWarehouses = async () => {
-      const data = await getWarehouses()
-      setWarehouses(data)
-    }
-    fetchWarehouses()
-  }, [])
+      const data = await getWarehouses();
+      setWarehouses(data);
+    };
+    fetchWarehouses();
+  }, []);
   return (
     <BrowserRouter>
       {/* Header Component */ }
       <Routes>
         <Route path="/" element={ <Navigate to="/warehouse" /> } />
-        <Route path="/warehouse" element={ <WarehousesPage warehouses={ warehouses } /> } />
+        <Route
+          path="/warehouse"
+          element={ <WarehousesPage warehouses={ warehouses } /> }
+        />
         <Route path="/warehouse/add" element={ <AddWarehousePage /> } />
         <Route
           path="/warehouse/:warehouseId"
