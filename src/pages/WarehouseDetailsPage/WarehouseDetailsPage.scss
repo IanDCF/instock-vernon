@@ -239,11 +239,13 @@
         flex: 3;
       }
       &:nth-child(5) {
-        // flex: 1.5;
-        width: 6rem;
+        flex: 1.5;
         display: flex;
         justify-content: end;
-        padding-right: 0.75rem;
+
+        p {
+          margin-right: 0.75rem;
+        }
       }
     }
 
@@ -302,4 +304,10 @@
       // height: 1.5rem;
     }
   }
+}
+
+// ** Desktop ** //
+
+@include globals.desktop {
+  // }
 }
