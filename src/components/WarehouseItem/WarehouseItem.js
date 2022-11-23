@@ -7,13 +7,16 @@ import chevronIcon from "../../assets/icons/chevron_right-24px.svg";
 
 const WarehouseItem = ({ warehouse }) => {
     const address = `${warehouse.address} ${warehouse.city} ${warehouse.country}`
+    const onClickHandler = () => {
+        //Here goes Ian's Code for the modal delete and edit
+    }
     return (
         <li className="warehouse">
             <section className="warehouse__info">
                 <ul className="warehouse__list-items">
                     <li className="warehouse__item warehouse__item">
                         <span className="warehouse__item-label">WAREHOUSE</span>
-                        <Link className="warehouse__link">
+                        <Link className="warehouse__link" to={ `/warehouse/${warehouse.id}` }>
                             <span className="warehouse__link-warehouse">{ warehouse.warehouse_name }</span>
                             <img src={ chevronIcon } alt="" />
                         </Link>
@@ -40,12 +43,12 @@ const WarehouseItem = ({ warehouse }) => {
                 </ul>
             </section>
             <div className=" warehouse__icons-container">
-                <a className="warehouse__delete">
+                <div onClick={ onClickHandler } className="warehouse__delete">
                     <img className=" warehouse__icons" src={ deleteIcon } alt="" />
-                </a>
-                <a className="warehouse__edit">
+                </div>
+                <div onClick={ onClickHandler } className="warehouse__edit">
                     <img className=" warehouse__icons" src={ editIcon } alt="" />
-                </a>
+                </div>
             </div>
         </li>
     );

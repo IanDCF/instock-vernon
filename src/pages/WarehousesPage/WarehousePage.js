@@ -3,6 +3,7 @@ import searchIcon from "../../assets/icons/search-24px.svg";
 import AddNewButton from "../../components/Buttons/AddNew/AddNewButton";
 import WarehouseItem from "../../components/WarehouseItem/WarehouseItem";
 import sortIcon from "../../assets/icons/sort-24px.svg"
+import { Link } from "react-router-dom";
 const WarehousesPage = ({ warehouses }) => {
 
     return (
@@ -17,7 +18,9 @@ const WarehousesPage = ({ warehouses }) => {
                             placeholder="Search..."
                         />
                     </form>
-                    <AddNewButton text={ "Add New Warehouse" } />
+                    <Link to={ '/warehouses/add' }>
+                        <AddNewButton text={ "Add New Warehouse" } />
+                    </Link>
                 </section>
             </article>
             <ul className="warehouses__list">

@@ -4,6 +4,7 @@
 
 @include bp.mobile {
   .add-new {
+    cursor: pointer;
     color: colors.$white;
     font-family: "Tillium Web";
     font-size: 0.875rem;
@@ -19,6 +20,7 @@
 
 @include bp.tablet {
   .add-new {
+    cursor: pointer;
     color: colors.$white;
     font-family: "Tillium Web";
     font-size: 0.875rem;
