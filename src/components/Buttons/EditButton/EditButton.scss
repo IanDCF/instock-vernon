@@ -1,0 +1,22 @@
+@use "../../../styles/globals.scss";
+
+.edit-btn {
+  border-style: none;
+  background-color: globals.$instock-indigo;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 1.25rem;
+
+  svg path {
+    fill: white;
+    width: 15px;
+    height: 15px;
+  }
+
+  &__text {
+    display: none;
+  }
+}

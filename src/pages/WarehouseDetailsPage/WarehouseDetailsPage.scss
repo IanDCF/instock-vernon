@@ -2,7 +2,7 @@
 
 .wh-details {
   //   @include globals.mixins-display-flex($gap: 2rem);
-  background-color: globals.$light-grey;
+  background-color: globals.$white;
   border-radius: 3px;
 
   // Title Card
@@ -12,10 +12,24 @@
     padding-top: 2rem;
     padding-bottom: 1.5rem;
   }
+
+  &__back-title-wrapper {
+    display: flex;
+    align-items: center;
+  }
   &__title {
     padding: 0rem 1.5rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      margin: 0px;
+    }
+  }
+  &__back-arrow {
+    padding: 0.25rem;
+    margin-right: 0.5rem;
   }
 
   // Meta Information
@@ -57,6 +71,10 @@
   // Actual Meta Content
   &__meta-content {
     margin: 0px;
+    font-weight: 400;
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+    color: globals.$instock-black;
   }
 
   // Table
@@ -64,15 +82,11 @@
   }
 
   &__column-labels {
-    border-bottom: 1px solid globals.$cloud;
     // display none on mobile
   }
 
   &__column-labels-wrapper {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 1.5rem;
-    flex-wrap: wrap;
+    display: none;
   }
 
   &__mobile-label {
@@ -96,19 +110,23 @@
   &__item-wrapper {
     width: 50%;
     margin-bottom: 1.25rem;
+    order: 1;
   }
 
   &__category-wrapper {
     width: 50%;
-    margin-bottom: 1.25rem;
+    // margin-bottom: 1.25rem;
+    order: 3;
   }
 
   &__status-wrapper {
     width: 50%;
+    order: 2;
   }
 
-  &__quantity-wrapper {
+  &__qty-wrapper {
     width: 50%;
+    order: 4;
   }
 
   &__actions-wrapper {
@@ -117,7 +135,23 @@
     display: flex;
     justify-content: space-between;
     padding-top: 1rem;
-    padding-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    order: 5;
+  }
+
+  &-item-btn {
+    text-decoration: none;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 0.25rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    color: globals.$instock-indigo;
+  }
+  &__item-btn-icon {
+    margin-left: 0.25rem;
   }
 
   //   Information and Labels
@@ -126,5 +160,22 @@
   &__information {
     margin: 0px;
     margin-top: 0.25rem;
+    font-weight: 400;
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+    color: globals.$instock-black;
+  }
+}
+
+// ** Tablet ** //
+
+@include globals.tablet {
+  .wh-details {
+    &__column-labels-wrapper {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      flex-wrap: wrap;
+    }
   }
 }
