@@ -1,21 +1,32 @@
 import "./App.scss";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import WarehousesPage from "./pages/WarehousesPage/WarehousesPage";
-import WarehouseDetailsPage from "./pages/WarehouseDetailsPage/WarehouseDetailsPage";
-import EditWarehousePage from "./pages/EditWarehousePage/EditWarehousePage";
-import AddWarehousePage from "./pages/AddWarehousePage/AddWarehousePage";
-import InventoryPage from "./pages/InventoryPage/InventoryPage";
-import ItemDetailsPage from "./pages/ItemDetailsPage/ItemDetailsPage";
-import EditItemPage from "./pages/EditItemPage/EditItemPage";
-import AddItemPage from "./pages/AddItemPage/AddItemPage";
+import WarehousesPage from "../WarehousesPage/WarehousesPage";
+import WarehouseDetailsPage from "../WarehouseDetailsPage/WarehouseDetailsPage";
+import EditWarehousePage from "../EditWarehousePage/EditWarehousePage";
+import AddWarehousePage from "../AddWarehousePage/AddWarehousePage";
+import InventoryPage from "../InventoryPage/InventoryPage";
+import ItemDetailsPage from "../ItemDetailsPage/ItemDetailsPage";
+import EditItemPage from "../EditItemPage/EditItemPage";
+import AddItemPage from "../AddItemPage/AddItemPage";
 
 function App() {
+  const [warehouses, setWarehouses] = useState([]);
+  useEffect(() => {
+    const fetchWarehouses = async () => {
+      const data = await getWarehouses();
+      setWarehouses(data);
+    };
+    fetchWarehouses();
+  }, []);
   return (
     <BrowserRouter>
       {/* Header Component */}
       <Routes>
         <Route path="/" element={<Navigate to="/warehouse" />} />
-        <Route path="/warehouse" element={<WarehousesPage />} />
+        <Route
+          path="/warehouse"
+          element={<WarehousesPage warehouses={warehouses} />}
+        />
         <Route path="/warehouse/add" element={<AddWarehousePage />} />
         <Route
           path="/warehouse/:warehouseId"
