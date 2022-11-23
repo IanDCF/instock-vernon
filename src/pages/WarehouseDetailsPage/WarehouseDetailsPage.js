@@ -122,19 +122,19 @@ function WarehouseDetailsPage() {
             </div>
           </div>
         </div>
-        {warehouseInventory &&
-          warehouseInventory.map((item) => {
-            return (
-              <div className="wh-details__table-rows">
-                <article className="wh-details__item-row">
+        <div className="wh-details__table-rows">
+          {warehouseInventory &&
+            warehouseInventory.map((item) => {
+              return (
+                <article className="wh-details__item-row" key={item.id}>
                   <div className="wh-details__item-row-wrapper">
                     <div className="wh-details__item-wrapper">
                       <label className="wh-details__mobile-label">
                         Inventory Item
                       </label>
-                      <br></br>
+                      {/* <br></br> */}
                       <a className="wh-details-item-btn" href="">
-                        Television
+                        {item.item_name}
                         <img
                           className="wh-details__item-btn-icon"
                           src={chevronIcon}
@@ -147,14 +147,17 @@ function WarehouseDetailsPage() {
                         Category
                       </label>
                       <p className="wh-details__category wh-details__information">
-                        Electronics
+                        {item.category}
                       </p>
                     </div>
                     <div className="wh-details__status-wrapper">
                       <label className="wh-details__mobile-label">Status</label>
                       <p className="wh-details__status wh-details__information">
-                        <InventoryTagInStock />
-                        {/* <InventoryTagOutOfStock /> */}
+                        {item.quantity === 0 ? (
+                          <InventoryTagOutOfStock />
+                        ) : (
+                          <InventoryTagInStock />
+                        )}
                       </p>
                     </div>
                     <div className="wh-details__qty-wrapper">
@@ -162,18 +165,26 @@ function WarehouseDetailsPage() {
                         Quantity
                       </label>
                       <p className="wh-details__quantity wh-details__information">
-                        500
+                        {item.quantity}
                       </p>
                     </div>
                     <div className="wh-details__actions-wrapper">
-                      <img src={deleteIcon} alt="delete item" />
-                      <img src={editIcon} alt="edit item" />
+                      <img
+                        className="wh-details__delete wh-details__action-icon"
+                        src={deleteIcon}
+                        alt="delete item"
+                      />
+                      <img
+                        className="wh-details__edit wh-details__action-icon"
+                        src={editIcon}
+                        alt="edit item"
+                      />
                     </div>
                   </div>
                 </article>
-              </div>
-            );
-          })}
+              );
+            })}
+        </div>
       </div>
     </section>
   );

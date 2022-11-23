@@ -24,3 +24,18 @@
   background-color: globals.$red-70;
   width: 5.375rem;
 }
+
+@include globals.tablet {
+  .inventory-tag {
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+  }
+
+  .in-stock {
+    width: 4.0625rem;
+  }
+
+  .out-of-stock {
+    width: 5.75rem;
+  }
+}

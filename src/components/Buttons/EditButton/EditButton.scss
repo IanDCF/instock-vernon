@@ -20,3 +20,19 @@
     display: none;
   }
 }
+
+// ** Tablet ** //
+
+@include globals.tablet {
+  .edit-btn {
+    width: 6rem;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    height: unset;
+
+    &__text {
+      display: block;
+      color: globals.$white;
+    }
+  }
+}

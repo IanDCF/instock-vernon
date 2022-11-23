@@ -4,6 +4,7 @@
   //   @include globals.mixins-display-flex($gap: 2rem);
   background-color: globals.$white;
   border-radius: 3px;
+  box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
 
   // Title Card
 
@@ -66,6 +67,7 @@
     font-weight: 600;
     font-size: 0.6875rem;
     line-height: 1rem;
+    text-transform: uppercase;
   }
 
   // Actual Meta Content
@@ -95,6 +97,7 @@
     font-weight: 600;
     font-size: 0.6875rem;
     line-height: 1rem;
+    text-transform: uppercase;
   }
 
   //  Row Items
@@ -171,11 +174,132 @@
 
 @include globals.tablet {
   .wh-details {
+    // Meta Information
+
+    &__meta-info {
+      border: none;
+    }
+    &__meta-info-wrapper {
+      flex-wrap: nowrap;
+      gap: 2rem;
+    }
+    &__address {
+      flex: 1.25;
+      border-right: 1px solid globals.$cloud;
+      padding-bottom: 0rem;
+
+      p {
+        max-width: 8rem;
+      }
+    }
+
+    &__contact-name {
+      flex: 1;
+    }
+    &__contact-info {
+      flex: 1;
+    }
+    &__meta-label {
+      font-size: 0.75rem;
+      line-height: 1.125rem;
+    }
+
+    &__meta-content {
+      font-size: 0.875rem;
+      line-height: 1.375rem;
+    }
     &__column-labels-wrapper {
       display: flex;
       justify-content: space-between;
       padding: 1rem 1.5rem;
       flex-wrap: wrap;
+      background-color: hsla(210, 14%, 97%, 0.7);
+    }
+
+    &__column-label {
+      font-size: 0.75rem;
+      line-height: 1.125rem;
+      color: globals.$slate;
+      font-weight: 600;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+
+      &:nth-child(1) {
+        flex: 3;
+      }
+      &:nth-child(2) {
+        flex: 3;
+      }
+      &:nth-child(3) {
+        flex: 4;
+      }
+      &:nth-child(4) {
+        flex: 3;
+      }
+      &:nth-child(5) {
+        // flex: 1.5;
+        width: 6rem;
+        display: flex;
+        justify-content: end;
+        padding-right: 0.75rem;
+      }
+    }
+
+    &__sort-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      padding: 0.25rem;
+      margin-left: 0.25rem;
+    }
+
+    &__item-row-wrapper {
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+
+    &__mobile-label {
+      display: none;
+    }
+
+    // Each Column in the inventory list
+    &__item-wrapper {
+      flex: 3;
+      margin-bottom: 0px;
+    }
+
+    &__category-wrapper {
+      flex: 3;
+    }
+
+    &__status-wrapper {
+      flex: 4;
+      order: 3;
+    }
+
+    &__qty-wrapper {
+      flex: 3;
+    }
+
+    &__actions-wrapper {
+      flex: 1.5;
+      padding: 0px;
+    }
+
+    // Elements inside the inventory cards
+    &-item-btn {
+      font-size: 0.875rem;
+    }
+
+    &__information {
+      font-size: 0.875rem;
+    }
+
+    &__action-icon {
+      padding: 0.75rem;
+      // width: 1.5rem;
+      // height: 1.5rem;
     }
   }
 }
