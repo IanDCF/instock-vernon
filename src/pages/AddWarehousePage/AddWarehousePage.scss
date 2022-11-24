@@ -6,9 +6,9 @@
 
   &__wrapper {
     background-color: globals.$white;
-
     box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
     border-radius: 3px;
+    transform: translateY(-64px);
   }
 
   &__title {
@@ -114,6 +114,19 @@
     &:hover {
       background-color: globals.$graphite;
     }
+  }
+
+  &__error {
+    font-size: 0.75rem;
+    color: globals.$red;
+    margin: 0;
+    padding-top: 4px;
+  }
+
+  &__error-img {
+    width: 16px;
+    height: 16px;
+    padding-top: 4px;
   }
 }
 
