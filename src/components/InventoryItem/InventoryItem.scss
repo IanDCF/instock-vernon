@@ -59,8 +59,6 @@
     }
     &__icons {
       cursor: pointer;
-      max-width: 1.125rem;
-      max-height: 1.125rem;
     }
   }
   .warehouse:hover {
@@ -70,7 +68,7 @@
 @include bp.tablet {
   .inventory {
     display: flex;
-    // justify-content: space-between;
+    align-items: center;
     font-size: 0.875rem;
     line-height: 1.375rem;
     margin: 0;
@@ -89,7 +87,7 @@
       flex-direction: row;
       align-items: center;
       width: 100%;
-      height: 6.125rem;
+      height: 3.625rem;
     }
 
     &__item {
@@ -99,9 +97,18 @@
       height: fit-content;
       padding: 0rem 0rem;
       &--warehouse {
-        width: fit-content;
+        width: 100px;
         padding-right: 1rem;
       }
+    }
+    &__status-label {
+      padding-left: 2rem;
+    }
+    &__warehouse-name {
+      width: 100px;
+    }
+    &_qty {
+      padding-left: 2rem;
     }
     &__item-label {
       display: none;
@@ -112,12 +119,11 @@
     }
     &__contact-name {
       display: flex;
-      align-items: center;
       height: fit-content;
     }
     &__item-value {
       max-width: 6rem;
-      margin-left: 1.5rem;
+      margin-left: 2rem;
     }
     &__link {
       display: flex;
@@ -125,6 +131,7 @@
       color: colors.$instock-indigo;
       font-weight: 600;
       text-decoration: none;
+      // margin-right: 0.625rem;
     }
     &__link-warehouse:hover {
       border-bottom: 0.0313rem solid;
@@ -156,9 +163,22 @@
   }
 }
 @include bp.desktop {
-  .warehouse {
+  .inventory {
+    padding: 0 2.5rem;
     &__item {
       padding: 0rem 0rem;
+      &--address {
+        padding-left: 6rem;
+      }
+    }
+    &__status-label {
+      padding-left: 5rem;
+    }
+    &__warehouse-name {
+      width: 100px;
+    }
+    &_qty {
+      padding-left: 5rem;
     }
     &__item-value {
       max-width: 100%;
@@ -175,6 +195,9 @@
       align-items: center;
       width: 100%;
       height: 4.75rem;
+    }
+    &__icons-container {
+      padding-left: 7rem;
     }
   }
 }

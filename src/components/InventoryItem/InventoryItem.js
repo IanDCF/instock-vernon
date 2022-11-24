@@ -39,20 +39,24 @@ const InventoryItem = ({ inventory }) => {
                         <span className="inventory__item-label">STATUS</span>
 
                         { inventory.status === "In Stock" ? (
-                            <InventoryTagInStock />
+                            <div className="inventory__status-label">
+                                <InventoryTagInStock />
+                            </div>
                         ) : (
-                            <InventoryTagOutOfStock />
+                            <div className="inventory__status-label">
+                                <InventoryTagOutOfStock />
+                            </div>
                         ) }
                     </li>
                     <li className="inventory__item">
                         <span className="inventory__item-label">QTY</span>
-                        <span>{ inventory.quantity }</span>
+                        <span className="inventory_qty">{ inventory.quantity }</span>
                     </li>
                 </ul>
             </section>
             <div className="inventory__item inventory__item--warehouse ">
                 <span className="inventory__item-label">WAREHOUSE</span>
-                <span>{ inventory.warehouse_name }</span>
+                <span className="inventory__warehouse-name">{ inventory.warehouse_name }</span>
             </div>
             <div className=" inventory__icons-container">
                 <div
