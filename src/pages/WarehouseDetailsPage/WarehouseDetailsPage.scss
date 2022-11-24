@@ -1,0 +1,313 @@
+@use "../../styles/globals.scss";
+
+.wh-details {
+  //   @include globals.mixins-display-flex($gap: 2rem);
+  background-color: globals.$white;
+  border-radius: 3px;
+  box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
+
+  // Title Card
+
+  &__title-wrapper {
+    border-bottom: 1px solid globals.$cloud;
+    padding-top: 2rem;
+    padding-bottom: 1.5rem;
+  }
+
+  &__back-title-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  &__title {
+    padding: 0rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      margin: 0px;
+    }
+  }
+  &__back-arrow {
+    padding: 0.25rem;
+    margin-right: 0.5rem;
+  }
+
+  // Meta Information
+
+  &__meta-info {
+    border-bottom: 1px solid globals.$cloud;
+  }
+
+  &__meta-info-wrapper {
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__address {
+    flex-basis: 100%;
+    width: 100%;
+    padding-bottom: 2rem;
+  }
+
+  &__contact-name {
+    flex: 1;
+  }
+
+  &__contact-info {
+    flex: 1;
+  }
+
+  // Labels
+  &__meta-label {
+    margin: 0px;
+    margin-bottom: 4px;
+    color: globals.$slate;
+    font-weight: 600;
+    font-size: 0.6875rem;
+    line-height: 1rem;
+    text-transform: uppercase;
+  }
+
+  // Actual Meta Content
+  &__meta-content {
+    margin: 0px;
+    font-weight: 400;
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+    color: globals.$instock-black;
+  }
+
+  // Table
+  &__table {
+  }
+
+  &__column-labels {
+    // display none on mobile
+  }
+
+  &__column-labels-wrapper {
+    display: none;
+  }
+
+  &__mobile-label {
+    // display none on tablet and bigger
+    color: globals.$slate;
+    font-weight: 600;
+    font-size: 0.6875rem;
+    line-height: 1rem;
+    text-transform: uppercase;
+  }
+
+  //  Row Items
+
+  //   Row Item Wrappers
+  &__item-row-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid globals.$cloud;
+  }
+
+  &__item-wrapper {
+    width: 50%;
+    margin-bottom: 1.25rem;
+    order: 1;
+  }
+
+  &__category-wrapper {
+    width: 50%;
+    // margin-bottom: 1.25rem;
+    order: 3;
+  }
+
+  &__status-wrapper {
+    width: 50%;
+    order: 2;
+  }
+
+  &__qty-wrapper {
+    width: 50%;
+    order: 4;
+  }
+
+  &__actions-wrapper {
+    flex-basis: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+    order: 5;
+  }
+
+  &-item-btn {
+    text-decoration: none;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 0.25rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    color: globals.$instock-indigo;
+  }
+  &__item-btn-icon {
+    margin-left: 0.25rem;
+  }
+
+  //   Information and Labels
+  &__mobile-label {
+  }
+  &__information {
+    margin: 0px;
+    margin-top: 0.25rem;
+    font-weight: 400;
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+    color: globals.$instock-black;
+  }
+}
+
+// ** Tablet ** //
+
+@include globals.tablet {
+  .wh-details {
+    // Meta Information
+
+    &__meta-info {
+      border: none;
+    }
+    &__meta-info-wrapper {
+      flex-wrap: nowrap;
+      gap: 2rem;
+    }
+    &__address {
+      flex: 1.25;
+      border-right: 1px solid globals.$cloud;
+      padding-bottom: 0rem;
+
+      p {
+        max-width: 8rem;
+      }
+    }
+
+    &__contact-name {
+      flex: 1;
+    }
+    &__contact-info {
+      flex: 1;
+    }
+    &__meta-label {
+      font-size: 0.75rem;
+      line-height: 1.125rem;
+    }
+
+    &__meta-content {
+      font-size: 0.875rem;
+      line-height: 1.375rem;
+    }
+    &__column-labels-wrapper {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      flex-wrap: wrap;
+      background-color: hsla(210, 14%, 97%, 0.7);
+    }
+
+    &__column-label {
+      font-size: 0.75rem;
+      line-height: 1.125rem;
+      color: globals.$slate;
+      font-weight: 600;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+
+      &:nth-child(1) {
+        flex: 3;
+      }
+      &:nth-child(2) {
+        flex: 3;
+      }
+      &:nth-child(3) {
+        flex: 4;
+      }
+      &:nth-child(4) {
+        flex: 3;
+      }
+      &:nth-child(5) {
+        flex: 1.5;
+        display: flex;
+        justify-content: end;
+
+        p {
+          margin-right: 0.75rem;
+        }
+      }
+    }
+
+    &__sort-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      padding: 0.25rem;
+      margin-left: 0.25rem;
+    }
+
+    &__item-row-wrapper {
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+
+    &__mobile-label {
+      display: none;
+    }
+
+    // Each Column in the inventory list
+    &__item-wrapper {
+      flex: 3;
+      margin-bottom: 0px;
+    }
+
+    &__category-wrapper {
+      flex: 3;
+    }
+
+    &__status-wrapper {
+      flex: 4;
+      order: 3;
+    }
+
+    &__qty-wrapper {
+      flex: 3;
+    }
+
+    &__actions-wrapper {
+      flex: 1.5;
+      padding: 0px;
+    }
+
+    // Elements inside the inventory cards
+    &-item-btn {
+      font-size: 0.875rem;
+    }
+
+    &__information {
+      font-size: 0.875rem;
+    }
+
+    &__action-icon {
+      padding: 0.75rem;
+      // width: 1.5rem;
+      // height: 1.5rem;
+    }
+  }
+}
+
+// ** Desktop ** //
+
+@include globals.desktop {
+  // }
+}
