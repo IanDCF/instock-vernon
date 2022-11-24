@@ -1,5 +1,6 @@
 @use "../../styles/globals.scss";
 
+// mobile version
 .add-wh {
   padding: 0 1rem;
 
@@ -57,6 +58,7 @@
     font-family: "Tillium Web";
     height: 2.25rem;
     padding: 0 1rem;
+    width: 100%;
 
     &:focus {
       outline: none;
@@ -72,13 +74,83 @@
     }
   }
 
+  &__buttons-wrapper {
+    padding-top: 2.5rem;
+  }
+
   &__cancel-button {
     background-color: globals.$white;
     border: 1px solid globals.$cloud;
     border-radius: 20px;
     color: globals.$slate;
     height: 36px;
+    margin-right: 0.5rem;
     padding: 8px 16px;
-    width: 50%;
+    width: 45%;
+
+    &:hover {
+      color: globals.$instock-indigo;
+      border: 1px solid globals.$instock-indigo;
+    }
+  }
+
+  &__add-button {
+    background-color: globals.$instock-indigo;
+    border: none;
+    border-radius: 20px;
+    color: globals.$white;
+    height: 36px;
+    margin-left: 0.5rem;
+    padding: 8px 16px;
+    width: 45%;
+
+    &:hover {
+      background-color: globals.$graphite;
+    }
+  }
+}
+
+// tablet version
+@include globals.tablet {
+  .add-wh {
+    padding: 0 2rem;
+
+    &__subtitle {
+      padding-top: 0;
+    }
+
+    &__heading-wrapper {
+      justify-content: flex-start;
+      padding: 2rem;
+    }
+
+    &__form-wrapper {
+      display: flex;
+      padding-top: 1.5rem;
+    }
+
+    &__details-wrapper {
+      width: 50%;
+      border-bottom: none;
+
+      &:first-child {
+        border-right: 1px solid globals.$cloud;
+      }
+    }
+
+    &__buttons-wrapper {
+      padding-top: 2rem;
+      padding-bottom: 1rem;
+      text-align: right;
+    }
+
+    &__cancel-button {
+      width: 4.5rem;
+    }
+
+    &__add-button {
+      width: 8.625rem;
+      margin-right: 2rem;
+    }
   }
 }
