@@ -11,4 +11,11 @@ export const deleteWarehouse = async (warehouseId) => {
   const { data } = await axios.delete(url, { data: { id: warehouseId } });
   return data;
 };
+
+export const deleteItem = async (itemId) => {
+  const url = `http://localhost:8080/inventories/${itemId}`;
+  const { data } = await axios.delete(url, { data: { id: itemId } });
+  return data;
+};
+
 export default getWarehouses;

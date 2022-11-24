@@ -5,9 +5,9 @@ import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
 import editIcon from "../../assets/icons/edit-24px.svg";
 import chevronIcon from "../../assets/icons/chevron_right-24px.svg";
 import { useState } from "react";
-import WarehouseDeleteModal from "../../components/WarehouseDelModal/WarehouseDelModal";
+import DeleteModal from "../DeleteModal/DeleteModal";
 
-const WarehouseItem = ({ warehouse, render }) => {
+const WarehouseItem = ({ warehouse, renderWarehouses }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const handleModal = () => {
@@ -70,10 +70,11 @@ const WarehouseItem = ({ warehouse, render }) => {
         </div>
       </li>
       {openModal && (
-        <WarehouseDeleteModal
+        <DeleteModal
           handleModal={handleModal}
           warehouse={warehouse}
-          render={render}
+          renderWarehouses={renderWarehouses}
+          type="warehouse"
         />
       )}
     </>
