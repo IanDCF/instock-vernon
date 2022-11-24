@@ -28,9 +28,13 @@ function App() {
     fetchData()
   }, [])
 
-  const renderWarehouses = (id) => {
-    setWarehouses(warehouses.filter((element) => element.id !== id));
+  const renderWarehouses = (newWarehouseList) => {
+    setWarehouses(newWarehouseList);
   };
+  const updateInventory = (newInventoryList) => {
+    setInventory(newInventoryList)
+
+  }
 
   return (
     <BrowserRouter>
@@ -57,7 +61,7 @@ function App() {
           element={ <EditWarehousePage /> }
         />
 
-        <Route path="/inventory" element={ <InventoryPage inventory={ inventory } /> } />
+        <Route path="/inventory" element={ <InventoryPage updateInventory={ updateInventory } inventory={ inventory } /> } />
         <Route path="inventory/add" element={ <AddItemPage /> } />
         <Route path="/inventory/:itemId" element={ <ItemDetailsPage /> } />
         <Route path="/inventory/:itemId/edit" element={ <EditItemPage /> } />
