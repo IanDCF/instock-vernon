@@ -154,7 +154,6 @@ const AddWarehousePage = () => {
 
     if (flag === false) return false;
 
-    console.log("Form valid");
     return true;
   };
 
@@ -173,7 +172,6 @@ const AddWarehousePage = () => {
     };
 
     if (isFormValid()) {
-      console.log("Form Valid on submit");
       axios
         .post(`${BACKEND}/warehouses`, warehouseObj)
         .then(() => {
