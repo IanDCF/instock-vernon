@@ -1,8 +1,14 @@
 import "./AddItemPage.scss";
 import ArrowBack from "../../assets/icons/arrow_back-24px.svg";
 import ArrowDropDown from "../../assets/icons/arrow_drop_down-24px.svg";
+import AddNewButton from "../../components/Buttons/AddNew/AddNewButton";
 
 const AddItemPage = () => {
+  const handleClick = (event) => {
+    event.preventDefault();
+    console.log(event);
+  };
+
   return (
     <section className="add-item">
       <div className="add-item__component">
@@ -194,12 +200,16 @@ const AddItemPage = () => {
             </div>
 
             <div className="add-item__buttons-wrapper">
-              <button className="add-item__cancel-btn" type="button">
+              <button
+                className="add-item__cancel-btn"
+                type="button"
+                onClick={(event) => {
+                  handleClick(event);
+                }}
+              >
                 Cancel
               </button>
-              <button className="add-item__add-btn" type="button">
-                Add Item
-              </button>
+              <AddNewButton text="Add Item" onClick={handleClick} />
             </div>
           </form>
         </div>
