@@ -12,6 +12,10 @@
   width: 4.5rem;
   transition: all 0.15s ease-in-out;
 
+  @include bp.mobile {
+    width: 48%;
+  }
+
   &:hover {
     background-color: color.$instock-black;
   }

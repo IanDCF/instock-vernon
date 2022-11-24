@@ -13,6 +13,10 @@
   width: 4.5rem;
   transition: all 0.15s ease-in-out;
 
+  @include bp.mobile {
+    width: 48%;
+  }
+
   &:hover {
     border: 1px solid color.$instock-indigo;
     color: color.$instock-indigo;
