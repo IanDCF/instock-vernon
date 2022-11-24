@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
 import editIcon from "../../assets/icons/edit-24px.svg";
 import chevronIcon from "../../assets/icons/chevron_right-24px.svg";
+import axios from "axios";
 
 const WarehouseItem = ({ warehouse }) => {
     const address = `${warehouse.address} ${warehouse.city} ${warehouse.country}`
-    const onClickHandler = () => {
-        //Here goes Ian's Code for the modal delete and edit
+    const onClickHandler = async (id) => {
+        const { data } = await axios.delete(`http://localhost:8080/warehouses/${id}`)
+        console.log(data)
     }
     return (
         <li className="warehouse">
@@ -43,7 +45,7 @@ const WarehouseItem = ({ warehouse }) => {
                 </ul>
             </section>
             <div className=" warehouse__icons-container">
-                <div onClick={ onClickHandler } className="warehouse__delete">
+                <div onClick={ () => onClickHandler(warehouse.id) } className="warehouse__delete">
                     <img className=" warehouse__icons" src={ deleteIcon } alt="" />
                 </div>
                 <div onClick={ onClickHandler } className="warehouse__edit">

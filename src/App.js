@@ -9,16 +9,19 @@ import ItemDetailsPage from "./pages/ItemDetailsPage/ItemDetailsPage";
 import EditItemPage from "./pages/EditItemPage/EditItemPage";
 import AddItemPage from "./pages/AddItemPage/AddItemPage";
 import { useEffect, useState } from "react";
-import getWarehouses from "./utils/getWarehouses";
+import getWarehouses, { getInventory } from "./utils/utils";
 
 function App() {
   const [warehouses, setWarehouses] = useState([])
+  const [inventory, setInventory] = useState([])
   useEffect(() => {
-    const fetchWarehouses = async () => {
-      const data = await getWarehouses()
-      setWarehouses(data)
+    const fetchData = async () => {
+      const warehousesData = await getWarehouses()
+      setWarehouses(warehousesData)
+      const inventoryData = await getInventory()
+      setInventory(inventoryData)
     }
-    fetchWarehouses()
+    fetchData()
   }, [])
   return (
     <BrowserRouter>
@@ -39,7 +42,7 @@ function App() {
           element={ <EditWarehousePage /> }
         />
 
-        <Route path="/inventory" element={ <InventoryPage /> } />
+        <Route path="/inventory" element={ <InventoryPage inventory={ inventory } /> } />
         <Route path="inventory/add" element={ <AddItemPage /> } />
         <Route path="/inventory/:itemId" element={ <ItemDetailsPage /> } />
         <Route path="/inventory/:itemId/edit" element={ <EditItemPage /> } />
