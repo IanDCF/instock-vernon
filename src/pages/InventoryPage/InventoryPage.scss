@@ -1,0 +1,184 @@
+@use "../../styles/globals.scss" as globals;
+
+@include globals.mobile {
+  .inventories {
+    border-radius: 4px;
+    background-color: globals.$white;
+    &__header {
+      display: flex;
+      flex-direction: column;
+      padding: 0rem 1.5rem;
+    }
+    &__header-title {
+      margin: 2rem 0rem 1.5rem;
+      color: globals.$instock-black;
+      @include globals.mobile-page-header;
+    }
+    &__form-search {
+      display: flex;
+      flex-direction: column;
+    }
+    &__header-form {
+      position: relative;
+      width: 100%;
+    }
+    &__search-icon {
+      position: absolute;
+      top: 1.125rem;
+      transform: translate(-50%, -50%);
+      right: 0.5rem;
+    }
+    &__header-input {
+      height: 2.25rem;
+      width: 100%;
+      padding-left: 1rem;
+      border-radius: 1.25rem;
+      border: 1px solid globals.$cloud;
+    }
+    &__header-input::placeholder {
+      color: globals.$slate;
+      font-size: 0.8125rem;
+    }
+    &__list {
+      margin: 0;
+      padding: 0;
+    }
+    &__title-list {
+      display: none;
+    }
+  }
+}
+
+@include globals.tablet {
+  .inventories {
+    border-radius: 3px;
+    background-color: globals.$white;
+    &__header {
+      display: flex;
+      padding: 0rem 2rem;
+      justify-content: space-between;
+    }
+    &__header-title {
+      margin: 2rem 0rem 1.5rem;
+      color: globals.$instock-black;
+      font-size: 2rem;
+      line-height: 2.25rem;
+    }
+    &__form-search {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+      justify-content: right;
+    }
+    &__header-form {
+      width: 100%;
+      max-width: 11.5625rem;
+      position: relative;
+      margin-right: 1rem;
+    }
+    &__search-icon {
+      position: absolute;
+      top: 1.125rem;
+      transform: translate(-50%, -50%);
+      right: 0.5rem;
+    }
+    &__header-input {
+      width: 100%;
+      height: 2.375rem;
+      padding-left: 1rem;
+      border-radius: 1.25rem;
+      border: 1px solid globals.$cloud;
+    }
+    &__header-input::placeholder {
+      color: globals.$slate;
+      font-size: 0.875rem;
+    }
+    &__list {
+      margin: 0;
+      padding: 0;
+    }
+    &__title-list {
+      background-color: #f7f8f9;
+      display: flex;
+      width: 100%;
+      padding: 0 2rem;
+      height: 2.5rem;
+    }
+    &__header-list {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0;
+    }
+    &__list-container {
+      display: flex;
+      width: 100%;
+    }
+    &__title-item {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      @include globals.tablet-table-header;
+      width: 100%;
+      flex: 1;
+    }
+    &__list-value {
+      display: flex;
+      color: globals.$slate;
+      font-weight: 600;
+      @include globals.tablet-table-header;
+      &--address {
+        padding-left: 2rem;
+      }
+      &--contact {
+        padding-left: 2.24rem;
+      }
+      &--qty {
+        padding-left: 2rem;
+      }
+    }
+    &__list-action {
+      padding-left: 3rem;
+      &--warehouse {
+        padding-left: 0rem;
+      }
+    }
+    &__sort-icon {
+      display: flex;
+      height: 0.875rem;
+    }
+  }
+}
+
+@include globals.desktop {
+  .inventories {
+    &__header {
+      padding: 0rem 2.5rem;
+    }
+    &__header-form {
+      width: 100%;
+      max-width: 275px;
+      position: relative;
+      margin-right: 1rem;
+    }
+    &__list-action {
+      padding-left: 10rem;
+      &--warehouse {
+        padding-left: 0rem;
+      }
+    }
+    &__list-value {
+      display: flex;
+      &--address {
+        padding-left: 4.5rem;
+      }
+      &--contact {
+        padding-left: 5.5rem;
+      }
+      &--qty {
+        padding-left: 5.2rem;
+      }
+    }
+  }
+}
