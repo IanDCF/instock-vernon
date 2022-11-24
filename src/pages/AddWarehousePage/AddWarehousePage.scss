@@ -40,6 +40,10 @@
   &__details-wrapper {
     border-bottom: 1px solid globals.$cloud;
     padding: 0 1.5rem 1rem;
+
+    &:last-child {
+      border-bottom: none;
+    }
   }
 
   &__label {
@@ -76,7 +80,9 @@
   }
 
   &__buttons-wrapper {
-    padding-top: 2.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+    text-align: center;
   }
 
   &__cancel-button {
