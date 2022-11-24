@@ -40,47 +40,47 @@ function WarehouseDetailsPage() {
 
   return (
     <section className="wh-details">
-      {warehouseInfo && (
+      { warehouseInfo && (
         <div className="wh-details__title-wrapper">
           <div className="wh-details__title">
             <div className="wh-details__back-title-wrapper">
               <img
                 className="wh-details__back-arrow"
-                src={ArrowBack}
+                src={ ArrowBack }
                 alt="back arrow"
               />
-              <h1>{warehouseInfo.city}</h1>
+              <h1>{ warehouseInfo.city }</h1>
             </div>
             <EditButton />
           </div>
         </div>
-      )}
-      {warehouseInfo && (
+      ) }
+      { warehouseInfo && (
         <div className="wh-details__meta-info">
           <div className="wh-details__meta-info-wrapper">
             <div className="wh-details__address">
               <p className="wh-details__meta-label">Warehouse Address:</p>
               <p className="wh-details__meta-content">
-                {warehouseInfo.address}, {warehouseInfo.city},{" "}
-                {warehouseInfo.country}
+                { warehouseInfo.address }, { warehouseInfo.city },{ " " }
+                { warehouseInfo.country }
               </p>
             </div>
             <div className="wh-details__contact-name">
               <p className="wh-details__meta-label">Contact Name:</p>
               <p className="wh-details__meta-content">
-                {warehouseInfo.contact_name} <br></br>{" "}
-                {warehouseInfo.contact_position}
+                { warehouseInfo.contact_name } <br></br>{ " " }
+                { warehouseInfo.contact_position }
               </p>
             </div>
             <div className="wh-details__contact-info">
               <p className="wh-details__meta-label">Contact Information:</p>
               <p className="wh-details__meta-content">
-                {warehouseInfo.contact_phone} {warehouseInfo.contact_email}
+                { warehouseInfo.contact_phone } { warehouseInfo.contact_email }
               </p>
             </div>
           </div>
         </div>
-      )}
+      ) }
 
       <div className="wh-details__table">
         <div className="wh-details__column-labels">
@@ -89,7 +89,7 @@ function WarehouseDetailsPage() {
               <p>Inventory Item</p>
               <img
                 className="wh-details__sort-icon"
-                src={sortIcon}
+                src={ sortIcon }
                 alt="sort icon"
               />
             </div>
@@ -97,7 +97,7 @@ function WarehouseDetailsPage() {
               <p>Category</p>
               <img
                 className="wh-details__sort-icon"
-                src={sortIcon}
+                src={ sortIcon }
                 alt="sort icon"
               />
             </div>
@@ -105,7 +105,7 @@ function WarehouseDetailsPage() {
               <p>Status</p>
               <img
                 className="wh-details__sort-icon"
-                src={sortIcon}
+                src={ sortIcon }
                 alt="sort icon"
               />
             </div>
@@ -113,7 +113,7 @@ function WarehouseDetailsPage() {
               <p>Qty</p>
               <img
                 className="wh-details__sort-icon"
-                src={sortIcon}
+                src={ sortIcon }
                 alt="sort icon"
               />
             </div>
@@ -123,21 +123,21 @@ function WarehouseDetailsPage() {
           </div>
         </div>
         <div className="wh-details__table-rows">
-          {warehouseInventory &&
+          { warehouseInventory &&
             warehouseInventory.map((item) => {
               return (
-                <article className="wh-details__item-row" key={item.id}>
+                <article className="wh-details__item-row" key={ item.id }>
                   <div className="wh-details__item-row-wrapper">
                     <div className="wh-details__item-wrapper">
                       <label className="wh-details__mobile-label">
                         Inventory Item
                       </label>
-                      {/* <br></br> */}
+                      {/* <br></br> */ }
                       <a className="wh-details-item-btn" href="">
-                        {item.item_name}
+                        { item.item_name }
                         <img
                           className="wh-details__item-btn-icon"
-                          src={chevronIcon}
+                          src={ chevronIcon }
                           alt="chevron icon"
                         />
                       </a>
@@ -147,17 +147,17 @@ function WarehouseDetailsPage() {
                         Category
                       </label>
                       <p className="wh-details__category wh-details__information">
-                        {item.category}
+                        { item.category }
                       </p>
                     </div>
                     <div className="wh-details__status-wrapper">
                       <label className="wh-details__mobile-label">Status</label>
                       <p className="wh-details__status wh-details__information">
-                        {item.quantity === 0 ? (
+                        { item.quantity === 0 ? (
                           <InventoryTagOutOfStock />
                         ) : (
                           <InventoryTagInStock />
-                        )}
+                        ) }
                       </p>
                     </div>
                     <div className="wh-details__qty-wrapper">
@@ -165,25 +165,25 @@ function WarehouseDetailsPage() {
                         Quantity
                       </label>
                       <p className="wh-details__quantity wh-details__information">
-                        {item.quantity}
+                        { item.quantity }
                       </p>
                     </div>
                     <div className="wh-details__actions-wrapper">
                       <img
                         className="wh-details__delete wh-details__action-icon"
-                        src={deleteIcon}
+                        src={ deleteIcon }
                         alt="delete item"
                       />
                       <img
                         className="wh-details__edit wh-details__action-icon"
-                        src={editIcon}
+                        src={ editIcon }
                         alt="edit item"
                       />
                     </div>
                   </div>
                 </article>
               );
-            })}
+            }) }
         </div>
       </div>
     </section>

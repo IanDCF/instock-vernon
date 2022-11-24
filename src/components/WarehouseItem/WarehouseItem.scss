@@ -1,0 +1,171 @@
+@use "../../styles/partials/breakpoints.scss" as bp;
+@use "../../styles/partials/colors.scss" as colors;
+@use "../../styles/partials/fonts.scss";
+
+@include bp.mobile {
+  .warehouse {
+    font-size: 0.8125rem;
+    line-height: 1.375rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid colors.$cloud;
+    padding: 0rem 1.5rem;
+    &__info {
+      display: flex;
+      width: 95%;
+      justify-content: space-between;
+    }
+    &__list-items {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__item {
+      margin: 0;
+      padding: 1rem 0 0rem;
+      display: flex;
+      flex-direction: column;
+    }
+    &__item-label {
+      display: block;
+      font-size: 0.6875rem;
+      color: colors.$slate;
+      line-height: 1rem;
+      font-weight: 600;
+    }
+    &__item-value {
+      max-width: 6.9375rem;
+    }
+    &__link {
+      display: flex;
+      align-items: flex-end;
+      color: colors.$instock-indigo;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    &__icons-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 1.1875rem 0rem 1.6875rem;
+    }
+    &__icons {
+      cursor: pointer;
+      max-width: 1.125rem;
+      max-height: 1.125rem;
+    }
+  }
+  .warehouse:hover {
+    background: rgba(46, 102, 230, 0.07);
+  }
+}
+@include bp.tablet {
+  .warehouse {
+    display: flex;
+    // justify-content: space-between;
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid colors.$cloud;
+    padding: 0rem 2rem;
+    &__info {
+      display: flex;
+      width: 100%;
+    }
+    &__list-items {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+      height: 6.125rem;
+    }
+
+    &__item {
+      margin: 0;
+      display: flex;
+      width: 100%;
+      height: fit-content;
+      padding: 0rem 0rem;
+    }
+    &__item-label {
+      display: none;
+      font-size: 0.6875rem;
+      color: colors.$slate;
+      line-height: 1rem;
+      font-weight: 600;
+    }
+    &__contact-name {
+      display: flex;
+      align-items: center;
+      height: fit-content;
+    }
+    &__item-value {
+      max-width: 6rem;
+      margin-left: 1.5rem;
+    }
+    &__link {
+      display: flex;
+      align-items: center;
+      color: colors.$instock-indigo;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    &__link-warehouse:hover {
+      border-bottom: 0.0313rem solid;
+    }
+    &__icons-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-left: 0.625rem;
+      align-items: center;
+    }
+    &__icons {
+      cursor: pointer;
+    }
+    &__delete {
+      width: 18px;
+      height: 1.125rem;
+      margin-right: 1.5rem;
+    }
+    &__edit {
+      padding-top: 0.7rem;
+    }
+  }
+  .warehouse:last-child {
+    border-bottom: none;
+  }
+  .warehouse:hover {
+    background: rgba(46, 102, 230, 0.07);
+  }
+}
+@include bp.desktop {
+  .warehouse {
+    &__item {
+      padding: 0rem 0rem;
+    }
+    &__item-value {
+      max-width: 100%;
+      margin-left: 0rem;
+    }
+    &__contact-name {
+      padding: 0rem 0rem 2.5rem 2rem;
+    }
+    &__list-items {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+      height: 4.75rem;
+    }
+  }
+}
