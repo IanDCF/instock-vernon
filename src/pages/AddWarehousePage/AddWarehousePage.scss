@@ -56,6 +56,7 @@
     border-radius: 20px;
     display: block;
     font-family: "Tillium Web";
+    font-size: 0.8125rem;
     height: 2.25rem;
     padding: 0 1rem;
     width: 100%;
@@ -83,6 +84,9 @@
     border: 1px solid globals.$cloud;
     border-radius: 20px;
     color: globals.$slate;
+    font-family: "Tillium Web";
+    font-size: 0.8125rem;
+    font-weight: 600;
     height: 36px;
     margin-right: 0.5rem;
     padding: 8px 16px;
@@ -99,6 +103,9 @@
     border: none;
     border-radius: 20px;
     color: globals.$white;
+    font-family: "Tillium Web";
+    font-size: 0.8125rem;
+    font-weight: 600;
     height: 36px;
     margin-left: 0.5rem;
     padding: 8px 16px;
@@ -115,7 +122,14 @@
   .add-wh {
     padding: 0 2rem;
 
+    &__title {
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }
+
     &__subtitle {
+      font-size: 1.5rem;
+      line-height: 2rem;
       padding-top: 0;
     }
 
@@ -138,6 +152,16 @@
       }
     }
 
+    &__label {
+      font-size: 0.875rem;
+      line-height: 1.375rem;
+    }
+
+    &__input {
+      font-size: 0.875rem;
+      line-height: 1.375rem;
+    }
+
     &__buttons-wrapper {
       padding-top: 2rem;
       padding-bottom: 1rem;
@@ -145,12 +169,21 @@
     }
 
     &__cancel-button {
+      font-size: 0.875rem;
       width: 4.5rem;
     }
 
     &__add-button {
-      width: 8.625rem;
+      font-size: 0.875rem;
       margin-right: 2rem;
+      width: 8.625rem;
     }
+  }
+}
+
+@include globals.desktop {
+  .add-wh {
+    margin: 0 auto;
+    max-width: 80rem;
   }
 }
