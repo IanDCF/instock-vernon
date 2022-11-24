@@ -3,7 +3,12 @@
 @use "../../styles/partials/breakpoints.scss" as breakpoints;
 
 .header {
-  background-color: colors.$graphite;
+  // background-color: colors.$graphite;
+  padding-bottom: 62px;
+
+  &-wrapper {
+    background-color: colors.$graphite;
+  }
 
   &__logo {
     padding: 1.5rem 0;
@@ -44,6 +49,7 @@
   .header {
     display: flex;
     padding: 0 2rem;
+    padding-bottom: 4rem;
 
     &__nav {
       padding-bottom: 0;
@@ -61,6 +67,9 @@
 
 @include breakpoints.desktop {
   .header {
-    padding: 0 4rem;
+    padding: 0px;
+    padding-bottom: 4rem;
+    width: 63.75rem;
+    margin: 0 auto;
   }
 }

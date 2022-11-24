@@ -7,7 +7,11 @@ import AddWarehousePage from "./pages/AddWarehousePage/AddWarehousePage";
 import InventoryPage from "./pages//InventoryPage/InventoryPage";
 import ItemDetailsPage from "./pages/ItemDetailsPage/ItemDetailsPage";
 import EditItemPage from "./pages/EditItemPage/EditItemPage";
-import AddItemPage from "./pages//AddItemPage/AddItemPage";
+
+import AddItemPage from "./pages/AddItemPage/AddItemPage";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+
 import { useEffect, useState } from "react";
 import getWarehouses from "./utils/utils";
 
@@ -27,7 +31,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* Header Component */}
+
+      <Header />
+
       <Routes>
         <Route path="/" element={<Navigate to="/warehouse" />} />
         <Route
@@ -54,7 +60,9 @@ function App() {
         <Route path="/inventory/:itemId" element={<ItemDetailsPage />} />
         <Route path="/inventory/:itemId/edit" element={<EditItemPage />} />
       </Routes>
-      {/* Footer Component */}
+
+      <Footer />
+
     </BrowserRouter>
   );
 }
