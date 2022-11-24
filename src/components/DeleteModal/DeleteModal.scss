@@ -1,0 +1,93 @@
+@use "../../styles/partials/colors.scss" as color;
+@use "../../styles/partials/fonts.scss" as font;
+@use "../../styles/partials/breakpoints.scss" as bp;
+
+.modal-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(19, 24, 44, 0.8);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include bp.tablet {
+    padding-top: 12.5rem;
+  }
+}
+
+.modal {
+  background-color: color.$white;
+  position: relative;
+
+  @include bp.mobile {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  @include bp.tablet {
+    width: 42rem;
+    height: 16.5rem;
+    border-radius: 4px;
+    padding: 2.8rem 3rem;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    img {
+      width: 1.5rem;
+    }
+  }
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1rem;
+  }
+
+  &__title {
+    font-weight: 600;
+    @include bp.mobile {
+      font-size: 1.8rem;
+      margin: 3rem 0 0 0;
+      line-height: 2.5rem;
+    }
+    @include bp.tablet {
+      font-size: 2rem;
+      margin: 0 0 0.9rem 0;
+    }
+  }
+
+  &__text {
+    font-size: 1rem;
+
+    @include bp.tablet {
+      margin: 0 2.5rem 0 0;
+      line-height: 2;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    position: absolute;
+    justify-content: space-between;
+
+    @include bp.mobile {
+      bottom: 2rem;
+      width: 90%;
+      bottom: 2rem;
+    }
+
+    @include bp.tablet {
+      bottom: 2.5rem;
+      right: 4rem;
+      width: 10rem;
+    }
+  }
+}

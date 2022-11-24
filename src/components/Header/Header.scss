@@ -37,7 +37,8 @@
       text-decoration: underline;
     }
 
-    &--active {
+    &:active,
+    &:focus {
       background-color: colors.$instock-black;
       border-radius: 1.25rem;
       color: colors.$white;

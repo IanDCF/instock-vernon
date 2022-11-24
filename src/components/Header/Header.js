@@ -1,6 +1,6 @@
 import "./Header.scss";
-
 import instockLogo from "../../assets/logos/InStock-Logo_1x.png";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -11,14 +11,17 @@ const Header = () => {
         </div>
         <div className="header__nav">
           <div>
-            <a className="header__nav-link header__nav-link--active" href="#">
+            <Link
+              className="header__nav-link header__nav-link--active"
+              to="/warehouse"
+            >
               Warehouses
-            </a>
+            </Link>
           </div>
           <div>
-            <a className="header__nav-link" href="#">
+            <Link className="header__nav-link" to="inventory">
               Inventory
-            </a>
+            </Link>
           </div>
         </div>
       </header>
