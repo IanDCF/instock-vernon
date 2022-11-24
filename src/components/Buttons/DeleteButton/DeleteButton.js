@@ -1,8 +1,8 @@
 import "./DeleteButton.scss";
 
-const DeleteButton = ({ clickHandler }) => {
+const DeleteButton = ({ deleteHandler }) => {
   return (
-    <div className="delete-btn" onClick={clickHandler}>
+    <div className="delete-btn" onClick={deleteHandler}>
       Delete
     </div>
   );
