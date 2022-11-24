@@ -1,0 +1,203 @@
+@use "../../styles/globals.scss";
+
+.add-item {
+  background-color: globals.$light-grey;
+  &__component {
+    margin: 0rem 1rem;
+    box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
+    border-radius: 3px;
+    background-color: globals.$white;
+  }
+
+  &__title-wrapper {
+    border-bottom: 1px solid globals.$cloud;
+    padding-top: 2rem;
+    padding-bottom: 1.5rem;
+
+    h1 {
+      margin: 0px;
+    }
+  }
+  &__title {
+    padding: 0rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__back-title-wrapper {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  &__back-arrow {
+    padding: 0.25rem;
+    margin-right: 0.5rem;
+    margin-top: 0.25rem;
+  }
+
+  //   Form
+  &__form-wrapper {
+  }
+
+  &__header {
+    margin-top: 0px;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.75rem;
+    color: globals.$instock-black;
+  }
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    color: globals.$instock-black;
+
+    > * {
+      margin-top: 0.25rem;
+    }
+
+    input,
+    textarea,
+    select,
+    datalist,
+    option {
+      font-family: "Tillium Web";
+      font-size: 0.8125rem;
+      font-weight: 400;
+      color: globals.$slate;
+
+      border-radius: 1.25rem;
+      border: 1px solid globals.$cloud;
+    }
+
+    input,
+    textarea {
+      padding: 0.5rem 1rem;
+    }
+
+    input {
+      width: 100%;
+    }
+
+    [list]::-webkit-calendar-picker-indicator {
+      display: none !important;
+    }
+  }
+
+  //  Details
+  &__form-details {
+    padding: 1rem 2rem 0.5rem;
+    border-bottom: 1px solid globals.$cloud;
+  }
+
+  &__description {
+    width: 100%;
+    height: 120px;
+    resize: none;
+  }
+
+  &__datalist-input,
+  &__input-dropdown-wrapper {
+    position: relative;
+  }
+
+  &__arrow-drop-down {
+    position: absolute;
+    right: 1rem;
+    top: 0.375rem;
+  }
+
+  // Availability
+  &__form-availability {
+    padding: 1rem 2rem 0.5rem;
+  }
+
+  &__radios-wrapper {
+    display: flex;
+
+    input[type="radio"] {
+      width: unset;
+      margin: 0px;
+    }
+  }
+  &__radio-wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 50%;
+  }
+  &__label--radio {
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.25rem;
+    color: globals.$slate;
+    padding-bottom: 0px;
+    margin-left: 0.5rem;
+  }
+
+  //   Buttons
+  &__buttons-wrapper {
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    background-color: globals.$light-grey;
+  }
+}
+
+// ** Desktop ** //
+
+@include globals.tablet {
+  .add-item {
+    &__form {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &__form-details {
+      flex: 1;
+      border: none;
+      border-right: 1px solid #bdc5d5;
+      margin-top: 1.5rem;
+      margin-bottom: 1.25rem;
+      padding: 0.5rem 2rem;
+    }
+
+    &__form-availability {
+      flex: 1;
+      margin-top: 1.5rem;
+      margin-bottom: 1.25rem;
+      padding: 0.5rem 2rem;
+    }
+
+    &__radio-wrapper {
+      width: 40%;
+      flex: unset;
+    }
+    &__buttons-wrapper {
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+}
+
+@include globals.desktop {
+  .add-item {
+    &__component {
+      width: 63.75rem;
+      margin: 0 auto;
+    }
+
+    &__radio-wrapper {
+      width: 30%;
+    }
+  }
+}
