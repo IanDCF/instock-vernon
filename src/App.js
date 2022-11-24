@@ -1,13 +1,17 @@
 import "./App.scss";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import WarehousesPage from "./pages/WarehousesPage/WarehousePage";
+import WarehousePage from "./pages/WarehousePage/WarehousePage";
 import WarehouseDetailsPage from "./pages/WarehouseDetailsPage/WarehouseDetailsPage";
 import EditWarehousePage from "./pages/EditWarehousePage/EditWarehousePage";
 import AddWarehousePage from "./pages/AddWarehousePage/AddWarehousePage";
-import InventoryPage from "./pages/InventoryPage/InventoryPage";
+import InventoryPage from "./pages//InventoryPage/InventoryPage";
 import ItemDetailsPage from "./pages/ItemDetailsPage/ItemDetailsPage";
 import EditItemPage from "./pages/EditItemPage/EditItemPage";
+
 import AddItemPage from "./pages/AddItemPage/AddItemPage";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+
 import { useEffect, useState } from "react";
 import getWarehouses, { getInventory } from "./utils/utils";
 
@@ -23,14 +27,25 @@ function App() {
     }
     fetchData()
   }, [])
+
+  const renderWarehouses = (id) => {
+    setWarehouses(warehouses.filter((element) => element.id !== id));
+  };
+
   return (
     <BrowserRouter>
-      {/* Header Component */ }
+      <Header />
+
       <Routes>
         <Route path="/" element={ <Navigate to="/warehouse" /> } />
         <Route
           path="/warehouse"
-          element={ <WarehousesPage warehouses={ warehouses } /> }
+          element={
+            <WarehousePage
+              warehouses={ warehouses }
+              renderWarehouses={ renderWarehouses }
+            />
+          }
         />
         <Route path="/warehouse/add" element={ <AddWarehousePage /> } />
         <Route
@@ -47,7 +62,8 @@ function App() {
         <Route path="/inventory/:itemId" element={ <ItemDetailsPage /> } />
         <Route path="/inventory/:itemId/edit" element={ <EditItemPage /> } />
       </Routes>
-      {/* Footer Component */ }
+
+      <Footer />
     </BrowserRouter>
   );
 }

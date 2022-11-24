@@ -5,9 +5,8 @@ import searchIcon from "../../assets/icons/search-24px.svg";
 import InventoryItem from "../../components/InventoryItem/InventoryItem";
 import sortIcon from "../../assets/icons/sort-24px.svg";
 
-const InventoryPage = ({ inventory }) => {
+const InventoryPage = ({ updateInventory, inventory }) => {
   return (
-    // Need abstract the section as a component w/ styling
     <section className="inventories">
       <article className="inventories__header">
         <h1 className="inventories__header-title">Warehouses</h1>
@@ -64,7 +63,7 @@ const InventoryPage = ({ inventory }) => {
         </li>
         { inventory &&
           inventory.map((inventory, index) => (
-            <InventoryItem key={ index } inventory={ inventory } />
+            <InventoryItem key={ index } updateInventory={ updateInventory } inventory={ inventory } />
           )) }
       </ul>
     </section>
