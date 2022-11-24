@@ -9,6 +9,14 @@ const AddItemPage = () => {
     console.log(event);
   };
 
+  // useRef to get values of the form
+  // create a axios post for add inventory item
+  // handle form validation
+
+  // set instock to default
+  // hide quantity selector only when out of stock
+  // consider dynamically populating categories and warehouses
+
   return (
     <section className="add-item">
       <div className="add-item__component">
