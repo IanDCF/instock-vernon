@@ -5,7 +5,7 @@ import WarehouseItem from "../../components/WarehouseItem/WarehouseItem";
 import sortIcon from "../../assets/icons/sort-24px.svg";
 import { Link } from "react-router-dom";
 
-const WarehousesPage = ({ warehouses, render }) => {
+const WarehousesPage = ({ warehouses, renderWarehouses }) => {
   return (
     <>
       <section className="warehouses">
@@ -83,7 +83,7 @@ const WarehousesPage = ({ warehouses, render }) => {
               <WarehouseItem
                 key={index}
                 warehouse={warehouse}
-                render={render}
+                renderWarehouses={renderWarehouses}
               />
             ))}
         </ul>

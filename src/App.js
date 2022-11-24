@@ -25,13 +25,12 @@ function App() {
     fetchWarehouses();
   }, []);
 
-  const renderWarehouseList = (id) => {
+  const renderWarehouses = (id) => {
     setWarehouses(warehouses.filter((element) => element.id !== id));
   };
 
   return (
     <BrowserRouter>
-
       <Header />
 
       <Routes>
@@ -41,7 +40,7 @@ function App() {
           element={
             <WarehousePage
               warehouses={warehouses}
-              render={renderWarehouseList}
+              renderWarehouses={renderWarehouses}
             />
           }
         />
@@ -62,7 +61,6 @@ function App() {
       </Routes>
 
       <Footer />
-
     </BrowserRouter>
   );
 }
