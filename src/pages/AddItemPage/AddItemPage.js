@@ -2,6 +2,8 @@ import "./AddItemPage.scss";
 import ArrowBack from "../../assets/icons/arrow_back-24px.svg";
 import ArrowDropDown from "../../assets/icons/arrow_drop_down-24px.svg";
 import AddNewButton from "../../components/Buttons/AddNew/AddNewButton";
+import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
 const AddItemPage = () => {
   const handleClick = (event) => {
@@ -9,9 +11,108 @@ const AddItemPage = () => {
     console.log(event);
   };
 
+  const [categories, setCategories] = useState();
+  const [warehousesList, setWarehousesList] = useState();
+
+  const [itemStatus, setItemStatus] = useState("in-stock");
+
+  // Get Catagories List for catagories datalist
+  const getCategoriesAxios = async () => {
+    try {
+      const { data: inventories } = await axios.get(
+        "http://localhost:8080/inventories"
+      );
+      const { data: warehouses } = await axios.get(
+        "http://localhost:8080/warehouses"
+      );
+
+      console.log(inventories);
+
+      // console.log(arrayOfCategories);
+
+      const arrayOfCategories = [];
+
+      warehouses.map((item) => {
+        if (
+          arrayOfCategories.length !== 0 ||
+          !arrayOfCategories.find((category) => category === item.category)
+        ) {
+          console.log(item.category);
+        }
+
+        // ;
+      });
+
+      setCategories(inventories);
+      setWarehousesList(warehouses);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getCategoriesAxios();
+  }, []);
+
+  const statusRadioChangeHandler = (e) => {
+    setItemStatus(e.target.value);
+    console.log(e.target.value);
+  };
+
   // useRef to get values of the form
+  const formRef = useRef();
+
   // create a axios post for add inventory item
-  // handle form validation
+  const addInventoryItem = async (obj) => {
+    try {
+      const { data } = await axios.post(
+        "http://localhost:8080/inventories",
+        JSON.stringify(obj)
+      );
+      console.log("video was posted", data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = formRef.current;
+    const itemName = form.name.value; // this matches the name
+    const description = form.description.value;
+    const category = form.categories.value;
+    const status = itemStatus; // setState
+
+    const quantity = status === "in-stock" ? form.quantity.value : 0;
+
+    const warehouseId = form.warehouse.value;
+
+    console.log(itemName, description, category, quantity, status, warehouseId);
+    // handle form validation
+    if (
+      itemName === "" ||
+      description === "" ||
+      category === "" ||
+      status === "" ||
+      quantity === "" ||
+      warehouseId === ""
+    ) {
+      alert("please fill out the form fields");
+      return;
+    }
+    const newInventoryItem = {
+      item_name: itemName,
+      description: description,
+      category: category,
+      status: status,
+      quantity: quantity,
+      warehouseId: warehouseId,
+    };
+    console.log(newInventoryItem);
+    addInventoryItem(newInventoryItem);
+
+    // form.reset();
+  };
 
   // set instock to default
   // hide quantity selector only when out of stock
@@ -20,7 +121,7 @@ const AddItemPage = () => {
   return (
     <section className="add-item">
       <div className="add-item__component">
-        {/* Title */}
+        {/* { Title } */}
         <div className="add-item__title-wrapper">
           <div className="add-item__title">
             <div className="add-item__back-title-wrapper">
@@ -33,9 +134,9 @@ const AddItemPage = () => {
             </div>
           </div>
         </div>
-        {/* Form */}
+        {/* {/ Form /} */}
         <div className="add-item__form-wrapper">
-          <form className="add-item__form" action="">
+          <form className="add-item__form" ref={formRef}>
             <div className="add-item__form-details">
               <h2 className="add-item__header">Item Details</h2>
               <label className="add-item__label">
@@ -57,36 +158,6 @@ const AddItemPage = () => {
                 />
               </label>
 
-              {/* Render These Dynamically */}
-              {/* <label className="add-item__label">
-              Categories
-              <select
-                name="category"
-                id="add-item-category"
-                className="add-item__category"
-              >
-                <option value="accessories" className="add-item__option">
-                  Accessories
-                </option>
-                <option value="gear" className="add-item__option">
-                  Gaer
-                </option>
-                <option
-                  value="electronics"
-                  className="add-item__option"
-                ></option>
-                <option value="" className="add-item__option">
-                  Electronics
-                </option>
-                <option value="health" className="add-item__option">
-                  Health
-                </option>
-                <option value="apparel" className="add-item__option">
-                  Apparel
-                </option>
-              </select>
-            </label> */}
-
               <label className="add-item__label" htmlFor="categories">
                 Categories
                 <div className="add-item__input-dropdown-wrapper">
@@ -106,19 +177,16 @@ const AddItemPage = () => {
                   id="categories"
                   placeholder="Please Select"
                 >
-                  {/* Replace this dynamically */}
-                  <option
-                    value="Apparel"
-                    className="add-item__category"
-                  ></option>
-                  <option
-                    value="Health"
-                    className="add-item__category"
-                  ></option>
-                  <option
-                    value="Electronics"
-                    className="add-item__category"
-                  ></option>
+                  {categories &&
+                    categories.map((category) => {
+                      return (
+                        <option
+                          key={category.id}
+                          value={category.category}
+                          className="add-item__category"
+                        ></option>
+                      );
+                    })}
                 </datalist>
               </label>
             </div>
@@ -132,52 +200,59 @@ const AddItemPage = () => {
                   <div className="add-item__radio-wrapper">
                     <label
                       className="add-item__label add-item__label--radio"
-                      htmlFor="in-stock"
+                      htmlFor="instock"
                     >
                       In-Stock
                     </label>
                     <input
+                      onChange={statusRadioChangeHandler}
                       type="radio"
-                      name="in-stock"
+                      name="instock"
                       className="add-item__status"
                       value="in-stock"
-                      selected
+                      checked={itemStatus === "in-stock"}
                     />
                   </div>
                   <div className="add-item__radio-wrapper">
                     <label
                       className="add-item__label add-item__label--radio"
-                      htmlFor="out-of-stock"
+                      htmlFor="outofstock"
                     >
                       Out-of-Stock
                     </label>
                     <input
+                      onChange={statusRadioChangeHandler}
                       type="radio"
-                      name="out-of-stock"
+                      name="outofstock"
                       className="add-item__status"
                       value="out-of-stock"
+                      checked={itemStatus === "out-of-stock"}
                     />
                   </div>
                 </div>
               </label>
 
-              <label className="add-item__label">
-                Quantity
-                <input
-                  className="add-item__quantity"
-                  type="number"
-                  name="quantity"
-                  placeholder="0"
-                />
-              </label>
+              {itemStatus === "in-stock" ? (
+                <label className="add-item__label">
+                  Quantity
+                  <input
+                    className="add-item__quantity"
+                    type="number"
+                    name="quantity"
+                    placeholder="0"
+                  />
+                </label>
+              ) : (
+                ""
+              )}
 
-              <label className="add-item__label" htmlFor="categories">
-                Category
+              <label className="add-item__label" htmlFor="warehouse">
+                Warehouse
                 <div className="add-item__input-dropdown-wrapper">
                   <input
-                    list="categories"
-                    name="categories"
-                    className="add-item__categories-list"
+                    list="warehouse"
+                    name="warehouse"
+                    className="add-item__warehouse-list"
                   ></input>
                   <img
                     className="add-item__arrow-drop-down"
@@ -186,23 +261,20 @@ const AddItemPage = () => {
                   />
                 </div>
                 <datalist
-                  className="add-item__category-list"
-                  id="categories"
+                  className="add-item__warehouse-list"
+                  id="warehouse"
                   placeholder="Please Select"
                 >
-                  {/* Replace this dynamically */}
-                  <option
-                    value="Warsaw"
-                    className="add-item__category"
-                  ></option>
-                  <option
-                    value="Berlin"
-                    className="add-item__category"
-                  ></option>
-                  <option
-                    value="Helsinki"
-                    className="add-item__category"
-                  ></option>
+                  {warehousesList &&
+                    warehousesList.map((warehouse) => {
+                      return (
+                        <option
+                          key={warehouse.id}
+                          value={warehouse.warehouse_name}
+                          className="add-item__warehouse"
+                        ></option>
+                      );
+                    })}
                 </datalist>
               </label>
             </div>
@@ -217,7 +289,7 @@ const AddItemPage = () => {
               >
                 Cancel
               </button>
-              <AddNewButton text="Add Item" onClick={handleClick} />
+              <AddNewButton text="Add Item" onClick={handleSubmit} />
             </div>
           </form>
         </div>
