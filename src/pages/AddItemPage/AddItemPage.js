@@ -64,13 +64,13 @@ const AddItemPage = () => {
         "http://localhost:8080/inventories",
         obj
       );
-      console.log("video was posted", response);
+      console.log("inventory was added/posted", response);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const notify = () => toast("Video Uploaded.");
+  const notify = () => toast("Inventory Item Added.");
 
   let navigate = useNavigate();
 
