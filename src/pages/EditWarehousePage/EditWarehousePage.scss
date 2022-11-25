@@ -39,7 +39,7 @@
 
   &__details-wrapper {
     border-bottom: 1px solid globals.$cloud;
-    padding: 0 1.5rem 1rem;
+    padding: 0 1.5rem 1.5rem;
 
     &:last-child {
       border-bottom: none;
@@ -166,6 +166,7 @@
       border-bottom: none;
       padding-left: 2rem;
       padding-right: 2rem;
+      padding-bottom: 0.5rem;
 
       &:first-child {
         border-right: 1px solid globals.$cloud;
@@ -175,6 +176,7 @@
     &__label {
       font-size: 0.875rem;
       line-height: 1.375rem;
+      padding-top: 1.5rem;
     }
 
     &__input {
@@ -209,6 +211,10 @@
     &__details-wrapper {
       padding-left: 2.5rem;
       padding-right: 2.5rem;
+    }
+
+    &__buttons-wrapper {
+      padding-top: 2.5rem;
     }
   }
 }
