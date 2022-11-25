@@ -6,17 +6,12 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 const AddItemPage = () => {
-  const handleClick = (event) => {
-    event.preventDefault();
-    console.log(event);
-  };
-
   const [categories, setCategories] = useState();
   const [warehousesList, setWarehousesList] = useState();
 
   const [itemStatus, setItemStatus] = useState("in-stock");
 
-  // Get Catagories List for catagories datalist
+  // Get Catagories List for categories datalist
   const getCategoriesAxios = async () => {
     try {
       const { data: inventories } = await axios.get(
@@ -26,24 +21,12 @@ const AddItemPage = () => {
         "http://localhost:8080/warehouses"
       );
 
-      console.log(inventories);
+      // warehouses
+      const uniqueCategories = [
+        ...new Set(inventories.map((item) => item.category)),
+      ];
 
-      // console.log(arrayOfCategories);
-
-      const arrayOfCategories = [];
-
-      warehouses.map((item) => {
-        if (
-          arrayOfCategories.length !== 0 ||
-          !arrayOfCategories.find((category) => category === item.category)
-        ) {
-          console.log(item.category);
-        }
-
-        // ;
-      });
-
-      setCategories(inventories);
+      setCategories(uniqueCategories);
       setWarehousesList(warehouses);
     } catch (err) {
       console.log(err);
@@ -54,6 +37,7 @@ const AddItemPage = () => {
     getCategoriesAxios();
   }, []);
 
+  // Form Submissions
   const statusRadioChangeHandler = (e) => {
     setItemStatus(e.target.value);
     console.log(e.target.value);
@@ -65,11 +49,11 @@ const AddItemPage = () => {
   // create a axios post for add inventory item
   const addInventoryItem = async (obj) => {
     try {
-      const { data } = await axios.post(
+      const response = await axios.post(
         "http://localhost:8080/inventories",
-        JSON.stringify(obj)
+        obj
       );
-      console.log("video was posted", data);
+      console.log("video was posted", response);
     } catch (err) {
       console.log(err);
     }
@@ -83,9 +67,11 @@ const AddItemPage = () => {
     const category = form.categories.value;
     const status = itemStatus; // setState
 
-    const quantity = status === "in-stock" ? form.quantity.value : 0;
+    const quantity = status === "in-stock" ? form.quantity.value / 1 : 0;
 
     const warehouseId = form.warehouse.value;
+    console.log(warehouseId);
+    console.log(typeof quantity);
 
     console.log(itemName, description, category, quantity, status, warehouseId);
     // handle form validation
@@ -136,7 +122,13 @@ const AddItemPage = () => {
         </div>
         {/* {/ Form /} */}
         <div className="add-item__form-wrapper">
-          <form className="add-item__form" ref={formRef}>
+          <form
+            className="add-item__form"
+            ref={formRef}
+            onSubmit={(event) => {
+              handleSubmit(event);
+            }}
+          >
             <div className="add-item__form-details">
               <h2 className="add-item__header">Item Details</h2>
               <label className="add-item__label">
@@ -178,11 +170,11 @@ const AddItemPage = () => {
                   placeholder="Please Select"
                 >
                   {categories &&
-                    categories.map((category) => {
+                    categories.map((category, index) => {
                       return (
                         <option
-                          key={category.id}
-                          value={category.category}
+                          key={index}
+                          value={category}
                           className="add-item__category"
                         ></option>
                       );
@@ -270,9 +262,13 @@ const AddItemPage = () => {
                       return (
                         <option
                           key={warehouse.id}
-                          value={warehouse.warehouse_name}
+                          id={warehouse.id}
+                          data-value={warehouse.id}
+                          value={warehouse.id}
                           className="add-item__warehouse"
-                        ></option>
+                        >
+                          {warehouse.warehouse_name}
+                        </option>
                       );
                     })}
                 </datalist>
@@ -280,16 +276,10 @@ const AddItemPage = () => {
             </div>
 
             <div className="add-item__buttons-wrapper">
-              <button
-                className="add-item__cancel-btn"
-                type="button"
-                onClick={(event) => {
-                  handleClick(event);
-                }}
-              >
+              <button className="add-item__cancel-btn" type="button">
                 Cancel
               </button>
-              <AddNewButton text="Add Item" onClick={handleSubmit} />
+              <AddNewButton text="Add Item" />
             </div>
           </form>
         </div>
