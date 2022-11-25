@@ -4,13 +4,17 @@ import ArrowDropDown from "../../assets/icons/arrow_drop_down-24px.svg";
 import AddNewButton from "../../components/Buttons/AddNew/AddNewButton";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import CancelButton from "../../components/Buttons/CancelButton/CancelButton";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddItemPage = () => {
   const [categories, setCategories] = useState();
   const [warehousesList, setWarehousesList] = useState();
 
   const [itemStatus, setItemStatus] = useState("in-stock");
-
+  const [itemWarehouse, setItemWarehouse] = useState("");
   // Get Catagories List for categories datalist
   const getCategoriesAxios = async () => {
     try {
@@ -43,6 +47,13 @@ const AddItemPage = () => {
     console.log(e.target.value);
   };
 
+  const warehouseChangeHandler = (e) => {
+    const selectedWarehouse = warehousesList.find(
+      (warehouse) => warehouse.warehouse_name === e.target.value
+    );
+    setItemWarehouse(selectedWarehouse.id);
+  };
+
   // useRef to get values of the form
   const formRef = useRef();
 
@@ -59,6 +70,10 @@ const AddItemPage = () => {
     }
   };
 
+  const notify = () => toast("Video Uploaded.");
+
+  let navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = formRef.current;
@@ -69,7 +84,8 @@ const AddItemPage = () => {
 
     const quantity = status === "in-stock" ? form.quantity.value / 1 : 0;
 
-    const warehouseId = form.warehouse.value;
+    // const warehouseId = form.warehouse.value;
+    const warehouseId = itemWarehouse;
 
     console.log(itemName, description, category, quantity, status, warehouseId);
     // handle form validation
@@ -95,12 +111,13 @@ const AddItemPage = () => {
     console.log(newInventoryItem);
     addInventoryItem(newInventoryItem);
 
-    // form.reset();
-  };
+    form.reset();
+    notify();
 
-  // set instock to default
-  // hide quantity selector only when out of stock
-  // consider dynamically populating categories and warehouses
+    setTimeout(() => {
+      navigate("/inventory");
+    }, 3000);
+  };
 
   return (
     <section className="add-item">
@@ -109,11 +126,13 @@ const AddItemPage = () => {
         <div className="add-item__title-wrapper">
           <div className="add-item__title">
             <div className="add-item__back-title-wrapper">
-              <img
-                className="add-item__back-arrow"
-                src={ArrowBack}
-                alt="back arrow"
-              />
+              <Link to="/inventory">
+                <img
+                  className="add-item__back-arrow"
+                  src={ArrowBack}
+                  alt="back arrow"
+                />
+              </Link>
               <h1>Add New Inventory Item</h1>
             </div>
           </div>
@@ -144,7 +163,7 @@ const AddItemPage = () => {
                   className="add-item__description"
                   type="text"
                   name="description"
-                  placeholder="Plase enter a brief item description..."
+                  placeholder="Please enter a brief item description..."
                 />
               </label>
 
@@ -243,6 +262,9 @@ const AddItemPage = () => {
                     list="warehouse"
                     name="warehouse"
                     className="add-item__warehouse-list"
+                    onChange={(event) => {
+                      warehouseChangeHandler(event);
+                    }}
                   ></input>
                   <img
                     className="add-item__arrow-drop-down"
@@ -262,7 +284,7 @@ const AddItemPage = () => {
                           key={warehouse.id}
                           id={warehouse.id}
                           data-value={warehouse.id}
-                          value={warehouse.id}
+                          value={warehouse.warehouse_name}
                           className="add-item__warehouse"
                         >
                           {warehouse.warehouse_name}
@@ -274,11 +296,21 @@ const AddItemPage = () => {
             </div>
 
             <div className="add-item__buttons-wrapper">
-              <button className="add-item__cancel-btn" type="button">
-                Cancel
-              </button>
+              <CancelButton link="/inventory" />
               <AddNewButton text="Add Item" />
             </div>
+            <ToastContainer
+              position="bottom-center"
+              autoClose={2000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
           </form>
         </div>
       </div>
