@@ -16,17 +16,18 @@ const DeleteModal = ({
   renderInventory,
 }) => {
   const deleteHandlerWarehouse = async () => {
-    const id = await deleteWarehouse(warehouse.id);
+    const res = await deleteWarehouse(warehouse.id);
+    console.log(res);
     handleModal();
-    console.log(`warehouse: ${id} has been deleted`);
-    renderWarehouses(id);
+    console.log(`warehouse with id: ${res.id} has been deleted`);
+    renderWarehouses(res.id);
   };
 
   const deleteHandlerItem = async () => {
-    const id = await deleteItem(item.id);
+    const res = await deleteItem(item.id);
     handleModal();
-    console.log(`item: ${id} has been deleted`);
-    renderInventory(id);
+    console.log(`item with id: ${res.id} has been deleted`);
+    renderInventory(res.id);
   };
 
   return (
