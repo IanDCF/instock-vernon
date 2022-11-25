@@ -9,7 +9,7 @@ const InventoryPage = ({ updateInventory, inventory }) => {
   return (
     <section className="inventories">
       <article className="inventories__header">
-        <h1 className="inventories__header-title">Warehouses</h1>
+        <h1 className="inventories__header-title">Inventory</h1>
         <section className="inventories__form-search">
           <form className="inventories__header-form">
             <img className="inventories__search-icon" src={ searchIcon } alt="" />

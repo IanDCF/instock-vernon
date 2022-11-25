@@ -10,18 +10,11 @@ import WarehouseDelModal from "../../components/DeleteModal/DeleteModal";
 
 const InventoryItem = ({ updateInventory, inventory }) => {
     const [openModal, setOpenModal] = useState(false);
-    const renderInventory = (id) => {
-        updateInventory(inventory.filter((element) => element.id !== id));
+    const renderInventory = (newInventoryList) => {
+        updateInventory(newInventoryList);
     };
     const handleModal = () => {
         setOpenModal(!openModal);
-    };
-    const returnItem = () => {
-        let itemObj = {
-            item_name: "Belt",
-            stock: 1234,
-        };
-        return itemObj;
     };
     return (
         <>
@@ -82,7 +75,7 @@ const InventoryItem = ({ updateInventory, inventory }) => {
                 <WarehouseDelModal
                     type="item"
                     renderInventory={ renderInventory }
-                    item={ returnItem }
+                    item={ inventory }
                     handleModal={ handleModal }
                 />
             ) }
