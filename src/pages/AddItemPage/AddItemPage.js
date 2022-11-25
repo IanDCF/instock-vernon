@@ -70,8 +70,6 @@ const AddItemPage = () => {
     const quantity = status === "in-stock" ? form.quantity.value / 1 : 0;
 
     const warehouseId = form.warehouse.value;
-    console.log(warehouseId);
-    console.log(typeof quantity);
 
     console.log(itemName, description, category, quantity, status, warehouseId);
     // handle form validation
@@ -92,7 +90,7 @@ const AddItemPage = () => {
       category: category,
       status: status,
       quantity: quantity,
-      warehouseId: warehouseId,
+      warehouse_Id: warehouseId,
     };
     console.log(newInventoryItem);
     addInventoryItem(newInventoryItem);
