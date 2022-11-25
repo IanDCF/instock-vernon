@@ -80,8 +80,7 @@
   }
 
   &__buttons-wrapper {
-    padding-top: 1.5rem;
-    padding-bottom: 1rem;
+    padding: 1.5rem 1rem 1rem;
     text-align: center;
   }
 
@@ -96,7 +95,7 @@
     height: 36px;
     margin-right: 0.5rem;
     padding: 8px 16px;
-    width: 45%;
+    width: 47%;
 
     &:hover {
       color: globals.$instock-indigo;
@@ -115,7 +114,7 @@
     height: 36px;
     margin-left: 0.5rem;
     padding: 8px 16px;
-    width: 45%;
+    width: 47%;
 
     &:hover {
       background-color: globals.$graphite;
@@ -154,7 +153,7 @@
 
     &__heading-wrapper {
       justify-content: flex-start;
-      padding: 2rem;
+      padding: 2rem 2rem 1.3125rem;
     }
 
     &__form-wrapper {
@@ -165,6 +164,8 @@
     &__details-wrapper {
       width: 50%;
       border-bottom: none;
+      padding-left: 2rem;
+      padding-right: 2rem;
 
       &:first-child {
         border-right: 1px solid globals.$cloud;
@@ -204,5 +205,10 @@
   .add-wh {
     margin: 0 auto;
     max-width: 80rem;
+
+    &__details-wrapper {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+    }
   }
 }

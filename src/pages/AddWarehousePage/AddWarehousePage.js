@@ -91,8 +91,7 @@ const AddWarehousePage = () => {
   };
 
   const validatePhoneNumber = (input_str) => {
-    let re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
-    return re.test(input_str);
+    return input_str.match(/\d/g).length === 11;
   };
 
   const isPhoneValid = () => {
