@@ -22,11 +22,13 @@ const ItemDetailsPage = () => {
         <article className="item-details__title-wrapper">
           <div className="item-details__title">
             <section className="item-details__back-title-wrapper">
-              <img
-                className="item-details__back-arrow"
-                src={ ArrowBack }
-                alt="back arrow"
-              />
+              <Link to={ '/inventory' }>
+                <img
+                  className="item-details__back-arrow"
+                  src={ ArrowBack }
+                  alt="back arrow"
+                />
+              </Link>
               <h1 className="item-details__title-value">{ inventoryItem.item_name }</h1>
             </section>
             <Link to={ `/inventory/${inventoryItem.id}/edit` }>
