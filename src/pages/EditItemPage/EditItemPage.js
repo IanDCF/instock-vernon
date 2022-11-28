@@ -3,7 +3,7 @@ import ArrowBack from "../../assets/icons/arrow_back-24px.svg";
 import ArrowDropDown from "../../assets/icons/arrow_drop_down-24px.svg";
 import AddNewButton from "../../components/Buttons/AddNew/AddNewButton";
 import CancelButton from "../../components/Buttons/CancelButton/CancelButton";
-
+import { useParams } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
@@ -11,12 +11,38 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const EditItemPage = () => {
+  const { itemId } = useParams();
+  console.log(itemId);
+
+  // Inventory Item State for page creation
+  const [item, setItem] = useState();
+
+  // State for the form
   const [categories, setCategories] = useState();
   const [warehousesList, setWarehousesList] = useState();
-
   const [itemStatus, setItemStatus] = useState("in-stock");
   const [itemWarehouse, setItemWarehouse] = useState("");
 
+  // Get value of that inventory item from the useParam and put in the form fields
+  const getIndividualItemAxios = async (id) => {
+    try {
+      const { data } = await axios.get(
+        `http://localhost:8080/inventories/${id}`
+      );
+      console.log(data);
+      setItem(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getIndividualItemAxios(itemId);
+    console.log(itemId);
+    // setItemStatus(itemId.status);
+  }, [itemId]);
+
+  // Grab the Categories
   const getCategoriesAxios = async () => {
     try {
       const { data: inventories } = await axios.get(
@@ -57,7 +83,7 @@ const EditItemPage = () => {
   // useRef to get values of the form
   const formRef = useRef();
 
-  // create a axios put for add inventory item
+  // create a axios put for edit inventory item
   const editInventoryItem = async (id, obj) => {
     try {
       const response = await axios.put(
@@ -71,7 +97,6 @@ const EditItemPage = () => {
   };
 
   const notify = () => toast("Inventory Item Added.");
-
   let navigate = useNavigate();
 
   const handleSubmit = () => {};
@@ -100,185 +125,187 @@ const EditItemPage = () => {
                   alt="back arrow"
                 />
               </Link>
-              <h1>Add New Inventory Item</h1>
+              <h1>Edit Inventory Item</h1>
             </div>
           </div>
         </div>
         {/* {/ Form /} */}
         <div className="add-item__form-wrapper">
-          <form
-            className="add-item__form"
-            ref={formRef}
-            onSubmit={(event) => {
-              handleSubmit(event);
-            }}
-          >
-            <div className="add-item__form-details">
-              <h2 className="add-item__header">Item Details</h2>
-              <label className="add-item__label">
-                Item Name
-                <input
-                  className="add-item__name"
-                  type="text"
-                  name="name"
-                  placeholder="Item Name"
-                />
-              </label>
-              <label className="add-item__label">
-                Description
-                <textarea
-                  className="add-item__description"
-                  type="text"
-                  name="description"
-                  placeholder="Please enter a brief item description..."
-                />
-              </label>
-
-              <label className="add-item__label" htmlFor="categories">
-                Categories
-                <div className="add-item__input-dropdown-wrapper">
-                  <input
-                    list="categories"
-                    name="categories"
-                    className="add-item__categories-list add-item__datalist-input"
-                  />
-                  <img
-                    className="add-item__arrow-drop-down"
-                    src={ArrowDropDown}
-                    alt=""
-                  />
-                </div>
-                <datalist
-                  className="add-item__categories-list"
-                  id="categories"
-                  placeholder="Please Select"
-                >
-                  {categories &&
-                    categories.map((category, index) => {
-                      return (
-                        <option
-                          key={index}
-                          value={category}
-                          className="add-item__category"
-                        ></option>
-                      );
-                    })}
-                </datalist>
-              </label>
-            </div>
-
-            <div className="add-item__form-availability">
-              <h2 className="add-item__header">Item Availability</h2>
-
-              <label className="add-item__label">
-                Status
-                <div className="add-item__radios-wrapper">
-                  <div className="add-item__radio-wrapper">
-                    <label
-                      className="add-item__label add-item__label--radio"
-                      htmlFor="instock"
-                    >
-                      In-Stock
-                    </label>
-                    <input
-                      onChange={statusRadioChangeHandler}
-                      type="radio"
-                      name="instock"
-                      className="add-item__status"
-                      value="in-stock"
-                      checked={itemStatus === "in-stock"}
-                    />
-                  </div>
-                  <div className="add-item__radio-wrapper">
-                    <label
-                      className="add-item__label add-item__label--radio"
-                      htmlFor="outofstock"
-                    >
-                      Out-of-Stock
-                    </label>
-                    <input
-                      onChange={statusRadioChangeHandler}
-                      type="radio"
-                      name="outofstock"
-                      className="add-item__status"
-                      value="out-of-stock"
-                      checked={itemStatus === "out-of-stock"}
-                    />
-                  </div>
-                </div>
-              </label>
-
-              {itemStatus === "in-stock" ? (
+          {item && (
+            <form
+              className="add-item__form"
+              ref={formRef}
+              onSubmit={(event) => {
+                handleSubmit(event);
+              }}
+            >
+              <div className="add-item__form-details">
+                <h2 className="add-item__header">Item Details</h2>
                 <label className="add-item__label">
-                  Quantity
+                  Item Name
                   <input
-                    className="add-item__quantity"
-                    type="number"
-                    name="quantity"
-                    placeholder="0"
+                    className="add-item__name"
+                    type="text"
+                    name="name"
+                    placeholder={`${item.item_name}`}
                   />
                 </label>
-              ) : (
-                ""
-              )}
-
-              <label className="add-item__label" htmlFor="warehouse">
-                Warehouse
-                <div className="add-item__input-dropdown-wrapper">
-                  <input
-                    list="warehouse"
-                    name="warehouse"
-                    className="add-item__warehouse-list"
-                    onChange={(event) => {
-                      warehouseChangeHandler(event);
-                    }}
-                  ></input>
-                  <img
-                    className="add-item__arrow-drop-down"
-                    src={ArrowDropDown}
-                    alt=""
+                <label className="add-item__label">
+                  Description
+                  <textarea
+                    className="add-item__description"
+                    type="text"
+                    name="description"
+                    placeholder={`${item.description}`}
                   />
-                </div>
-                <datalist
-                  className="add-item__warehouse-list"
-                  id="warehouse"
-                  placeholder="Please Select"
-                >
-                  {warehousesList &&
-                    warehousesList.map((warehouse) => {
-                      return (
-                        <option
-                          key={warehouse.id}
-                          id={warehouse.id}
-                          data-value={warehouse.id}
-                          value={warehouse.warehouse_name}
-                          className="add-item__warehouse"
-                        >
-                          {warehouse.warehouse_name}
-                        </option>
-                      );
-                    })}
-                </datalist>
-              </label>
-            </div>
+                </label>
 
-            <div className="add-item__buttons-wrapper">
-              <CancelButton link="/inventory" />
-              <AddNewButton text="Add Item" />
-            </div>
-            <ToastContainer
-              position="bottom-center"
-              autoClose={2000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="light"
-            />
-          </form>
+                <label className="add-item__label" htmlFor="categories">
+                  Categories
+                  <div className="add-item__input-dropdown-wrapper">
+                    <input
+                      list="categories"
+                      name="categories"
+                      className="add-item__categories-list add-item__datalist-input"
+                    />
+                    <img
+                      className="add-item__arrow-drop-down"
+                      src={ArrowDropDown}
+                      alt=""
+                    />
+                  </div>
+                  <datalist
+                    className="add-item__categories-list"
+                    id="categories"
+                    placeholder="Please Select"
+                  >
+                    {categories &&
+                      categories.map((category, index) => {
+                        return (
+                          <option
+                            key={index}
+                            value={category}
+                            className="add-item__category"
+                          ></option>
+                        );
+                      })}
+                  </datalist>
+                </label>
+              </div>
+
+              <div className="add-item__form-availability">
+                <h2 className="add-item__header">Item Availability</h2>
+
+                <label className="add-item__label">
+                  Status
+                  <div className="add-item__radios-wrapper">
+                    <div className="add-item__radio-wrapper">
+                      <label
+                        className="add-item__label add-item__label--radio"
+                        htmlFor="instock"
+                      >
+                        In-Stock
+                      </label>
+                      <input
+                        onChange={statusRadioChangeHandler}
+                        type="radio"
+                        name="instock"
+                        className="add-item__status"
+                        value="in-stock"
+                        checked={itemStatus === "in-stock"}
+                      />
+                    </div>
+                    <div className="add-item__radio-wrapper">
+                      <label
+                        className="add-item__label add-item__label--radio"
+                        htmlFor="outofstock"
+                      >
+                        Out-of-Stock
+                      </label>
+                      <input
+                        onChange={statusRadioChangeHandler}
+                        type="radio"
+                        name="outofstock"
+                        className="add-item__status"
+                        value="out-of-stock"
+                        checked={itemStatus === "out-of-stock"}
+                      />
+                    </div>
+                  </div>
+                </label>
+
+                {itemStatus === "in-stock" ? (
+                  <label className="add-item__label">
+                    Quantity
+                    <input
+                      className="add-item__quantity"
+                      type="number"
+                      name="quantity"
+                      placeholder={`${item.quantity}`}
+                    />
+                  </label>
+                ) : (
+                  ""
+                )}
+
+                <label className="add-item__label" htmlFor="warehouse">
+                  Warehouse
+                  <div className="add-item__input-dropdown-wrapper">
+                    <input
+                      list="warehouse"
+                      name="warehouse"
+                      className="add-item__warehouse-list"
+                      onChange={(event) => {
+                        warehouseChangeHandler(event);
+                      }}
+                    ></input>
+                    <img
+                      className="add-item__arrow-drop-down"
+                      src={ArrowDropDown}
+                      alt=""
+                    />
+                  </div>
+                  <datalist
+                    className="add-item__warehouse-list"
+                    id="warehouse"
+                    placeholder="Please Select"
+                  >
+                    {warehousesList &&
+                      warehousesList.map((warehouse) => {
+                        return (
+                          <option
+                            key={warehouse.id}
+                            id={warehouse.id}
+                            data-value={warehouse.id}
+                            value={warehouse.warehouse_name}
+                            className="add-item__warehouse"
+                          >
+                            {warehouse.warehouse_name}
+                          </option>
+                        );
+                      })}
+                  </datalist>
+                </label>
+              </div>
+
+              <div className="add-item__buttons-wrapper">
+                <CancelButton link="/inventory" />
+                <AddNewButton text="Add Item" />
+              </div>
+              <ToastContainer
+                position="bottom-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+              />
+            </form>
+          )}
         </div>
       </div>
     </section>
