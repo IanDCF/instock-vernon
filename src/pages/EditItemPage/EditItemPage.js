@@ -9,19 +9,29 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getInventory } from "../../utils/utils";
 
-const EditItemPage = () => {
+const EditItemPage = ({ updateInventory, inventory }) => {
   const { itemId } = useParams();
-  console.log(itemId);
 
   // Inventory Item State for page creation
   const [item, setItem] = useState();
-
-  // State for the form
   const [categories, setCategories] = useState();
   const [warehousesList, setWarehousesList] = useState();
-  const [itemStatus, setItemStatus] = useState("in-stock");
-  const [itemWarehouse, setItemWarehouse] = useState("");
+
+  // State for the form
+  const [newItemObj, setNewItemObj] = useState({
+    // item_name: item.item_name,
+    // description: item.description,
+    // category: item.category,
+    // status: item.status,
+    // quantity: item.quantity,
+    // warehouse_Id: item.warehouse_Id,
+  }); // when something changes, add it here
+
+  useEffect(() => {
+    console.log(newItemObj);
+  }, [newItemObj]);
 
   // Get value of that inventory item from the useParam and put in the form fields
   const getIndividualItemAxios = async (id) => {
@@ -29,8 +39,9 @@ const EditItemPage = () => {
       const { data } = await axios.get(
         `http://localhost:8080/inventories/${id}`
       );
-      console.log(data);
+
       setItem(data);
+      console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -39,7 +50,6 @@ const EditItemPage = () => {
   useEffect(() => {
     getIndividualItemAxios(itemId);
     console.log(itemId);
-    // setItemStatus(itemId.status);
   }, [itemId]);
 
   // Grab the Categories
@@ -67,39 +77,78 @@ const EditItemPage = () => {
     getCategoriesAxios();
   }, []);
 
+  // This is for item name, description, categories, quantity
+  const changeHandler = (e, input) => {
+    setItem({ ...item, [input]: e.target.value });
+    setNewItemObj({ ...newItemObj, [input]: e.target.value });
+  };
+
   // Change Handlers
-  const statusRadioChangeHandler = (e) => {
-    setItemStatus(e.target.value);
+  const statusRadioChangeHandler = (e, input) => {
+    setItem({ ...item, status: e.target.value });
     console.log(e.target.value);
+
+    if (e.target.value === "Out of Stock") {
+      setNewItemObj({ ...newItemObj, quantity: 0, status: e.target.value });
+    } else {
+      setNewItemObj({
+        ...newItemObj,
+        quantity: item.quantity,
+        status: e.target.value,
+      });
+    }
   };
 
   const warehouseChangeHandler = (e) => {
     const selectedWarehouse = warehousesList.find(
       (warehouse) => warehouse.warehouse_name === e.target.value
     );
-    setItemWarehouse(selectedWarehouse.id);
+    setNewItemObj({
+      ...newItemObj,
+      warehouse_id: selectedWarehouse.id,
+    });
   };
 
   // useRef to get values of the form
   const formRef = useRef();
 
+  const renderInventory = () => {
+    const fetchData = async () => {
+      const inventoryData = await getInventory();
+      console.log(inventoryData);
+      updateInventory(inventoryData);
+    };
+    fetchData();
+  };
+
   // create a axios put for edit inventory item
   const editInventoryItem = async (id, obj) => {
     try {
-      const response = await axios.put(
-        `http://localhost:8080/inventories${id}`,
+      const response = await axios.patch(
+        `http://localhost:8080/inventories/${id}`,
         obj
       );
-      console.log("inventory item was edited", response);
+      console.log("inventory item was edited", response.data);
+      renderInventory();
     } catch (err) {
       console.log(err);
     }
   };
 
-  const notify = () => toast("Inventory Item Added.");
+  const notify = () => toast(`Inventory Item: ${item.item_name} was edited.`);
   let navigate = useNavigate();
 
-  const handleSubmit = () => {};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(newItemObj, itemId);
+
+    editInventoryItem(itemId, newItemObj);
+    notify();
+
+    setTimeout(() => {
+      navigate("/inventory");
+    }, 3000);
+  };
 
   /**
    * use param to get that item's id
@@ -148,6 +197,10 @@ const EditItemPage = () => {
                     type="text"
                     name="name"
                     placeholder={`${item.item_name}`}
+                    value={`${item.item_name}`}
+                    onChange={(e, input) => {
+                      changeHandler(e, "item_name");
+                    }}
                   />
                 </label>
                 <label className="add-item__label">
@@ -157,6 +210,10 @@ const EditItemPage = () => {
                     type="text"
                     name="description"
                     placeholder={`${item.description}`}
+                    value={`${item.description}`}
+                    onChange={(e, input) => {
+                      changeHandler(e, "description");
+                    }}
                   />
                 </label>
 
@@ -167,6 +224,10 @@ const EditItemPage = () => {
                       list="categories"
                       name="categories"
                       className="add-item__categories-list add-item__datalist-input"
+                      placeholder={`${item.category}`}
+                      onChange={(e, input) => {
+                        changeHandler(e, "category");
+                      }}
                     />
                     <img
                       className="add-item__arrow-drop-down"
@@ -204,15 +265,15 @@ const EditItemPage = () => {
                         className="add-item__label add-item__label--radio"
                         htmlFor="instock"
                       >
-                        In-Stock
+                        In Stock
                       </label>
                       <input
                         onChange={statusRadioChangeHandler}
                         type="radio"
                         name="instock"
                         className="add-item__status"
-                        value="in-stock"
-                        checked={itemStatus === "in-stock"}
+                        value="In Stock"
+                        checked={item.status === "In Stock"}
                       />
                     </div>
                     <div className="add-item__radio-wrapper">
@@ -220,21 +281,21 @@ const EditItemPage = () => {
                         className="add-item__label add-item__label--radio"
                         htmlFor="outofstock"
                       >
-                        Out-of-Stock
+                        Out of Stock
                       </label>
                       <input
                         onChange={statusRadioChangeHandler}
                         type="radio"
                         name="outofstock"
                         className="add-item__status"
-                        value="out-of-stock"
-                        checked={itemStatus === "out-of-stock"}
+                        value="Out of Stock"
+                        checked={item.status === "Out of Stock"}
                       />
                     </div>
                   </div>
                 </label>
 
-                {itemStatus === "in-stock" ? (
+                {item.status === "In Stock" ? (
                   <label className="add-item__label">
                     Quantity
                     <input
@@ -242,6 +303,10 @@ const EditItemPage = () => {
                       type="number"
                       name="quantity"
                       placeholder={`${item.quantity}`}
+                      value={`${item.quantity}`}
+                      onChange={(e, input) => {
+                        changeHandler(e, "quantity");
+                      }}
                     />
                   </label>
                 ) : (
@@ -258,6 +323,7 @@ const EditItemPage = () => {
                       onChange={(event) => {
                         warehouseChangeHandler(event);
                       }}
+                      placeholder={`${item.warehouse_name}`}
                     ></input>
                     <img
                       className="add-item__arrow-drop-down"
@@ -290,8 +356,9 @@ const EditItemPage = () => {
 
               <div className="add-item__buttons-wrapper">
                 <CancelButton link="/inventory" />
-                <AddNewButton text="Add Item" />
+                <AddNewButton text="Edit Item" />
               </div>
+
               <ToastContainer
                 position="bottom-center"
                 autoClose={2000}

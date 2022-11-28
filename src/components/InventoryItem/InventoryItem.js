@@ -71,7 +71,9 @@ const InventoryItem = ({ updateInventory, inventory }) => {
             <img className=" inventory__icons" src={deleteIcon} alt="" />
           </div>
           <div className="inventory__edit">
-            <Link to={`/inventory/${inventory.id}/edit`}>
+            <Link
+              to={`/inventory/${inventory.id}/edit`}
+            >
               <img className=" inventory__icons" src={editIcon} alt="" />
             </Link>
           </div>
