@@ -4,25 +4,44 @@ import AddNewButton from "../../components/Buttons/AddNew/AddNewButton";
 import searchIcon from "../../assets/icons/search-24px.svg";
 import InventoryItem from "../../components/InventoryItem/InventoryItem";
 import sortIcon from "../../assets/icons/sort-24px.svg";
+import { useEffect, useState } from "react";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
+
 const InventoryPage = ({ updateInventory, inventory }) => {
+  const [searchedInventory, setSearchedInventory] = useState();
+  useEffect(() => {
+    setSearchedInventory(inventory);
+  }, [setSearchedInventory, inventory]);
+
+  const inputOnChange = (e) => {
+    e.preventDefault();
+    const input = e.target.value.trim().toLowerCase();
+    if (!input) {
+      setSearchedInventory(inventory);
+    } else {
+      const filteredInventory = inventory.filter((inventoryItem) =>
+        inventoryItem.item_name.toLowerCase().includes(input)
+      );
+      setSearchedInventory(filteredInventory);
+    }
+  };
   return (
     <PageWrapper>
-
       <section className="inventories">
         <article className="inventories__header">
           <h1 className="inventories__header-title">Inventory</h1>
           <section className="inventories__form-search">
-            <form className="inventories__header-form">
+            <form onSubmit={ inputOnChange } className="inventories__header-form">
               <img className="inventories__search-icon" src={ searchIcon } alt="" />
               <input
+                onChange={ (e) => inputOnChange(e) }
                 className="inventories__header-input"
                 placeholder="Search..."
               />
             </form>
             <Link to={ "/inventory/add" }>
-              <AddNewButton text={ "Add New Item" } styling={ 'add-new--width' } />
+              <AddNewButton text={ "Add New Item" } />
             </Link>
           </section>
         </article>
@@ -66,8 +85,8 @@ const InventoryPage = ({ updateInventory, inventory }) => {
               <span className="inventories__list-action">ACTIONS</span>
             </div>
           </li>
-          { inventory &&
-            inventory.map((inventory, index) => (
+          { searchedInventory &&
+            searchedInventory.map((inventory, index) => (
               <InventoryItem
                 key={ index }
                 updateInventory={ updateInventory }
