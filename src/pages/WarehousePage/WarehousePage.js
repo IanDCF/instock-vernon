@@ -4,10 +4,11 @@ import AddNewButton from "../../components/Buttons/AddNew/AddNewButton";
 import WarehouseItem from "../../components/WarehouseItem/WarehouseItem";
 import sortIcon from "../../assets/icons/sort-24px.svg";
 import { Link } from "react-router-dom";
+import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
 const WarehousesPage = ({ warehouses, renderWarehouses }) => {
   return (
-    <>
+    <PageWrapper>
       <section className="warehouses">
         <article className="warehouses__header">
           <h1 className="warehouses__header-title">Warehouses</h1>
@@ -88,7 +89,7 @@ const WarehousesPage = ({ warehouses, renderWarehouses }) => {
             )) }
         </ul>
       </section>
-    </>
+    </PageWrapper>
   );
 };
 
