@@ -23,4 +23,11 @@ export const deleteItem = async (itemId) => {
   return data;
 };
 
+export const getInventoryItem = async (itemId) => {
+  const url = `http://localhost:8080/inventories/${itemId}`;
+  const { data } = await axios.get(url);
+  return data;
+
+}
+
 export default getWarehouses;

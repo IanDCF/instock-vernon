@@ -2,6 +2,14 @@
 @use "../../styles/partials/colors.scss" as colors;
 @use "../../styles/partials/fonts.scss";
 
+@keyframes arrow-animation {
+  from {
+    padding-left: 0px;
+  }
+  to {
+    padding-left: 0.25rem;
+  }
+}
 @include bp.mobile {
   .inventory {
     font-size: 0.8125rem;
@@ -59,6 +67,12 @@
     }
     &__icons {
       cursor: pointer;
+    }
+    &__chevron {
+      width: fit-content;
+    }
+    &__link:hover > &__chevron {
+      animation: arrow-animation 0.2s forwards;
     }
   }
   .warehouse:hover {
@@ -153,6 +167,12 @@
     }
     &__edit {
       padding-top: 0.7rem;
+    }
+    &__chevron {
+      width: fit-content;
+    }
+    &__link:hover > &__chevron {
+      animation: arrow-animation 0.2s forwards;
     }
   }
   .warehouse:last-child {
