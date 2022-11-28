@@ -27,7 +27,7 @@ const InventoryItem = ({ updateInventory, inventory }) => {
                                 <span className="inventory__link-warehouse">
                                     { inventory.item_name }
                                 </span>
-                                <img src={ chevronIcon } alt="" />
+                                <img className="inventory__chevron" src={ chevronIcon } alt="" />
                             </Link>
                         </li>
                         <li className="inventory__item inventory__item--address">
