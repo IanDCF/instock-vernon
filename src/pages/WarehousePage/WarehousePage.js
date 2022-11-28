@@ -41,7 +41,7 @@ const WarehousesPage = ({ warehouses, renderWarehouses }) => {
                 onChange={ (e) => inputOnChange(e) }
               />
             </form>
-            <Link to={ "/warehouses/add" }>
+            <Link to={ "/warehouse/add" }>
               <AddNewButton text={ "Add New Warehouse" } />
             </Link>
           </section>
