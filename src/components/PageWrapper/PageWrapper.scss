@@ -1,0 +1,26 @@
+@use "../../styles/globals.scss";
+
+.page-wrapper {
+  margin: 0rem 1rem;
+  box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
+  border-radius: 3px;
+  background-color: globals.$white;
+  transform: translateY(-64px);
+}
+
+@include globals.tablet {
+  .page-wrapper {
+    margin: 0rem 2rem;
+    box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
+    border-radius: 3px;
+    background-color: globals.$white;
+    transform: translateY(-64px);
+  }
+}
+
+@include globals.desktop {
+  .page-wrapper {
+    width: 63.75rem;
+    margin: 0 auto;
+  }
+}
