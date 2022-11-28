@@ -4,10 +4,11 @@ import AddNewButton from "../../components/Buttons/AddNew/AddNewButton";
 import WarehouseItem from "../../components/WarehouseItem/WarehouseItem";
 import sortIcon from "../../assets/icons/sort-24px.svg";
 import { Link } from "react-router-dom";
+import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
 const WarehousesPage = ({ warehouses, renderWarehouses }) => {
   return (
-    <>
+    <PageWrapper>
       <section className="warehouses">
         <article className="warehouses__header">
           <h1 className="warehouses__header-title">Warehouses</h1>
@@ -15,7 +16,7 @@ const WarehousesPage = ({ warehouses, renderWarehouses }) => {
             <form className="warehouses__header-form">
               <img
                 className="warehouses__search-icon"
-                src={searchIcon}
+                src={ searchIcon }
                 alt=""
               />
               <input
@@ -23,8 +24,8 @@ const WarehousesPage = ({ warehouses, renderWarehouses }) => {
                 placeholder="Search..."
               />
             </form>
-            <Link to={"/warehouses/add"}>
-              <AddNewButton text={"Add New Warehouse"} />
+            <Link to={ "/warehouses/add" }>
+              <AddNewButton text={ "Add New Warehouse" } styling={ 'add-new--width' } />
             </Link>
           </section>
         </article>
@@ -36,7 +37,7 @@ const WarehousesPage = ({ warehouses, renderWarehouses }) => {
                   <span className="warehouses__list-value">WAREHOUSE</span>
                   <img
                     className="warehouses__sort-icon"
-                    src={sortIcon}
+                    src={ sortIcon }
                     alt=""
                   />
                 </div>
@@ -46,7 +47,7 @@ const WarehousesPage = ({ warehouses, renderWarehouses }) => {
                   </span>
                   <img
                     className="warehouses__sort-icon"
-                    src={sortIcon}
+                    src={ sortIcon }
                     alt=""
                   />
                 </div>
@@ -58,7 +59,7 @@ const WarehousesPage = ({ warehouses, renderWarehouses }) => {
                   </span>
                   <img
                     className="warehouses__sort-icon"
-                    src={sortIcon}
+                    src={ sortIcon }
                     alt=""
                   />
                 </div>
@@ -68,7 +69,7 @@ const WarehousesPage = ({ warehouses, renderWarehouses }) => {
                   </span>
                   <img
                     className="warehouses__sort-icon"
-                    src={sortIcon}
+                    src={ sortIcon }
                     alt=""
                   />
                 </div>
@@ -78,17 +79,17 @@ const WarehousesPage = ({ warehouses, renderWarehouses }) => {
               <span className="warehouses__list-action">ACTIONS</span>
             </div>
           </li>
-          {warehouses &&
+          { warehouses &&
             warehouses.map((warehouse, index) => (
               <WarehouseItem
-                key={index}
-                warehouse={warehouse}
-                renderWarehouses={renderWarehouses}
+                key={ index }
+                warehouse={ warehouse }
+                renderWarehouses={ renderWarehouses }
               />
-            ))}
+            )) }
         </ul>
       </section>
-    </>
+    </PageWrapper>
   );
 };
 
