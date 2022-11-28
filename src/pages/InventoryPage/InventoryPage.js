@@ -1,38 +1,78 @@
 import "./InventoryPage.scss";
-import { useState } from "react";
-import WarehouseDelModal from "../../components/DeleteModal/DeleteModal";
-const InventoryPage = () => {
-  const [openModal, setOpenModal] = useState(false);
-  const [inventories, setInventories] = useState([]);
+import { Link } from "react-router-dom";
+import AddNewButton from "../../components/Buttons/AddNew/AddNewButton";
+import searchIcon from "../../assets/icons/search-24px.svg";
+import InventoryItem from "../../components/InventoryItem/InventoryItem";
+import sortIcon from "../../assets/icons/sort-24px.svg";
 
-  const renderInventory = (id) => {
-    setInventories(inventories.filter((element) => element.id !== id));
-  };
-
-  const handleModal = () => {
-    setOpenModal(!openModal);
-  };
-
-  const returnItem = () => {
-    let itemObj = {
-      item_name: "Belt",
-      stock: 1234,
-    };
-    return itemObj;
-  };
-
+const InventoryPage = ({ updateInventory, inventory }) => {
   return (
-    <div>
-      <button onClick={handleModal}>Delete Item</button>
-      {openModal && (
-        <WarehouseDelModal
-          type="item"
-          renderInventory={renderInventory}
-          item={returnItem}
-          handleModal={handleModal}
-        />
-      )}
-    </div>
+    <section className="inventories">
+      <article className="inventories__header">
+        <h1 className="inventories__header-title">Inventory</h1>
+        <section className="inventories__form-search">
+          <form className="inventories__header-form">
+            <img className="inventories__search-icon" src={searchIcon} alt="" />
+            <input
+              className="inventories__header-input"
+              placeholder="Search..."
+            />
+          </form>
+          <Link to={"/inventory/add"}>
+            <AddNewButton text={"Add New Item"} />
+          </Link>
+        </section>
+      </article>
+      <ul className="inventories__list">
+        <li className="inventories__title-list">
+          <ul className="inventories__header-list">
+            <li className="inventories__list-container">
+              <div className="inventories__title-item">
+                <span className="inventories__list-value">INVENTORY ITEM</span>
+                <img className="inventories__sort-icon" src={sortIcon} alt="" />
+              </div>
+              <div className="inventories__title-item">
+                <span className="inventories__list-value inventories__list-value--address">
+                  CATEGORY
+                </span>
+                <img className="inventories__sort-icon" src={sortIcon} alt="" />
+              </div>
+            </li>
+            <li className="inventories__list-container">
+              <div className="inventories__title-item">
+                <span className="inventories__list-value inventories__list-value--contact">
+                  STATUS
+                </span>
+                <img className="inventories__sort-icon" src={sortIcon} alt="" />
+              </div>
+              <div className="inventories__title-item">
+                <span className="inventories__list-value inventories__list-value--qty">
+                  QTY
+                </span>
+                <img className="inventories__sort-icon" src={sortIcon} alt="" />
+              </div>
+            </li>
+          </ul>
+          <div className="inventories__title-item">
+            <span className="inventories__list-action inventories__list-action--warehouse">
+              WAREHOUSE
+            </span>{" "}
+            <img className="inventories__sort-icon" src={sortIcon} alt="" />
+          </div>
+          <div className="inventories__title-item">
+            <span className="inventories__list-action">ACTIONS</span>
+          </div>
+        </li>
+        {inventory &&
+          inventory.map((inventory, index) => (
+            <InventoryItem
+              key={index}
+              updateInventory={updateInventory}
+              inventory={inventory}
+            />
+          ))}
+      </ul>
+    </section>
   );
 };
 

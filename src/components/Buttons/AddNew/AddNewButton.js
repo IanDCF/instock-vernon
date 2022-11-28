@@ -1,11 +1,11 @@
 import "./AddNewButton.scss";
-const AddNewButton = ({ text, onClick }) => {
+const AddNewButton = ({ text }) => {
   return (
     <button
       className="add-new"
-      onClick={(event) => {
-        onClick(event);
-      }}
+      // onClick={(event) => {
+      //   onClick(event);
+      // }}
     >
       + {text}
     </button>

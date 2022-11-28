@@ -3,7 +3,7 @@
 @use "../../styles/partials/fonts.scss";
 
 @include bp.mobile {
-  .warehouse {
+  .inventory {
     font-size: 0.8125rem;
     line-height: 1.375rem;
     margin: 0;
@@ -13,7 +13,7 @@
     padding: 0rem 1.5rem;
     &__info {
       display: flex;
-      width: 95%;
+      width: 80%;
       justify-content: space-between;
     }
     &__list-items {
@@ -28,6 +28,10 @@
       padding: 1rem 0 0rem;
       display: flex;
       flex-direction: column;
+      &--warehouse {
+        width: 80%;
+        align-items: flex-end;
+      }
     }
     &__item-label {
       display: block;
@@ -55,8 +59,6 @@
     }
     &__icons {
       cursor: pointer;
-      max-width: 1.3rem;
-      max-height: 1.3rem;
     }
   }
   .warehouse:hover {
@@ -64,9 +66,9 @@
   }
 }
 @include bp.tablet {
-  .warehouse {
+  .inventory {
     display: flex;
-    // justify-content: space-between;
+    align-items: center;
     font-size: 0.875rem;
     line-height: 1.375rem;
     margin: 0;
@@ -85,7 +87,7 @@
       flex-direction: row;
       align-items: center;
       width: 100%;
-      height: 6.125rem;
+      height: 3.625rem;
     }
 
     &__item {
@@ -94,6 +96,19 @@
       width: 100%;
       height: fit-content;
       padding: 0rem 0rem;
+      &--warehouse {
+        width: 100px;
+        padding-right: 1rem;
+      }
+    }
+    &__status-label {
+      padding-left: 2rem;
+    }
+    &__warehouse-name {
+      width: 100px;
+    }
+    &_qty {
+      padding-left: 2rem;
     }
     &__item-label {
       display: none;
@@ -104,12 +119,11 @@
     }
     &__contact-name {
       display: flex;
-      align-items: center;
       height: fit-content;
     }
     &__item-value {
       max-width: 6rem;
-      margin-left: 1.5rem;
+      margin-left: 2rem;
     }
     &__link {
       display: flex;
@@ -117,6 +131,7 @@
       color: colors.$instock-indigo;
       font-weight: 600;
       text-decoration: none;
+      // margin-right: 0.625rem;
     }
     &__link-warehouse:hover {
       border-bottom: 0.0313rem solid;
@@ -148,9 +163,22 @@
   }
 }
 @include bp.desktop {
-  .warehouse {
+  .inventory {
+    padding: 0 2.5rem;
     &__item {
       padding: 0rem 0rem;
+      &--address {
+        padding-left: 6rem;
+      }
+    }
+    &__status-label {
+      padding-left: 5rem;
+    }
+    &__warehouse-name {
+      width: 100px;
+    }
+    &_qty {
+      padding-left: 5rem;
     }
     &__item-value {
       max-width: 100%;
@@ -167,6 +195,9 @@
       align-items: center;
       width: 100%;
       height: 4.75rem;
+    }
+    &__icons-container {
+      padding-left: 7rem;
     }
   }
 }
