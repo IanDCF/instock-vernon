@@ -153,10 +153,10 @@
     &__edit {
       padding-top: 0.7rem;
     }
-    &__back-arrow {
+    &__chevron {
       width: fit-content;
     }
-    &__link:hover > &__back-arrow {
+    &__link:hover > &__chevron {
       animation: arrow-animation 0.2s forwards;
     }
   }
