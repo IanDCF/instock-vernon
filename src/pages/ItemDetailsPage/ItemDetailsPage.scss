@@ -1,0 +1,101 @@
+@use "../../styles/globals.scss";
+.item-details {
+  &__title-wrapper {
+    border-bottom: 1px solid globals.$cloud;
+    padding-top: 2rem;
+    padding-bottom: 1.5rem;
+  }
+
+  &__back-title-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  &__title {
+    padding: 0rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__title-value {
+    margin: 0;
+    @include globals.mobile-page-header;
+  }
+  &__back-arrow {
+    padding: 0.25rem;
+    margin-right: 0.5rem;
+  }
+  &__info-wrapper {
+    padding: 0rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  &__item-wrapper {
+    &--status {
+      padding-right: 7.3125rem;
+    }
+  }
+  &__label {
+    @include globals.mobile-label-links-buttons;
+    color: globals.$slate;
+    margin: 1rem 0rem 0rem;
+  }
+  &__description {
+    margin: 0.25rem 0;
+    color: globals.$instock-black;
+    @include globals.mobile-body-medium;
+  }
+  &__status-quantity {
+    display: flex;
+    width: 100%;
+  }
+}
+
+@include globals.tablet {
+  .item-details {
+    &__info-wrapper {
+      padding: 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: row;
+    }
+    &__info-item:nth-child(2) {
+      border-left: 1px solid globals.$cloud;
+      padding-left: 1.5rem;
+    }
+    &__item-wrapper {
+      &--status {
+        padding-right: 7.3125rem;
+      }
+    }
+    &__label {
+      @include globals.tablet-label-links-buttons;
+      color: globals.$slate;
+      margin: 0rem 0rem 0rem;
+    }
+    &__description {
+      margin: 0 0 2rem;
+      color: globals.$instock-black;
+      @include globals.tablet-body-medium;
+      max-width: 18.4375rem;
+      margin-right: 1.5rem;
+    }
+    &__status-quantity {
+      display: flex;
+      width: 100%;
+    }
+  }
+}
+@include globals.desktop {
+  .item-details {
+    margin: auto;
+    max-width: 63.75rem;
+    &__title {
+      padding: 0, 2.5rem;
+    }
+    &__info-wrapper {
+      padding: 1.5rem 2.5rem;
+    }
+    &__description {
+      max-width: 100%;
+    }
+  }
+}
