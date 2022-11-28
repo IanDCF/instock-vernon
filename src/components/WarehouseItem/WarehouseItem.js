@@ -30,7 +30,7 @@ const WarehouseItem = ({ warehouse, renderWarehouses }) => {
                 <span className="warehouse__link-warehouse">
                   { warehouse.warehouse_name }
                 </span>
-                <img src={ chevronIcon } alt="" />
+                <img className="warehouse__chevron" src={ chevronIcon } alt="" />
               </Link>
             </li>
             <li className="warehouse__item warehouse__item--address">
