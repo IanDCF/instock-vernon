@@ -1,14 +1,14 @@
 import "./Header.scss";
-import instockLogo from "../../assets/logos/InStock-Logo.svg";
 import { Link } from "react-router-dom";
+import instockLogo from "../../assets/logos/InStock-Logo.svg";
 
 const Header = () => {
   return (
     <div className="header-wrapper">
       <header className="header">
-        <div className="header__logo">
+        <Link className="header__logo" to="/warehouse">
           <img src={instockLogo} alt="InStock Logo" />
-        </div>
+        </Link>
         <div className="header__nav">
           <div>
             <Link
