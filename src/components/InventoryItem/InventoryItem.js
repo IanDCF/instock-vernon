@@ -1,21 +1,20 @@
 import "./InventoryItem.scss";
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
 import editIcon from "../../assets/icons/edit-24px.svg";
 import chevronIcon from "../../assets/icons/chevron_right-24px.svg";
 import InventoryTagInStock from "../Buttons/InventoryTag/InventoryTagInStock";
 import InventoryTagOutOfStock from "../Buttons/InventoryTag/InventoryTagOutOfStock";
-import WarehouseDelModal from "../../components/DeleteModal/DeleteModal";
+// import WarehouseDelModal from "../../components/DeleteModal/DeleteModal";
 
-const InventoryItem = ({ updateInventory, inventory }) => {
-  const [openModal, setOpenModal] = useState(false);
-  const renderInventory = (newInventoryList) => {
-    updateInventory(newInventoryList);
-  };
-  const handleModal = () => {
-    setOpenModal(!openModal);
-  };
+const InventoryItem = ({ inventory, handleModal }) => {
+  // const [openModal, setOpenModal] = useState(false);
+  // // const renderInventory = (newInventoryList) => {
+  // //   updateInventory(newInventoryList);
+  // // };
+  // const handleModal = () => {
+  //   setOpenModal(!openModal);
+  // };
   return (
     <>
       <li className="inventory">
@@ -67,26 +66,29 @@ const InventoryItem = ({ updateInventory, inventory }) => {
           </span>
         </div>
         <div className=" inventory__icons-container">
-          <div onClick={handleModal} className="inventory__delete">
-            <img className=" inventory__icons" src={deleteIcon} alt="" />
+          <div className="inventory__delete">
+            <img
+              className=" inventory__icons"
+              src={deleteIcon}
+              alt=""
+              onClick={() => handleModal(inventory)}
+            />
           </div>
           <div className="inventory__edit">
-            <Link
-              to={`/inventory/${inventory.id}/edit`}
-            >
+            <Link to={`/inventory/${inventory.id}/edit`}>
               <img className=" inventory__icons" src={editIcon} alt="" />
             </Link>
           </div>
         </div>
       </li>
-      {openModal && (
+      {/* {openModal && (
         <WarehouseDelModal
           type="item"
           renderInventory={renderInventory}
           item={inventory}
           handleModal={handleModal}
         />
-      )}
+      )} */}
     </>
   );
 };
