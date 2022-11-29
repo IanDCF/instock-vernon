@@ -64,9 +64,11 @@ const WarehouseItem = ({ warehouse, renderWarehouses }) => {
               onClick={ () => handleModal(warehouse) }
             />
           </div>
-          <div className="warehouse__edit">
-            <img className=" warehouse__icons" src={ editIcon } alt="" />
-          </div>
+          <Link to={ `${warehouse.id}/edit` }>
+            <div className="warehouse__edit">
+              <img className=" warehouse__icons" src={ editIcon } alt="" />
+            </div>
+          </Link>
         </div>
       </li>
       { openModal && (
