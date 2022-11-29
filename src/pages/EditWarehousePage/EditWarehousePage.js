@@ -203,7 +203,7 @@ const EditWarehousePage = ({ warehouses, renderWarehouses }) => {
           const updatedWarehouseArray = [...warehouses];
           updatedWarehouseArray[updatedWarehouseIndex] = data;
           renderWarehouses(updatedWarehouseArray);
-          navigate("/");
+          // navigate("/");
           // setWarehouseName("");
           // setAddress("");
           // setCity("");
