@@ -40,32 +40,45 @@ function App() {
       <Header />
 
       <Routes>
-        <Route path="/" element={<Navigate to="/warehouse" />} />
+        <Route path="/" element={ <Navigate to="/warehouse" /> } />
         <Route
           path="/warehouse"
           element={
             <WarehousePage
-              warehouses={warehouses}
-              renderWarehouses={renderWarehouses}
+              warehouses={ warehouses }
+              renderWarehouses={ renderWarehouses }
             />
           }
         />
-        <Route path="/warehouse/add" element={<AddWarehousePage />} />
+        <Route
+          path="/warehouse/add"
+          element={
+            <AddWarehousePage
+              warehouses={ warehouses }
+              renderWarehouses={ renderWarehouses }
+            />
+          }
+        />
         <Route
           path="/warehouse/:warehouseId"
-          element={<WarehouseDetailsPage />}
+          element={ <WarehouseDetailsPage /> }
         />
         <Route
           path="/warehouse/:warehouseId/edit"
-          element={<EditWarehousePage />}
+          element={
+            <EditWarehousePage
+              warehouses={ warehouses }
+              renderWarehouses={ renderWarehouses }
+            />
+          }
         />
 
         <Route
           path="/inventory"
           element={
             <InventoryPage
-              updateInventory={updateInventory}
-              inventory={inventory}
+              updateInventory={ updateInventory }
+              inventory={ inventory }
             />
           }
         />
@@ -73,18 +86,18 @@ function App() {
           path="inventory/add"
           element={
             <AddItemPage
-              updateInventory={updateInventory}
-              inventory={inventory}
+              updateInventory={ updateInventory }
+              inventory={ inventory }
             />
           }
         />
-        <Route path="/inventory/:itemId" element={<ItemDetailsPage />} />
+        <Route path="/inventory/:itemId" element={ <ItemDetailsPage /> } />
         <Route
           path="/inventory/:itemId/edit"
           element={
             <EditItemPage
-              updateInventory={updateInventory}
-              inventory={inventory}
+              updateInventory={ updateInventory }
+              inventory={ inventory }
             />
           }
         />
