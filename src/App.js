@@ -94,7 +94,7 @@ function App() {
         />
         <Route
           path="/warehouse/:warehouseId"
-          element={<WarehouseDetailsPage />}
+          element={<WarehouseDetailsPage handleModal={handleInventoryModal} />}
         />
         <Route
           path="/warehouse/:warehouseId/edit"
