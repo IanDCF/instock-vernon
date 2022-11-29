@@ -8,7 +8,7 @@ import InventoryTagInStock from "../../components/Buttons/InventoryTag/Inventory
 import InventoryTagOutOfStock from "../../components/Buttons/InventoryTag/InventoryTagOutOfStock";
 import ArrowBack from "../../assets/icons/arrow_back-24px.svg";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
 import "./WarehouseDetailsPage.scss";
 import { useEffect, useState } from "react";
@@ -33,7 +33,7 @@ function WarehouseDetailsPage() {
         // console.log(warehouseData);
         setWarehouseInfo(warehouseData);
 
-        console.log(warehouseInventoryData);
+        // console.log(warehouseInventoryData);
         setWarehouseInventory(warehouseInventoryData);
       } catch (error) {
         console.log(error);
@@ -41,6 +41,13 @@ function WarehouseDetailsPage() {
     };
     fetchData();
   }, []);
+
+  let navigate = useNavigate();
+
+  const handleEditClick = () => {
+    console.log("clicked");
+    navigate(`/warehouse/${warehouseId}/edit`);
+  };
 
   return (
     <PageWrapper>
@@ -58,7 +65,7 @@ function WarehouseDetailsPage() {
                 </Link>
                 <h1>{warehouseInfo.city}</h1>
               </div>
-              <EditButton />
+              <EditButton onClick={handleEditClick} />
             </div>
           </div>
         )}
@@ -140,14 +147,19 @@ function WarehouseDetailsPage() {
                           Inventory Item
                         </label>
                         {/* <br></br> */}
-                        <a className="wh-details-item-btn" href="">
+                        <Link
+                          className="wh-details-item-btn"
+                          to={`/inventory/${item.id}`}
+                        >
+                          {/* <a className="wh-details-item-btn" href=""> */}
                           {item.item_name}
                           <img
                             className="wh-details__item-btn-icon"
                             src={chevronIcon}
                             alt="chevron icon"
                           />
-                        </a>
+                          {/* </a> */}
+                        </Link>
                       </div>
                       <div className="wh-details__category-wrapper">
                         <label className="wh-details__mobile-label">
