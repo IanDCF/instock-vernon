@@ -8,12 +8,13 @@ import CancelButton from "../../components/Buttons/CancelButton/CancelButton";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getInventory } from "../../utils/utils";
 
-const AddItemPage = () => {
+const AddItemPage = ({ updateInventory, inventory }) => {
   const [categories, setCategories] = useState();
   const [warehousesList, setWarehousesList] = useState();
 
-  const [itemStatus, setItemStatus] = useState("in-stock");
+  const [itemStatus, setItemStatus] = useState("In Stock");
   const [itemWarehouse, setItemWarehouse] = useState("");
   // Get Catagories List for categories datalist
   const getCategoriesAxios = async () => {
@@ -57,6 +58,15 @@ const AddItemPage = () => {
   // useRef to get values of the form
   const formRef = useRef();
 
+  const renderInventory = () => {
+    const fetchData = async () => {
+      const inventoryData = await getInventory();
+      console.log(inventoryData);
+      updateInventory(inventoryData);
+    };
+    fetchData();
+  };
+
   // create a axios post for add inventory item
   const addInventoryItem = async (obj) => {
     try {
@@ -65,6 +75,7 @@ const AddItemPage = () => {
         obj
       );
       console.log("inventory was added/posted", response);
+      renderInventory();
     } catch (err) {
       console.log(err);
     }
@@ -82,7 +93,7 @@ const AddItemPage = () => {
     const category = form.categories.value;
     const status = itemStatus; // setState
 
-    const quantity = status === "in-stock" ? form.quantity.value / 1 : 0;
+    const quantity = status === "In Stock" ? form.quantity.value / 1 : 0;
 
     // const warehouseId = form.warehouse.value;
     const warehouseId = itemWarehouse;
@@ -174,6 +185,7 @@ const AddItemPage = () => {
                     list="categories"
                     name="categories"
                     className="add-item__categories-list add-item__datalist-input"
+                    placeholder="Please select"
                   />
                   <img
                     className="add-item__arrow-drop-down"
@@ -211,15 +223,15 @@ const AddItemPage = () => {
                       className="add-item__label add-item__label--radio"
                       htmlFor="instock"
                     >
-                      In-Stock
+                      In Stock
                     </label>
                     <input
                       onChange={statusRadioChangeHandler}
                       type="radio"
                       name="instock"
                       className="add-item__status"
-                      value="in-stock"
-                      checked={itemStatus === "in-stock"}
+                      value="In Stock"
+                      checked={itemStatus === "In Stock"}
                     />
                   </div>
                   <div className="add-item__radio-wrapper">
@@ -227,21 +239,21 @@ const AddItemPage = () => {
                       className="add-item__label add-item__label--radio"
                       htmlFor="outofstock"
                     >
-                      Out-of-Stock
+                      Out of Stock
                     </label>
                     <input
                       onChange={statusRadioChangeHandler}
                       type="radio"
                       name="outofstock"
                       className="add-item__status"
-                      value="out-of-stock"
-                      checked={itemStatus === "out-of-stock"}
+                      value="Out of Stock"
+                      checked={itemStatus === "Out of Stock"}
                     />
                   </div>
                 </div>
               </label>
 
-              {itemStatus === "in-stock" ? (
+              {itemStatus === "In Stock" ? (
                 <label className="add-item__label">
                   Quantity
                   <input
@@ -265,6 +277,7 @@ const AddItemPage = () => {
                     onChange={(event) => {
                       warehouseChangeHandler(event);
                     }}
+                    placeholder="Please select"
                   ></input>
                   <img
                     className="add-item__arrow-drop-down"

@@ -6,7 +6,7 @@ import arrowBackIcon from "../../assets/icons/arrow_back-24px.svg";
 import errorIcon from "../../assets/icons/error-24px.svg";
 import "./AddWarehousePage.scss";
 
-const AddWarehousePage = () => {
+const AddWarehousePage = ({ warehouses, renderWarehouses }) => {
   const [warehouseName, setWarehouseName] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -173,7 +173,8 @@ const AddWarehousePage = () => {
     if (isFormValid()) {
       axios
         .post(`${BACKEND}/warehouses`, warehouseObj)
-        .then(() => {
+        .then(({ data }) => {
+          renderWarehouses([...warehouses, data]);
           setWarehouseName("");
           setAddress("");
           setCity("");
@@ -195,11 +196,11 @@ const AddWarehousePage = () => {
         <div className="add-wh__inner-wrapper">
           <div className="add-wh__heading-wrapper">
             <Link to="/warehouse">
-              <img src={arrowBackIcon} alt="Back Arrow" />
+              <img src={ arrowBackIcon } alt="Back Arrow" />
             </Link>
             <h1 className="add-wh__title">Add New Warehouse</h1>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={ handleSubmit }>
             <div className="add-wh__form-wrapper">
               <div className="add-wh__details-wrapper">
                 <h2 className="add-wh__subtitle">Warehouse Details</h2>
@@ -207,96 +208,92 @@ const AddWarehousePage = () => {
                   Warehouse Name
                 </label>
                 <input
-                  className={`add-wh__input ${
-                    !isWarehouse && "add-wh__input--required"
-                  }`}
+                  className={ `add-wh__input ${!isWarehouse && "add-wh__input--required"
+                    }` }
                   type="text"
                   name="warehouse-name"
                   placeholder="Warehouse Name"
-                  value={warehouseName}
-                  onChange={handleChangeWarehouse}
+                  value={ warehouseName }
+                  onChange={ handleChangeWarehouse }
                 />
-                {!isWarehouse && (
+                { !isWarehouse && (
                   <p className="add-wh__error">
                     <img
                       className="add-wh__error-img"
-                      src={errorIcon}
+                      src={ errorIcon }
                       alt="Error"
                     />
                     This field is required
                   </p>
-                )}
+                ) }
                 <label className="add-wh__label" htmlFor="address">
                   Street Address
                 </label>
                 <input
-                  className={`add-wh__input ${
-                    !isAddress && "add-wh__input--required"
-                  }`}
+                  className={ `add-wh__input ${!isAddress && "add-wh__input--required"
+                    }` }
                   type="text"
                   name="address"
                   placeholder="Street Address"
-                  value={address}
-                  onChange={handleChangeAddress}
+                  value={ address }
+                  onChange={ handleChangeAddress }
                 />
-                {!isAddress && (
+                { !isAddress && (
                   <p className="add-wh__error">
                     <img
                       className="add-wh__error-img"
-                      src={errorIcon}
+                      src={ errorIcon }
                       alt="Error"
                     />
                     This field is required
                   </p>
-                )}
+                ) }
 
                 <label className="add-wh__label" htmlFor="city">
                   City
                 </label>
                 <input
-                  className={`add-wh__input ${
-                    !isCity && "add-wh__input--required"
-                  }`}
+                  className={ `add-wh__input ${!isCity && "add-wh__input--required"
+                    }` }
                   type="text"
                   name="city"
                   placeholder="City"
-                  value={city}
-                  onChange={handleChangeCity}
+                  value={ city }
+                  onChange={ handleChangeCity }
                 />
-                {!isCity && (
+                { !isCity && (
                   <p className="add-wh__error">
                     <img
                       className="add-wh__error-img"
-                      src={errorIcon}
+                      src={ errorIcon }
                       alt="Error"
                     />
                     This field is required
                   </p>
-                )}
+                ) }
 
                 <label className="add-wh__label" htmlFor="country">
                   Country
                 </label>
                 <input
-                  className={`add-wh__input ${
-                    !isCountry && "add-wh__input--required"
-                  }`}
+                  className={ `add-wh__input ${!isCountry && "add-wh__input--required"
+                    }` }
                   type="text"
                   name="country"
                   placeholder="Country"
-                  value={country}
-                  onChange={handleChangeCountry}
+                  value={ country }
+                  onChange={ handleChangeCountry }
                 />
-                {!isCountry && (
+                { !isCountry && (
                   <p className="add-wh__error">
                     <img
                       className="add-wh__error-img"
-                      src={errorIcon}
+                      src={ errorIcon }
                       alt="Error"
                     />
                     This field is required
                   </p>
-                )}
+                ) }
               </div>
               <div className="add-wh__details-wrapper">
                 <h2 className="add-wh__subtitle">Contact Details</h2>
@@ -304,94 +301,90 @@ const AddWarehousePage = () => {
                   Contact Name
                 </label>
                 <input
-                  className={`add-wh__input ${
-                    !isContact && "add-wh__input--required"
-                  }`}
+                  className={ `add-wh__input ${!isContact && "add-wh__input--required"
+                    }` }
                   type="text"
                   name="contact-name"
                   placeholder="Contact Name"
-                  value={contactName}
-                  onChange={handleChangeContact}
+                  value={ contactName }
+                  onChange={ handleChangeContact }
                 />
-                {!isContact && (
+                { !isContact && (
                   <p className="add-wh__error">
                     <img
                       className="add-wh__error-img"
-                      src={errorIcon}
+                      src={ errorIcon }
                       alt="Error"
                     />
                     This field is required
                   </p>
-                )}
+                ) }
                 <label className="add-wh__label" htmlFor="position">
                   Position
                 </label>
                 <input
-                  className={`add-wh__input ${
-                    !isPosition && "add-wh__input--required"
-                  }`}
+                  className={ `add-wh__input ${!isPosition && "add-wh__input--required"
+                    }` }
                   type="text"
                   name="position"
                   placeholder="Position"
-                  value={position}
-                  onChange={handleChangePosition}
+                  value={ position }
+                  onChange={ handleChangePosition }
                 />
-                {!isPosition && (
+                { !isPosition && (
                   <p className="add-wh__error">
                     <img
                       className="add-wh__error-img"
-                      src={errorIcon}
+                      src={ errorIcon }
                       alt="Error"
                     />
                     This field is required
                   </p>
-                )}
+                ) }
                 <label className="add-wh__label" htmlFor="phone">
                   Phone Number
                 </label>
                 <input
-                  className={`add-wh__input ${
-                    !isPhone && "add-wh__input--required"
-                  }`}
+                  className={ `add-wh__input ${!isPhone && "add-wh__input--required"
+                    }` }
                   type="text"
                   name="phone"
                   placeholder="Phone Number"
-                  value={phone}
-                  onChange={handleChangePhone}
+                  value={ phone }
+                  onChange={ handleChangePhone }
                 />
-                {!isPhone && (
+                { !isPhone && (
                   <p className="add-wh__error">
                     <img
                       className="add-wh__error-img"
-                      src={errorIcon}
+                      src={ errorIcon }
                       alt="Error"
                     />
                     This field is required
                   </p>
-                )}
+                ) }
                 <label className="add-wh__label" htmlFor="email">
                   Email
                 </label>
                 <input
-                  className={`add-wh__input ${
-                    !isEmail && "add-wh__input--required"
-                  }`}
+                  className={ `add-wh__input ${!isEmail && "add-wh__input--required"
+                    }` }
                   type="text"
                   name="email"
                   placeholder="Email"
-                  value={email}
-                  onChange={handleChangeEmail}
+                  value={ email }
+                  onChange={ handleChangeEmail }
                 />
-                {!isEmail && (
+                { !isEmail && (
                   <p className="add-wh__error">
                     <img
                       className="add-wh__error-img"
-                      src={errorIcon}
+                      src={ errorIcon }
                       alt="Error"
                     />
                     This field is required
                   </p>
-                )}
+                ) }
               </div>
             </div>
             <div className="add-wh__buttons-wrapper">

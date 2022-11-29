@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
 const WarehousesPage = ({ warehouses, renderWarehouses }) => {
-  const [searchedWarehouses, setSearchedWarehouses] = useState();
+  const [searchedWarehouses, setSearchedWarehouses] = useState(warehouses);
   useEffect(() => {
     setSearchedWarehouses(warehouses);
   }, [setSearchedWarehouses, warehouses]);

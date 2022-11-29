@@ -11,7 +11,7 @@ import CancelButton from "../../components/Buttons/CancelButton/CancelButton";
 
 import "./EditWarehousePage.scss";
 
-const EditWarehousePage = () => {
+const EditWarehousePage = ({ warehouses, renderWarehouses }) => {
   const [warehouseName, setWarehouseName] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -20,6 +20,7 @@ const EditWarehousePage = () => {
   const [position, setPosition] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
   const [isWarehouse, setIsWarehouse] = useState(true);
   const [isAddress, setIsAddress] = useState(true);
@@ -178,8 +179,6 @@ const EditWarehousePage = () => {
 
   const notify = () => toast(`Warehouse: ${warehouseName} was edited.`);
 
-  let navigate = useNavigate();
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -197,7 +196,14 @@ const EditWarehousePage = () => {
     if (isFormValid()) {
       axios
         .put(`${BACKEND}/warehouses/${warehouseId}`, warehouseObj)
-        .then(() => {
+        .then(({ data }) => {
+          const updatedWarehouseIndex = warehouses.findIndex(
+            (warehouse) => data.id === warehouse.id
+          );
+          const updatedWarehouseArray = [...warehouses];
+          updatedWarehouseArray[updatedWarehouseIndex] = data;
+          renderWarehouses(updatedWarehouseArray);
+          navigate("/");
           // setWarehouseName("");
           // setAddress("");
           // setCity("");
