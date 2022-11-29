@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 import arrowBackIcon from "../../assets/icons/arrow_back-24px.svg";
 import errorIcon from "../../assets/icons/error-24px.svg";
+import AddNewButton from "../../components/Buttons/AddNew/AddNewButton";
+import CancelButton from "../../components/Buttons/CancelButton/CancelButton";
+
 import "./EditWarehousePage.scss";
 
 const EditWarehousePage = () => {
@@ -171,6 +176,10 @@ const EditWarehousePage = () => {
     return true;
   };
 
+  const notify = () => toast(`Warehouse: ${warehouseName} was edited.`);
+
+  let navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -199,6 +208,12 @@ const EditWarehousePage = () => {
           // setEmail("");
         })
         .catch((error) => console.log(error));
+
+      notify();
+
+      setTimeout(() => {
+        navigate("/warehouse");
+      }, 3000);
     }
   };
 
@@ -408,13 +423,21 @@ const EditWarehousePage = () => {
               </div>
             </div>
             <div className="edit-wh__buttons-wrapper">
-              <Link to="/warehouse">
-                <button className="edit-wh__cancel-button">Cancel</button>
-              </Link>
-              <button className="edit-wh__add-button" type="submit">
-                Save
-              </button>
+              <CancelButton link="/warehouse" />
+              <AddNewButton text="Save" />
             </div>
+            <ToastContainer
+              position="bottom-center"
+              autoClose={2000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
           </form>
         </div>
       </div>
