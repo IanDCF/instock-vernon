@@ -7,8 +7,7 @@ import sortIcon from "../../assets/icons/sort-24px.svg";
 import { useEffect, useState } from "react";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
-
-const InventoryPage = ({ updateInventory, inventory }) => {
+const InventoryPage = ({ inventory, handleModal }) => {
   const [searchedInventory, setSearchedInventory] = useState();
   useEffect(() => {
     setSearchedInventory(inventory);
@@ -32,16 +31,20 @@ const InventoryPage = ({ updateInventory, inventory }) => {
         <article className="inventories__header">
           <h1 className="inventories__header-title">Inventory</h1>
           <section className="inventories__form-search">
-            <form onSubmit={ inputOnChange } className="inventories__header-form">
-              <img className="inventories__search-icon" src={ searchIcon } alt="" />
+            <form onSubmit={inputOnChange} className="inventories__header-form">
+              <img
+                className="inventories__search-icon"
+                src={searchIcon}
+                alt=""
+              />
               <input
-                onChange={ (e) => inputOnChange(e) }
+                onChange={(e) => inputOnChange(e)}
                 className="inventories__header-input"
                 placeholder="Search..."
               />
             </form>
-            <Link to={ "/inventory/add" }>
-              <AddNewButton text={ "Add New Item" } />
+            <Link to={"/inventory/add"}>
+              <AddNewButton text={"Add New Item"} styling={"add-new--width"} />
             </Link>
           </section>
         </article>
@@ -50,14 +53,24 @@ const InventoryPage = ({ updateInventory, inventory }) => {
             <ul className="inventories__header-list">
               <li className="inventories__list-container">
                 <div className="inventories__title-item">
-                  <span className="inventories__list-value">INVENTORY ITEM</span>
-                  <img className="inventories__sort-icon" src={ sortIcon } alt="" />
+                  <span className="inventories__list-value">
+                    INVENTORY ITEM
+                  </span>
+                  <img
+                    className="inventories__sort-icon"
+                    src={sortIcon}
+                    alt=""
+                  />
                 </div>
                 <div className="inventories__title-item">
                   <span className="inventories__list-value inventories__list-value--address">
                     CATEGORY
                   </span>
-                  <img className="inventories__sort-icon" src={ sortIcon } alt="" />
+                  <img
+                    className="inventories__sort-icon"
+                    src={sortIcon}
+                    alt=""
+                  />
                 </div>
               </li>
               <li className="inventories__list-container">
@@ -65,34 +78,42 @@ const InventoryPage = ({ updateInventory, inventory }) => {
                   <span className="inventories__list-value inventories__list-value--contact">
                     STATUS
                   </span>
-                  <img className="inventories__sort-icon" src={ sortIcon } alt="" />
+                  <img
+                    className="inventories__sort-icon"
+                    src={sortIcon}
+                    alt=""
+                  />
                 </div>
                 <div className="inventories__title-item">
                   <span className="inventories__list-value inventories__list-value--qty">
                     QTY
                   </span>
-                  <img className="inventories__sort-icon" src={ sortIcon } alt="" />
+                  <img
+                    className="inventories__sort-icon"
+                    src={sortIcon}
+                    alt=""
+                  />
                 </div>
               </li>
             </ul>
             <div className="inventories__title-item">
               <span className="inventories__list-action inventories__list-action--warehouse">
                 WAREHOUSE
-              </span>{ " " }
-              <img className="inventories__sort-icon" src={ sortIcon } alt="" />
+              </span>{" "}
+              <img className="inventories__sort-icon" src={sortIcon} alt="" />
             </div>
             <div className="inventories__title-item">
               <span className="inventories__list-action">ACTIONS</span>
             </div>
           </li>
-          { searchedInventory &&
+          {searchedInventory &&
             searchedInventory.map((inventory, index) => (
               <InventoryItem
-                key={ index }
-                updateInventory={ updateInventory }
-                inventory={ inventory }
+                key={index}
+                inventory={inventory}
+                handleModal={handleModal}
               />
-            )) }
+            ))}
         </ul>
       </section>
     </PageWrapper>

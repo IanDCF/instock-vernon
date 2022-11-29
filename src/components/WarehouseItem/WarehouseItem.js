@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
 import editIcon from "../../assets/icons/edit-24px.svg";
 import chevronIcon from "../../assets/icons/chevron_right-24px.svg";
-import { useState } from "react";
-import DeleteModal from "../DeleteModal/DeleteModal";
+// import { useState } from "react";
+// import DeleteModal from "../DeleteModal/DeleteModal";
 
-const WarehouseItem = ({ warehouse, renderWarehouses }) => {
-  const [openModal, setOpenModal] = useState(false);
+const WarehouseItem = ({ warehouse, handleModal }) => {
+  // const [openModal, setOpenModal] = useState(false);
 
-  const handleModal = () => {
-    setOpenModal(!openModal);
-  };
+  // const handleModal = () => {
+  //   setOpenModal(!openModal);
+  // };
 
   const address = `${warehouse.address} ${warehouse.city} ${warehouse.country}`;
 
@@ -25,32 +25,32 @@ const WarehouseItem = ({ warehouse, renderWarehouses }) => {
               <span className="warehouse__item-label">WAREHOUSE</span>
               <Link
                 className="warehouse__link"
-                to={ `/warehouse/${warehouse.id}` }
+                to={`/warehouse/${warehouse.id}`}
               >
                 <span className="warehouse__link-warehouse">
-                  { warehouse.warehouse_name }
+                  {warehouse.warehouse_name}
                 </span>
-                <img className="warehouse__chevron" src={ chevronIcon } alt="" />
+                <img className="warehouse__chevron" src={chevronIcon} alt="" />
               </Link>
             </li>
             <li className="warehouse__item warehouse__item--address">
               <span className="warehouse__item-label">ADDRESS</span>
-              <span className="warehouse__item-value">{ address }</span>
+              <span className="warehouse__item-value">{address}</span>
             </li>
           </ul>
           <ul className="warehouse__list-items">
             <li className="warehouse__item">
               <span className="warehouse__item-label">CONTACT NAME</span>
               <span className="warehouse__contact-name">
-                { warehouse.contact_name }
+                {warehouse.contact_name}
               </span>
             </li>
             <li className="warehouse__item">
               <span className="warehouse__item-label">CONTACT INFORMATION</span>
               <span>
-                { warehouse.contact_phone }
+                {warehouse.contact_phone}
                 <br />
-                { warehouse.contact_email }
+                {warehouse.contact_email}
               </span>
             </li>
           </ul>
@@ -59,26 +59,26 @@ const WarehouseItem = ({ warehouse, renderWarehouses }) => {
           <div className="warehouse__delete">
             <img
               className=" warehouse__icons"
-              src={ deleteIcon }
+              src={deleteIcon}
               alt=""
-              onClick={ () => handleModal(warehouse) }
+              onClick={() => handleModal(warehouse)}
             />
           </div>
-          <Link to={ `${warehouse.id}/edit` }>
+          <Link to={`${warehouse.id}/edit`}>
             <div className="warehouse__edit">
-              <img className=" warehouse__icons" src={ editIcon } alt="" />
+              <img className=" warehouse__icons" src={editIcon} alt="" />
             </div>
           </Link>
         </div>
       </li>
-      { openModal && (
+      {/* {openModal && (
         <DeleteModal
-          handleModal={ handleModal }
-          warehouse={ warehouse }
-          renderWarehouses={ renderWarehouses }
+          handleModal={handleModal}
+          warehouse={warehouse}
+          renderWarehouses={renderWarehouses}
           type="warehouse"
         />
-      ) }
+      )} */}
     </>
   );
 };

@@ -5,6 +5,7 @@ import axios from "axios";
 import arrowBackIcon from "../../assets/icons/arrow_back-24px.svg";
 import errorIcon from "../../assets/icons/error-24px.svg";
 import "./EditWarehousePage.scss";
+import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
 const EditWarehousePage = ({ warehouses, renderWarehouses }) => {
   const [warehouseName, setWarehouseName] = useState("");
@@ -15,7 +16,7 @@ const EditWarehousePage = ({ warehouses, renderWarehouses }) => {
   const [position, setPosition] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [isWarehouse, setIsWarehouse] = useState(true);
   const [isAddress, setIsAddress] = useState(true);
@@ -190,11 +191,13 @@ const EditWarehousePage = ({ warehouses, renderWarehouses }) => {
       axios
         .put(`${BACKEND}/warehouses/${warehouseId}`, warehouseObj)
         .then(({ data }) => {
-          const updatedWarehouseIndex = warehouses.findIndex(warehouse => data.id === warehouse.id)
-          const updatedWarehouseArray = [...warehouses]
-          updatedWarehouseArray[updatedWarehouseIndex] = data
-          renderWarehouses(updatedWarehouseArray)
-          navigate('/')
+          const updatedWarehouseIndex = warehouses.findIndex(
+            (warehouse) => data.id === warehouse.id
+          );
+          const updatedWarehouseArray = [...warehouses];
+          updatedWarehouseArray[updatedWarehouseIndex] = data;
+          renderWarehouses(updatedWarehouseArray);
+          navigate("/");
           // setWarehouseName("");
           // setAddress("");
           // setCity("");
@@ -209,214 +212,224 @@ const EditWarehousePage = ({ warehouses, renderWarehouses }) => {
   };
 
   return (
-    <section className="edit-wh">
-      <div className="edit-wh__wrapper">
-        <div className="edit-wh__inner-wrapper">
-          <div className="edit-wh__heading-wrapper">
-            <Link to="/warehouse">
-              <img src={ arrowBackIcon } alt="Back Arrow" />
-            </Link>
-            <h1 className="edit-wh__title">Edit Warehouse</h1>
-          </div>
-          <form onSubmit={ handleSubmit }>
-            <div className="edit-wh__form-wrapper">
-              <div className="edit-wh__details-wrapper">
-                <h2 className="edit-wh__subtitle">Warehouse Details</h2>
-                <label className="edit-wh__label" htmlFor="warehouse-name">
-                  Warehouse Name
-                </label>
-                <input
-                  className={ `edit-wh__input ${!isWarehouse && "edit-wh__input--required"
-                    }` }
-                  type="text"
-                  name="warehouse-name"
-                  placeholder="Warehouse Name"
-                  value={ warehouseName }
-                  onChange={ handleChangeWarehouse }
-                />
-                { !isWarehouse && (
-                  <p className="edit-wh__error">
-                    <img
-                      className="edit-wh__error-img"
-                      src={ errorIcon }
-                      alt="Error"
-                    />
-                    This field is required
-                  </p>
-                ) }
-                <label className="edit-wh__label" htmlFor="address">
-                  Street Address
-                </label>
-                <input
-                  className={ `edit-wh__input ${!isAddress && "edit-wh__input--required"
-                    }` }
-                  type="text"
-                  name="address"
-                  placeholder="Street Address"
-                  value={ address }
-                  onChange={ handleChangeAddress }
-                />
-                { !isAddress && (
-                  <p className="edit-wh__error">
-                    <img
-                      className="edit-wh__error-img"
-                      src={ errorIcon }
-                      alt="Error"
-                    />
-                    This field is required
-                  </p>
-                ) }
-
-                <label className="edit-wh__label" htmlFor="city">
-                  City
-                </label>
-                <input
-                  className={ `edit-wh__input ${!isCity && "edit-wh__input--required"
-                    }` }
-                  type="text"
-                  name="city"
-                  placeholder="City"
-                  value={ city }
-                  onChange={ handleChangeCity }
-                />
-                { !isCity && (
-                  <p className="edit-wh__error">
-                    <img
-                      className="edit-wh__error-img"
-                      src={ errorIcon }
-                      alt="Error"
-                    />
-                    This field is required
-                  </p>
-                ) }
-
-                <label className="edit-wh__label" htmlFor="country">
-                  Country
-                </label>
-                <input
-                  className={ `edit-wh__input ${!isCountry && "edit-wh__input--required"
-                    }` }
-                  type="text"
-                  name="country"
-                  placeholder="Country"
-                  value={ country }
-                  onChange={ handleChangeCountry }
-                />
-                { !isCountry && (
-                  <p className="edit-wh__error">
-                    <img
-                      className="edit-wh__error-img"
-                      src={ errorIcon }
-                      alt="Error"
-                    />
-                    This field is required
-                  </p>
-                ) }
-              </div>
-              <div className="edit-wh__details-wrapper">
-                <h2 className="edit-wh__subtitle">Contact Details</h2>
-                <label className="edit-wh__label" htmlFor="contact-name">
-                  Contact Name
-                </label>
-                <input
-                  className={ `edit-wh__input ${!isContact && "edit-wh__input--required"
-                    }` }
-                  type="text"
-                  name="contact-name"
-                  placeholder="Contact Name"
-                  value={ contactName }
-                  onChange={ handleChangeContact }
-                />
-                { !isContact && (
-                  <p className="edit-wh__error">
-                    <img
-                      className="edit-wh__error-img"
-                      src={ errorIcon }
-                      alt="Error"
-                    />
-                    This field is required
-                  </p>
-                ) }
-                <label className="edit-wh__label" htmlFor="position">
-                  Position
-                </label>
-                <input
-                  className={ `edit-wh__input ${!isPosition && "edit-wh__input--required"
-                    }` }
-                  type="text"
-                  name="position"
-                  placeholder="Position"
-                  value={ position }
-                  onChange={ handleChangePosition }
-                />
-                { !isPosition && (
-                  <p className="edit-wh__error">
-                    <img
-                      className="edit-wh__error-img"
-                      src={ errorIcon }
-                      alt="Error"
-                    />
-                    This field is required
-                  </p>
-                ) }
-                <label className="edit-wh__label" htmlFor="phone">
-                  Phone Number
-                </label>
-                <input
-                  className={ `edit-wh__input ${!isPhone && "edit-wh__input--required"
-                    }` }
-                  type="text"
-                  name="phone"
-                  placeholder="Phone Number"
-                  value={ phone }
-                  onChange={ handleChangePhone }
-                />
-                { !isPhone && (
-                  <p className="edit-wh__error">
-                    <img
-                      className="edit-wh__error-img"
-                      src={ errorIcon }
-                      alt="Error"
-                    />
-                    This field is required
-                  </p>
-                ) }
-                <label className="edit-wh__label" htmlFor="email">
-                  Email
-                </label>
-                <input
-                  className={ `edit-wh__input ${!isEmail && "edit-wh__input--required"
-                    }` }
-                  type="text"
-                  name="email"
-                  placeholder="Email"
-                  value={ email }
-                  onChange={ handleChangeEmail }
-                />
-                { !isEmail && (
-                  <p className="edit-wh__error">
-                    <img
-                      className="edit-wh__error-img"
-                      src={ errorIcon }
-                      alt="Error"
-                    />
-                    This field is required
-                  </p>
-                ) }
-              </div>
-            </div>
-            <div className="edit-wh__buttons-wrapper">
+    <PageWrapper>
+      <section className="edit-wh">
+        <div className="edit-wh__wrapper">
+          <div className="edit-wh__inner-wrapper">
+            <div className="edit-wh__heading-wrapper">
               <Link to="/warehouse">
-                <button className="edit-wh__cancel-button">Cancel</button>
+                <img src={arrowBackIcon} alt="Back Arrow" />
               </Link>
-              <button className="edit-wh__add-button" type="submit">
-                Save
-              </button>
+              <h1 className="edit-wh__title">Edit Warehouse</h1>
             </div>
-          </form>
+            <form onSubmit={handleSubmit}>
+              <div className="edit-wh__form-wrapper">
+                <div className="edit-wh__details-wrapper">
+                  <h2 className="edit-wh__subtitle">Warehouse Details</h2>
+                  <label className="edit-wh__label" htmlFor="warehouse-name">
+                    Warehouse Name
+                  </label>
+                  <input
+                    className={`edit-wh__input ${
+                      !isWarehouse && "edit-wh__input--required"
+                    }`}
+                    type="text"
+                    name="warehouse-name"
+                    placeholder="Warehouse Name"
+                    value={warehouseName}
+                    onChange={handleChangeWarehouse}
+                  />
+                  {!isWarehouse && (
+                    <p className="edit-wh__error">
+                      <img
+                        className="edit-wh__error-img"
+                        src={errorIcon}
+                        alt="Error"
+                      />
+                      This field is required
+                    </p>
+                  )}
+                  <label className="edit-wh__label" htmlFor="address">
+                    Street Address
+                  </label>
+                  <input
+                    className={`edit-wh__input ${
+                      !isAddress && "edit-wh__input--required"
+                    }`}
+                    type="text"
+                    name="address"
+                    placeholder="Street Address"
+                    value={address}
+                    onChange={handleChangeAddress}
+                  />
+                  {!isAddress && (
+                    <p className="edit-wh__error">
+                      <img
+                        className="edit-wh__error-img"
+                        src={errorIcon}
+                        alt="Error"
+                      />
+                      This field is required
+                    </p>
+                  )}
+
+                  <label className="edit-wh__label" htmlFor="city">
+                    City
+                  </label>
+                  <input
+                    className={`edit-wh__input ${
+                      !isCity && "edit-wh__input--required"
+                    }`}
+                    type="text"
+                    name="city"
+                    placeholder="City"
+                    value={city}
+                    onChange={handleChangeCity}
+                  />
+                  {!isCity && (
+                    <p className="edit-wh__error">
+                      <img
+                        className="edit-wh__error-img"
+                        src={errorIcon}
+                        alt="Error"
+                      />
+                      This field is required
+                    </p>
+                  )}
+
+                  <label className="edit-wh__label" htmlFor="country">
+                    Country
+                  </label>
+                  <input
+                    className={`edit-wh__input ${
+                      !isCountry && "edit-wh__input--required"
+                    }`}
+                    type="text"
+                    name="country"
+                    placeholder="Country"
+                    value={country}
+                    onChange={handleChangeCountry}
+                  />
+                  {!isCountry && (
+                    <p className="edit-wh__error">
+                      <img
+                        className="edit-wh__error-img"
+                        src={errorIcon}
+                        alt="Error"
+                      />
+                      This field is required
+                    </p>
+                  )}
+                </div>
+                <div className="edit-wh__details-wrapper">
+                  <h2 className="edit-wh__subtitle">Contact Details</h2>
+                  <label className="edit-wh__label" htmlFor="contact-name">
+                    Contact Name
+                  </label>
+                  <input
+                    className={`edit-wh__input ${
+                      !isContact && "edit-wh__input--required"
+                    }`}
+                    type="text"
+                    name="contact-name"
+                    placeholder="Contact Name"
+                    value={contactName}
+                    onChange={handleChangeContact}
+                  />
+                  {!isContact && (
+                    <p className="edit-wh__error">
+                      <img
+                        className="edit-wh__error-img"
+                        src={errorIcon}
+                        alt="Error"
+                      />
+                      This field is required
+                    </p>
+                  )}
+                  <label className="edit-wh__label" htmlFor="position">
+                    Position
+                  </label>
+                  <input
+                    className={`edit-wh__input ${
+                      !isPosition && "edit-wh__input--required"
+                    }`}
+                    type="text"
+                    name="position"
+                    placeholder="Position"
+                    value={position}
+                    onChange={handleChangePosition}
+                  />
+                  {!isPosition && (
+                    <p className="edit-wh__error">
+                      <img
+                        className="edit-wh__error-img"
+                        src={errorIcon}
+                        alt="Error"
+                      />
+                      This field is required
+                    </p>
+                  )}
+                  <label className="edit-wh__label" htmlFor="phone">
+                    Phone Number
+                  </label>
+                  <input
+                    className={`edit-wh__input ${
+                      !isPhone && "edit-wh__input--required"
+                    }`}
+                    type="text"
+                    name="phone"
+                    placeholder="Phone Number"
+                    value={phone}
+                    onChange={handleChangePhone}
+                  />
+                  {!isPhone && (
+                    <p className="edit-wh__error">
+                      <img
+                        className="edit-wh__error-img"
+                        src={errorIcon}
+                        alt="Error"
+                      />
+                      This field is required
+                    </p>
+                  )}
+                  <label className="edit-wh__label" htmlFor="email">
+                    Email
+                  </label>
+                  <input
+                    className={`edit-wh__input ${
+                      !isEmail && "edit-wh__input--required"
+                    }`}
+                    type="text"
+                    name="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={handleChangeEmail}
+                  />
+                  {!isEmail && (
+                    <p className="edit-wh__error">
+                      <img
+                        className="edit-wh__error-img"
+                        src={errorIcon}
+                        alt="Error"
+                      />
+                      This field is required
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div className="edit-wh__buttons-wrapper">
+                <Link to="/warehouse">
+                  <button className="edit-wh__cancel-button">Cancel</button>
+                </Link>
+                <button className="edit-wh__add-button" type="submit">
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </PageWrapper>
   );
 };
 
