@@ -13,6 +13,11 @@
     border-radius: 1.25rem;
     background-color: colors.$instock-indigo;
     height: 2.25rem;
+
+    &:hover {
+      background-color: colors.$graphite;
+    }
+
     &--width {
       width: 100%;
       margin: 1rem 0rem 1.5rem;
@@ -32,6 +37,11 @@
     background-color: colors.$instock-indigo;
     height: 2.375rem;
     padding: 0 1rem;
+
+    &:hover {
+      background-color: colors.$graphite;
+    }
+
     &--width {
       width: 100%;
       margin: 0;

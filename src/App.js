@@ -11,6 +11,7 @@ import EditItemPage from "./pages/EditItemPage/EditItemPage";
 import AddItemPage from "./pages/AddItemPage/AddItemPage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import DeleteModal from "./components/DeleteModal/DeleteModal";
 
 import { useEffect, useState } from "react";
 import getWarehouses, { getInventory } from "./utils/utils";
@@ -18,6 +19,22 @@ import getWarehouses, { getInventory } from "./utils/utils";
 function App() {
   const [warehouses, setWarehouses] = useState([]);
   const [inventory, setInventory] = useState([]);
+
+  const [openModalW, setOpenModalW] = useState(false);
+  const [openModalI, setOpenModalI] = useState(false);
+  const [delWarehouse, setDelWarehouse] = useState([]);
+  const [delInvItem, setDelInvItem] = useState([]);
+
+  const handleWarehouseModal = (warehouse) => {
+    setOpenModalW(!openModalW);
+    setDelWarehouse(warehouse);
+  };
+
+  const handleInventoryModal = (item) => {
+    setOpenModalI(!openModalI);
+    setDelInvItem(item);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const warehousesData = await getWarehouses();
@@ -38,15 +55,31 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
+      {openModalW && (
+        <DeleteModal
+          handleModal={handleWarehouseModal}
+          warehouse={delWarehouse}
+          renderWarehouses={renderWarehouses}
+          type="warehouse"
+        />
+      )}
+      {openModalI && (
+        <DeleteModal
+          handleModal={handleInventoryModal}
+          item={delInvItem}
+          renderInventory={updateInventory}
+          type="item"
+        />
+      )}
 
       <Routes>
-        <Route path="/" element={ <Navigate to="/warehouse" /> } />
+        <Route path="/" element={<Navigate to="/warehouse" />} />
         <Route
           path="/warehouse"
           element={
             <WarehousePage
-              warehouses={ warehouses }
-              renderWarehouses={ renderWarehouses }
+              warehouses={warehouses}
+              handleModal={handleWarehouseModal}
             />
           }
         />
@@ -54,21 +87,21 @@ function App() {
           path="/warehouse/add"
           element={
             <AddWarehousePage
-              warehouses={ warehouses }
-              renderWarehouses={ renderWarehouses }
+              warehouses={warehouses}
+              renderWarehouses={renderWarehouses}
             />
           }
         />
         <Route
           path="/warehouse/:warehouseId"
-          element={ <WarehouseDetailsPage /> }
+          element={<WarehouseDetailsPage />}
         />
         <Route
           path="/warehouse/:warehouseId/edit"
           element={
             <EditWarehousePage
-              warehouses={ warehouses }
-              renderWarehouses={ renderWarehouses }
+              warehouses={warehouses}
+              renderWarehouses={renderWarehouses}
             />
           }
         />
@@ -77,8 +110,9 @@ function App() {
           path="/inventory"
           element={
             <InventoryPage
-              updateInventory={ updateInventory }
-              inventory={ inventory }
+              updateInventory={updateInventory}
+              inventory={inventory}
+              handleModal={handleInventoryModal}
             />
           }
         />
@@ -86,18 +120,18 @@ function App() {
           path="inventory/add"
           element={
             <AddItemPage
-              updateInventory={ updateInventory }
-              inventory={ inventory }
+              updateInventory={updateInventory}
+              inventory={inventory}
             />
           }
         />
-        <Route path="/inventory/:itemId" element={ <ItemDetailsPage /> } />
+        <Route path="/inventory/:itemId" element={<ItemDetailsPage />} />
         <Route
           path="/inventory/:itemId/edit"
           element={
             <EditItemPage
-              updateInventory={ updateInventory }
-              inventory={ inventory }
+              updateInventory={updateInventory}
+              inventory={inventory}
             />
           }
         />

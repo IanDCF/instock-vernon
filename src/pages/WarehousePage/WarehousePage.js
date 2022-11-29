@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
-const WarehousesPage = ({ warehouses, renderWarehouses }) => {
+const WarehousesPage = ({ warehouses, handleModal }) => {
   const [searchedWarehouses, setSearchedWarehouses] = useState(warehouses);
   useEffect(() => {
     setSearchedWarehouses(warehouses);
@@ -19,7 +19,9 @@ const WarehousesPage = ({ warehouses, renderWarehouses }) => {
     if (!input) {
       setSearchedWarehouses(warehouses);
     } else {
-      const filteredWarehouses = warehouses.filter(warehouse => warehouse.warehouse_name.toLowerCase().includes(input));
+      const filteredWarehouses = warehouses.filter((warehouse) =>
+        warehouse.warehouse_name.toLowerCase().includes(input)
+      );
 
       setSearchedWarehouses(filteredWarehouses);
     }
@@ -30,20 +32,23 @@ const WarehousesPage = ({ warehouses, renderWarehouses }) => {
         <article className="warehouses__header">
           <h1 className="warehouses__header-title">Warehouses</h1>
           <section className="warehouses__form-search">
-            <form onSubmit={ inputOnChange } className="warehouses__header-form">
+            <form onSubmit={inputOnChange} className="warehouses__header-form">
               <img
                 className="warehouses__search-icon"
-                src={ searchIcon }
+                src={searchIcon}
                 alt=""
               />
               <input
                 className="warehouses__header-input"
                 placeholder="Search..."
-                onChange={ (e) => inputOnChange(e) }
+                onChange={(e) => inputOnChange(e)}
               />
             </form>
-            <Link to={ "/warehouse/add" }>
-              <AddNewButton text={ "Add New Warehouse" } />
+            <Link to={"/warehouse/add"}>
+              <AddNewButton
+                styling={"add-new--width"}
+                text={"Add New Warehouse"}
+              />
             </Link>
           </section>
         </article>
@@ -55,7 +60,7 @@ const WarehousesPage = ({ warehouses, renderWarehouses }) => {
                   <span className="warehouses__list-value">WAREHOUSE</span>
                   <img
                     className="warehouses__sort-icon"
-                    src={ sortIcon }
+                    src={sortIcon}
                     alt=""
                   />
                 </div>
@@ -65,7 +70,7 @@ const WarehousesPage = ({ warehouses, renderWarehouses }) => {
                   </span>
                   <img
                     className="warehouses__sort-icon"
-                    src={ sortIcon }
+                    src={sortIcon}
                     alt=""
                   />
                 </div>
@@ -77,7 +82,7 @@ const WarehousesPage = ({ warehouses, renderWarehouses }) => {
                   </span>
                   <img
                     className="warehouses__sort-icon"
-                    src={ sortIcon }
+                    src={sortIcon}
                     alt=""
                   />
                 </div>
@@ -87,7 +92,7 @@ const WarehousesPage = ({ warehouses, renderWarehouses }) => {
                   </span>
                   <img
                     className="warehouses__sort-icon"
-                    src={ sortIcon }
+                    src={sortIcon}
                     alt=""
                   />
                 </div>
@@ -97,14 +102,14 @@ const WarehousesPage = ({ warehouses, renderWarehouses }) => {
               <span className="warehouses__list-action">ACTIONS</span>
             </div>
           </li>
-          { searchedWarehouses &&
+          {searchedWarehouses &&
             searchedWarehouses.map((warehouse, index) => (
               <WarehouseItem
-                key={ index }
-                warehouse={ warehouse }
-                renderWarehouses={ renderWarehouses }
+                key={index}
+                warehouse={warehouse}
+                handleModal={handleModal}
               />
-            )) }
+            ))}
         </ul>
       </section>
     </PageWrapper>
