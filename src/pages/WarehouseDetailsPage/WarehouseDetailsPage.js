@@ -8,29 +8,30 @@ import InventoryTagInStock from "../../components/Buttons/InventoryTag/Inventory
 import InventoryTagOutOfStock from "../../components/Buttons/InventoryTag/InventoryTagOutOfStock";
 import ArrowBack from "../../assets/icons/arrow_back-24px.svg";
 import axios from "axios";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
 import "./WarehouseDetailsPage.scss";
 import { useEffect, useState } from "react";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
-function WarehouseDetailsPage() {
+function WarehouseDetailsPage({ handleModal }) {
   const [warehouseInfo, setWarehouseInfo] = useState();
   const [warehouseInventory, setWarehouseInventory] = useState();
+
+  const { warehouseId } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data: warehouseData } = await axios.get(
-          `http://localhost:8080/warehouses/5bf7bd6c-2b16-4129-bddc-9d37ff8539e9`
+          `http://localhost:8080/warehouses/${warehouseId}`
         );
         const { data: warehouseInventoryData } = await axios.get(
-          `http://localhost:8080/warehouses/5bf7bd6c-2b16-4129-bddc-9d37ff8539e9/inventories`
+          `http://localhost:8080/warehouses/${warehouseId}/inventories`
         );
 
-        // console.log(warehouseData);
         setWarehouseInfo(warehouseData);
 
-        console.log(warehouseInventoryData);
         setWarehouseInventory(warehouseInventoryData);
       } catch (error) {
         console.log(error);
@@ -39,50 +40,66 @@ function WarehouseDetailsPage() {
     fetchData();
   }, []);
 
+  let navigate = useNavigate();
+
+  const handleEditClick = () => {
+    console.log("clicked");
+    navigate(`/warehouse/${warehouseId}/edit`);
+  };
+
+  const updateInventory = (item) => {
+    handleModal(item);
+    setWarehouseInventory(
+      warehouseInventory.filter((element) => element.id !== item.id)
+    );
+  };
+
   return (
     <PageWrapper>
       <section className="wh-details">
-        { warehouseInfo && (
+        {warehouseInfo && (
           <div className="wh-details__title-wrapper">
             <div className="wh-details__title">
               <div className="wh-details__back-title-wrapper">
-                <img
-                  className="wh-details__back-arrow"
-                  src={ ArrowBack }
-                  alt="back arrow"
-                />
-                <h1>{ warehouseInfo.city }</h1>
+                <Link to="/warehouse">
+                  <img
+                    className="wh-details__back-arrow"
+                    src={ArrowBack}
+                    alt="back arrow"
+                  />
+                </Link>
+                <h1>{warehouseInfo.city}</h1>
               </div>
-              <EditButton />
+              <EditButton onClick={handleEditClick} />
             </div>
           </div>
-        ) }
-        { warehouseInfo && (
+        )}
+        {warehouseInfo && (
           <div className="wh-details__meta-info">
             <div className="wh-details__meta-info-wrapper">
               <div className="wh-details__address">
                 <p className="wh-details__meta-label">Warehouse Address:</p>
                 <p className="wh-details__meta-content">
-                  { warehouseInfo.address }, { warehouseInfo.city },{ " " }
-                  { warehouseInfo.country }
+                  {warehouseInfo.address}, {warehouseInfo.city},{" "}
+                  {warehouseInfo.country}
                 </p>
               </div>
               <div className="wh-details__contact-name">
                 <p className="wh-details__meta-label">Contact Name:</p>
                 <p className="wh-details__meta-content">
-                  { warehouseInfo.contact_name } <br></br>{ " " }
-                  { warehouseInfo.contact_position }
+                  {warehouseInfo.contact_name} <br></br>{" "}
+                  {warehouseInfo.contact_position}
                 </p>
               </div>
               <div className="wh-details__contact-info">
                 <p className="wh-details__meta-label">Contact Information:</p>
                 <p className="wh-details__meta-content">
-                  { warehouseInfo.contact_phone } { warehouseInfo.contact_email }
+                  {warehouseInfo.contact_phone} {warehouseInfo.contact_email}
                 </p>
               </div>
             </div>
           </div>
-        ) }
+        )}
 
         <div className="wh-details__table">
           <div className="wh-details__column-labels">
@@ -91,7 +108,7 @@ function WarehouseDetailsPage() {
                 <p>Inventory Item</p>
                 <img
                   className="wh-details__sort-icon"
-                  src={ sortIcon }
+                  src={sortIcon}
                   alt="sort icon"
                 />
               </div>
@@ -99,7 +116,7 @@ function WarehouseDetailsPage() {
                 <p>Category</p>
                 <img
                   className="wh-details__sort-icon"
-                  src={ sortIcon }
+                  src={sortIcon}
                   alt="sort icon"
                 />
               </div>
@@ -107,7 +124,7 @@ function WarehouseDetailsPage() {
                 <p>Status</p>
                 <img
                   className="wh-details__sort-icon"
-                  src={ sortIcon }
+                  src={sortIcon}
                   alt="sort icon"
                 />
               </div>
@@ -115,7 +132,7 @@ function WarehouseDetailsPage() {
                 <p>Qty</p>
                 <img
                   className="wh-details__sort-icon"
-                  src={ sortIcon }
+                  src={sortIcon}
                   alt="sort icon"
                 />
               </div>
@@ -125,41 +142,48 @@ function WarehouseDetailsPage() {
             </div>
           </div>
           <div className="wh-details__table-rows">
-            { warehouseInventory &&
+            {warehouseInventory &&
               warehouseInventory.map((item) => {
                 return (
-                  <article className="wh-details__item-row" key={ item.id }>
+                  <article className="wh-details__item-row" key={item.id}>
                     <div className="wh-details__item-row-wrapper">
                       <div className="wh-details__item-wrapper">
                         <label className="wh-details__mobile-label">
                           Inventory Item
                         </label>
-                        {/* <br></br> */ }
-                        <a className="wh-details-item-btn" href="">
-                          { item.item_name }
+                        {/* <br></br> */}
+                        <Link
+                          className="wh-details-item-btn"
+                          to={`/inventory/${item.id}`}
+                        >
+                          {/* <a className="wh-details-item-btn" href=""> */}
+                          {item.item_name}
                           <img
                             className="wh-details__item-btn-icon"
-                            src={ chevronIcon }
+                            src={chevronIcon}
                             alt="chevron icon"
                           />
-                        </a>
+                          {/* </a> */}
+                        </Link>
                       </div>
                       <div className="wh-details__category-wrapper">
                         <label className="wh-details__mobile-label">
                           Category
                         </label>
                         <p className="wh-details__category wh-details__information">
-                          { item.category }
+                          {item.category}
                         </p>
                       </div>
                       <div className="wh-details__status-wrapper">
-                        <label className="wh-details__mobile-label">Status</label>
+                        <label className="wh-details__mobile-label">
+                          Status
+                        </label>
                         <p className="wh-details__status wh-details__information">
-                          { item.quantity === 0 ? (
+                          {item.quantity === 0 ? (
                             <InventoryTagOutOfStock />
                           ) : (
                             <InventoryTagInStock />
-                          ) }
+                          )}
                         </p>
                       </div>
                       <div className="wh-details__qty-wrapper">
@@ -167,25 +191,30 @@ function WarehouseDetailsPage() {
                           Quantity
                         </label>
                         <p className="wh-details__quantity wh-details__information">
-                          { item.quantity }
+                          {item.quantity}
                         </p>
                       </div>
                       <div className="wh-details__actions-wrapper">
-                        <img
-                          className="wh-details__delete wh-details__action-icon"
-                          src={ deleteIcon }
-                          alt="delete item"
-                        />
-                        <img
-                          className="wh-details__edit wh-details__action-icon"
-                          src={ editIcon }
-                          alt="edit item"
-                        />
+                        <Link>
+                          <img
+                            className="wh-details__delete wh-details__action-icon"
+                            src={deleteIcon}
+                            alt="delete item"
+                            onClick={() => updateInventory(item)}
+                          />
+                        </Link>
+                        <Link to={`/inventory/${item.id}/edit`}>
+                          <img
+                            className="wh-details__edit wh-details__action-icon"
+                            src={editIcon}
+                            alt="edit item"
+                          />
+                        </Link>
                       </div>
                     </div>
                   </article>
                 );
-              }) }
+              })}
           </div>
         </div>
       </section>

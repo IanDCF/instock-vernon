@@ -2,9 +2,9 @@ import React from "react";
 import editIcon from "../../../assets/icons/edit-24px.svg";
 import "./EditButton.scss";
 
-function EditButton() {
+function EditButton({ onClick }) {
   return (
-    <button className="edit-btn">
+    <button className="edit-btn" onClick={onClick ? onClick : ""}>
       <svg
         width="24"
         height="24"
