@@ -8,11 +8,11 @@ const Header = () => {
 
   const activeLink = (path) => {
     if (path.search(/warehouse/) === 1) {
-      console.log("warehouse");
+      // console.log("warehouse");
       return "warehouse";
     }
     if (path.search(/inventory/) === 1) {
-      console.log("inventory");
+      // console.log("inventory");
       return "inventory";
     }
   };
