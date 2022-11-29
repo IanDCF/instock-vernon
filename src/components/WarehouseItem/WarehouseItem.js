@@ -71,14 +71,6 @@ const WarehouseItem = ({ warehouse, handleModal }) => {
           </Link>
         </div>
       </li>
-      {/* {openModal && (
-        <DeleteModal
-          handleModal={handleModal}
-          warehouse={warehouse}
-          renderWarehouses={renderWarehouses}
-          type="warehouse"
-        />
-      )} */}
     </>
   );
 };

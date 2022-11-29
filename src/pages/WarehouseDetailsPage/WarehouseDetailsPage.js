@@ -14,7 +14,7 @@ import "./WarehouseDetailsPage.scss";
 import { useEffect, useState } from "react";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
-function WarehouseDetailsPage() {
+function WarehouseDetailsPage({ handleModal }) {
   const [warehouseInfo, setWarehouseInfo] = useState();
   const [warehouseInventory, setWarehouseInventory] = useState();
 
@@ -30,10 +30,8 @@ function WarehouseDetailsPage() {
           `http://localhost:8080/warehouses/${warehouseId}/inventories`
         );
 
-        // console.log(warehouseData);
         setWarehouseInfo(warehouseData);
 
-        // console.log(warehouseInventoryData);
         setWarehouseInventory(warehouseInventoryData);
       } catch (error) {
         console.log(error);
@@ -47,6 +45,13 @@ function WarehouseDetailsPage() {
   const handleEditClick = () => {
     console.log("clicked");
     navigate(`/warehouse/${warehouseId}/edit`);
+  };
+
+  const updateInventory = (item) => {
+    handleModal(item);
+    setWarehouseInventory(
+      warehouseInventory.filter((element) => element.id !== item.id)
+    );
   };
 
   return (
@@ -195,6 +200,7 @@ function WarehouseDetailsPage() {
                             className="wh-details__delete wh-details__action-icon"
                             src={deleteIcon}
                             alt="delete item"
+                            onClick={() => updateInventory(item)}
                           />
                         </Link>
                         <Link to={`/inventory/${item.id}/edit`}>
