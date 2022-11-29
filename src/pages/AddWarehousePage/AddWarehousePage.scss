@@ -80,44 +80,15 @@
   }
 
   &__buttons-wrapper {
-    padding: 1.5rem 1rem 1rem;
-    text-align: center;
-  }
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    background-color: globals.$light-grey;
 
-  &__cancel-button {
-    background-color: globals.$white;
-    border: 1px solid globals.$cloud;
-    border-radius: 20px;
-    color: globals.$slate;
-    font-family: "Tillium Web";
-    font-size: 0.8125rem;
-    font-weight: 600;
-    height: 36px;
-    margin-right: 0.5rem;
-    padding: 8px 16px;
-    width: 47%;
-
-    &:hover {
-      color: globals.$instock-indigo;
-      border: 1px solid globals.$instock-indigo;
-    }
-  }
-
-  &__add-button {
-    background-color: globals.$instock-indigo;
-    border: none;
-    border-radius: 20px;
-    color: globals.$white;
-    font-family: "Tillium Web";
-    font-size: 0.8125rem;
-    font-weight: 600;
-    height: 36px;
-    margin-left: 0.5rem;
-    padding: 8px 16px;
-    width: 47%;
-
-    &:hover {
-      background-color: globals.$graphite;
+    > * {
+      width: 50%;
     }
   }
 
@@ -166,7 +137,7 @@
       border-bottom: none;
       padding-left: 2rem;
       padding-right: 2rem;
-      padding-bottom: 0.5rem;
+      padding-bottom: 2rem;
 
       &:first-child {
         border-right: 1px solid globals.$cloud;
@@ -185,20 +156,16 @@
     }
 
     &__buttons-wrapper {
-      padding-top: 2.5rem;
-      padding-bottom: 1rem;
-      text-align: right;
-    }
-
-    &__cancel-button {
-      font-size: 0.875rem;
-      width: 4.5rem;
-    }
-
-    &__add-button {
-      font-size: 0.875rem;
-      margin-right: 2rem;
-      width: 8.625rem;
+      width: 100%;
+      justify-content: flex-end;
+      > {
+        :first-child {
+          width: 4.5rem;
+        }
+        :nth-child(2) {
+          width: unset;
+        }
+      }
     }
   }
 }

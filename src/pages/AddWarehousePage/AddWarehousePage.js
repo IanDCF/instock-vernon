@@ -1,9 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 import arrowBackIcon from "../../assets/icons/arrow_back-24px.svg";
 import errorIcon from "../../assets/icons/error-24px.svg";
+import AddNewButton from "../../components/Buttons/AddNew/AddNewButton";
+import CancelButton from "../../components/Buttons/CancelButton/CancelButton";
 import "./AddWarehousePage.scss";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
@@ -157,6 +161,10 @@ const AddWarehousePage = ({ warehouses, renderWarehouses }) => {
     return true;
   };
 
+  const notify = () => toast("Warehouse Added.");
+
+  let navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -186,8 +194,12 @@ const AddWarehousePage = ({ warehouses, renderWarehouses }) => {
           setEmail("");
         })
         .catch((error) => console.log(error));
-    } else {
-      return;
+
+      notify();
+
+      setTimeout(() => {
+        navigate("/warehouse");
+      }, 3000);
     }
   };
 
@@ -398,13 +410,21 @@ const AddWarehousePage = ({ warehouses, renderWarehouses }) => {
                 </div>
               </div>
               <div className="add-wh__buttons-wrapper">
-                <Link to="/warehouse">
-                  <button className="add-wh__cancel-button">Cancel</button>
-                </Link>
-                <button className="add-wh__add-button" type="submit">
-                  + Add Warehouse
-                </button>
+                <CancelButton link="/warehouse" />
+                <AddNewButton text="Add Warehouse" />
               </div>
+              <ToastContainer
+                position="bottom-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+              />
             </form>
           </div>
         </div>
