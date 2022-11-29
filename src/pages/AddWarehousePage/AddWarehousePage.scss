@@ -92,12 +92,6 @@
     }
   }
 
-  &__add-button {
-    &:hover {
-      background-color: globals.$graphite;
-    }
-  }
-
   &__error {
     font-size: 0.75rem;
     color: globals.$red;
@@ -172,17 +166,6 @@
           width: unset;
         }
       }
-    }
-
-    &__cancel-button {
-      font-size: 0.875rem;
-      width: 4.5rem;
-    }
-
-    &__add-button {
-      font-size: 0.875rem;
-      margin-right: 2rem;
-      width: 8.625rem;
     }
   }
 }
