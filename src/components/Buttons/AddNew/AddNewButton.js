@@ -1,8 +1,15 @@
-import "./AddNewButton.scss"
-const AddNewButton = ({ text }) => {
-    return (
-        <button className="add-new">+ { text }</button>
-    )
-}
+import "./AddNewButton.scss";
+const AddNewButton = ({ text, styling }) => {
+  return (
+    <button
+      className={ `add-new ${styling}` }
+    // onClick={(event) => {
+    //   onClick(event);
+    // }}
+    >
+      + { text }
+    </button>
+  );
+};
 
-export default AddNewButton
+export default AddNewButton;

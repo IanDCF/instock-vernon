@@ -7,54 +7,103 @@ import AddWarehousePage from "./pages/AddWarehousePage/AddWarehousePage";
 import InventoryPage from "./pages//InventoryPage/InventoryPage";
 import ItemDetailsPage from "./pages/ItemDetailsPage/ItemDetailsPage";
 import EditItemPage from "./pages/EditItemPage/EditItemPage";
-import AddItemPage from "./pages//AddItemPage/AddItemPage";
+
+import AddItemPage from "./pages/AddItemPage/AddItemPage";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+
 import { useEffect, useState } from "react";
-import getWarehouses from "./utils/utils";
+import getWarehouses, { getInventory } from "./utils/utils";
 
 function App() {
   const [warehouses, setWarehouses] = useState([]);
+  const [inventory, setInventory] = useState([]);
   useEffect(() => {
-    const fetchWarehouses = async () => {
-      const data = await getWarehouses();
-      setWarehouses(data);
+    const fetchData = async () => {
+      const warehousesData = await getWarehouses();
+      setWarehouses(warehousesData);
+      const inventoryData = await getInventory();
+      setInventory(inventoryData);
     };
-    fetchWarehouses();
+    fetchData();
   }, []);
 
-  const renderWarehouseList = (id) => {
-    setWarehouses(warehouses.filter((element) => element.id !== id));
+  const renderWarehouses = (newWarehouseList) => {
+    setWarehouses(newWarehouseList);
+  };
+  const updateInventory = (newInventoryList) => {
+    setInventory(newInventoryList);
   };
 
   return (
     <BrowserRouter>
-      {/* Header Component */}
+      <Header />
+
       <Routes>
-        <Route path="/" element={<Navigate to="/warehouse" />} />
+        <Route path="/" element={ <Navigate to="/warehouse" /> } />
         <Route
           path="/warehouse"
           element={
             <WarehousePage
-              warehouses={warehouses}
-              render={renderWarehouseList}
+              warehouses={ warehouses }
+              renderWarehouses={ renderWarehouses }
             />
           }
         />
-        <Route path="/warehouse/add" element={<AddWarehousePage />} />
+        <Route
+          path="/warehouse/add"
+          element={
+            <AddWarehousePage
+              warehouses={ warehouses }
+              renderWarehouses={ renderWarehouses }
+            />
+          }
+        />
         <Route
           path="/warehouse/:warehouseId"
-          element={<WarehouseDetailsPage />}
+          element={ <WarehouseDetailsPage /> }
         />
         <Route
           path="/warehouse/:warehouseId/edit"
-          element={<EditWarehousePage />}
+          element={
+            <EditWarehousePage
+              warehouses={ warehouses }
+              renderWarehouses={ renderWarehouses }
+            />
+          }
         />
 
-        <Route path="/inventory" element={<InventoryPage />} />
-        <Route path="inventory/add" element={<AddItemPage />} />
-        <Route path="/inventory/:itemId" element={<ItemDetailsPage />} />
-        <Route path="/inventory/:itemId/edit" element={<EditItemPage />} />
+        <Route
+          path="/inventory"
+          element={
+            <InventoryPage
+              updateInventory={ updateInventory }
+              inventory={ inventory }
+            />
+          }
+        />
+        <Route
+          path="inventory/add"
+          element={
+            <AddItemPage
+              updateInventory={ updateInventory }
+              inventory={ inventory }
+            />
+          }
+        />
+        <Route path="/inventory/:itemId" element={ <ItemDetailsPage /> } />
+        <Route
+          path="/inventory/:itemId/edit"
+          element={
+            <EditItemPage
+              updateInventory={ updateInventory }
+              inventory={ inventory }
+            />
+          }
+        />
       </Routes>
-      {/* Footer Component */}
+
+      <Footer />
     </BrowserRouter>
   );
 }

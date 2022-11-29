@@ -1,0 +1,216 @@
+@use "../../styles/globals.scss";
+
+// mobile version
+.add-wh {
+  padding: 0 1rem;
+
+  &__wrapper {
+    background-color: globals.$white;
+    box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
+    border-radius: 3px;
+    transform: translateY(-64px);
+  }
+
+  &__title {
+    color: globals.$instock-black;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 2.25rem;
+    margin: 0;
+  }
+
+  &__subtitle {
+    color: globals.$instock-black;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.75rem;
+    margin: 0;
+    padding: 1rem 0 0.5rem;
+  }
+
+  &__heading-wrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid globals.$cloud;
+    padding: 1.5rem;
+  }
+
+  &__details-wrapper {
+    border-bottom: 1px solid globals.$cloud;
+    padding: 0 1.5rem 1.5rem;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__label {
+    color: globals.$instock-black;
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    padding: 1rem 0 0.25rem;
+  }
+
+  &__input {
+    border: 1px solid globals.$cloud;
+    border-radius: 20px;
+    display: block;
+    font-family: "Tillium Web";
+    font-size: 0.8125rem;
+    height: 2.25rem;
+    padding: 0 1rem;
+    width: 100%;
+
+    &:focus {
+      outline: none;
+      border: 1px solid globals.$instock-indigo;
+    }
+
+    &--required {
+      border: 1px solid globals.$red;
+    }
+
+    &::placeholder {
+      color: globals.$slate;
+    }
+  }
+
+  &__buttons-wrapper {
+    padding: 1.5rem 1rem 1rem;
+    text-align: center;
+  }
+
+  &__cancel-button {
+    background-color: globals.$white;
+    border: 1px solid globals.$cloud;
+    border-radius: 20px;
+    color: globals.$slate;
+    font-family: "Tillium Web";
+    font-size: 0.8125rem;
+    font-weight: 600;
+    height: 36px;
+    margin-right: 0.5rem;
+    padding: 8px 16px;
+    width: 47%;
+
+    &:hover {
+      color: globals.$instock-indigo;
+      border: 1px solid globals.$instock-indigo;
+    }
+  }
+
+  &__add-button {
+    background-color: globals.$instock-indigo;
+    border: none;
+    border-radius: 20px;
+    color: globals.$white;
+    font-family: "Tillium Web";
+    font-size: 0.8125rem;
+    font-weight: 600;
+    height: 36px;
+    margin-left: 0.5rem;
+    padding: 8px 16px;
+    width: 47%;
+
+    &:hover {
+      background-color: globals.$graphite;
+    }
+  }
+
+  &__error {
+    font-size: 0.75rem;
+    color: globals.$red;
+    margin: 0;
+    padding-top: 4px;
+  }
+
+  &__error-img {
+    width: 16px;
+    height: 16px;
+    padding-top: 4px;
+  }
+}
+
+// tablet version
+@include globals.tablet {
+  .add-wh {
+    padding: 0 2rem;
+
+    &__title {
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }
+
+    &__subtitle {
+      font-size: 1.5rem;
+      line-height: 2rem;
+      padding-top: 0;
+    }
+
+    &__heading-wrapper {
+      justify-content: flex-start;
+      padding: 2rem 2rem 1.3125rem;
+    }
+
+    &__form-wrapper {
+      display: flex;
+      padding-top: 1.5rem;
+    }
+
+    &__details-wrapper {
+      width: 50%;
+      border-bottom: none;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      padding-bottom: 0.5rem;
+
+      &:first-child {
+        border-right: 1px solid globals.$cloud;
+      }
+    }
+
+    &__label {
+      font-size: 0.875rem;
+      line-height: 1.375rem;
+      padding-top: 1.5rem;
+    }
+
+    &__input {
+      font-size: 0.875rem;
+      line-height: 1.375rem;
+    }
+
+    &__buttons-wrapper {
+      padding-top: 2.5rem;
+      padding-bottom: 1rem;
+      text-align: right;
+    }
+
+    &__cancel-button {
+      font-size: 0.875rem;
+      width: 4.5rem;
+    }
+
+    &__add-button {
+      font-size: 0.875rem;
+      margin-right: 2rem;
+      width: 8.625rem;
+    }
+  }
+}
+
+@include globals.desktop {
+  .add-wh {
+    margin: 0 auto;
+    max-width: 80rem;
+
+    &__details-wrapper {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+    }
+  }
+}

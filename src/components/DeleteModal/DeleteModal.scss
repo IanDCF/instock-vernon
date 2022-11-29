@@ -77,11 +77,16 @@
     display: flex;
     position: absolute;
     justify-content: space-between;
+    gap: 1rem;
 
     @include bp.mobile {
       bottom: 2rem;
       width: 90%;
       bottom: 2rem;
+
+      > * {
+        width: 50% !important;
+      }
     }
 
     @include bp.tablet {

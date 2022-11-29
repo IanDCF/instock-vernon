@@ -1,26 +1,31 @@
 import "./Header.scss";
-
-import instockLogo from "../../assets/logos/InStock-Logo_1x.png";
+import instockLogo from "../../assets/logos/InStock-Logo.svg";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="header">
-      <div className="header__logo">
-        <img src={instockLogo} alt="InStock Logo" />
-      </div>
-      <div className="header__nav">
-        <div>
-          <a className="header__nav-link header__nav-link--active" href="#">
-            Warehouses
-          </a>
+    <div className="header-wrapper">
+      <header className="header">
+        <Link className="header__logo" to="/warehouse">
+          <img src={instockLogo} alt="InStock Logo" />
+        </Link>
+        <div className="header__nav">
+          <div>
+            <Link
+              className="header__nav-link header__nav-link--active"
+              to="/warehouse"
+            >
+              Warehouses
+            </Link>
+          </div>
+          <div>
+            <Link className="header__nav-link" to="inventory">
+              Inventory
+            </Link>
+          </div>
         </div>
-        <div>
-          <a className="header__nav-link" href="#">
-            Inventory
-          </a>
-        </div>
-      </div>
-    </header>
+      </header>
+    </div>
   );
 };
 
