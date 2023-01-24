@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# InStock
+Fully responsive Full-stack React/Express.js app built in a week-long sprint with a group of 4: Miguel Lopez, Ian del Carpio, Lucas Lu, and Jayson Postle.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview:
+In a group of 4, we were tasked with creating an inventory management system for a fictitious company. We were given a Figma design file and had to build a backend using a relational MySQL database, connected with Knex.js, and a server using Express.js. The front-end was built using React (Axios, SCSS, React Router Dom). The user can view warehouse and inventory data as well as add, edit, and delete warehouses and inventories.
 
-## Available Scripts
+## Screenshots and gif Walkthrough
+<img width="1103" alt="warehouses" src="https://user-images.githubusercontent.com/50502972/214374777-916c283c-2efe-471d-ba23-fe8ecec0514d.png">
 
-In the project directory, you can run:
+## Developer installation instructions
 
-### `npm start`
+### Set up the db
+Create a .env file with the following contents:
+```js
+DB_LOCAL_DBNAME = "<your_db_username>";
+DB_LOCAL_USER = "<your_db_password>";
+DB_LOCAL_PASSWORD = "<your_db_password>";
+PORT = 8080;
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Create a new MySQL Database called 'instock'. Once you have a database to use, update the `.env` file again with your user, password, and database information.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+Seed your data
+- Run npx knex seed:run to execute all seed files and add seed data to the database and each table.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+If you have to create your migrations and tables first:
+- For each table, run 'npx knex migrate:make [schema name]' replacing schema name with inventories, warehouses. But these should already be populated with a clone from GitHub.
 
-### `npm run build`
+Start your server
+- cd into the server folder
+- npm run server
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Start your client
+- cd into the client folder
+- npm start
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Tech Stack
+Backend built in javascript with node.js/express.js, a MySQL database connected with Knex.js. The frontend was built in React.js and SCSS for styling.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## What we learned
+### Team Code Consistency and Code Collisions
+We were very lucky to have such a great team both in our ability but more importantly, communication skills. We had rare code collisions and as a group we very quickly resolved issues. The Prettier extension made a few pull requests look like there were issues when in reality there weren’t. One area we would want to work on if given a second opportunity would be to create a consistent design system. We each took tickets from the project management board JIRA and to an extent, worked on each ticket/page/piece of functionality in silo. We asked each other questions but there are lines of duplicate code that could be streamlined. For example, the CSS for the Warehouse and Inventory tables is nearly the same. We really only need one component along but we made two along with two SCSS files. There are 2 other sets of pages that have similar views (adding and editing database items).
 
-### `npm run eject`
+## Portfolio Link
+See more details about the project on our individual portfolios:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Jayson Postle
+https://jaysonpostle.digital/portfolio/instock-inventory-management-system
