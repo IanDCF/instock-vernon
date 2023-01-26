@@ -6,6 +6,7 @@ In a group of 4, we were tasked with creating an inventory management system for
 
 ## Screenshots and gif Walkthrough
 <img width="1103" alt="warehouses" src="https://user-images.githubusercontent.com/50502972/214374777-916c283c-2efe-471d-ba23-fe8ecec0514d.png">
+![instock-walkthrough-shorter](https://user-images.githubusercontent.com/50502972/214955124-760b697b-87bd-47dd-8ddf-0b279c14c0e9.gif)
 
 ## Developer installation instructions
 
