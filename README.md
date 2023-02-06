@@ -1,6 +1,8 @@
 # InStock
 Fully responsive Full-stack React/Express.js app built in a week-long sprint with a group of 4: Miguel Lopez, Ian del Carpio, Lucas Lu, and Jayson Postle.
 
+** View the backend repo here https://github.com/lucaslu/instock-api-vernon **
+
 ## Overview:
 In a group of 4, we were tasked with creating an inventory management system for a fictitious company. We were given a Figma design file and had to build a backend using a relational MySQL database, connected with Knex.js, and a server using Express.js. The front-end was built using React (Axios, SCSS, React Router Dom). The user can view warehouse and inventory data as well as add, edit, and delete warehouses and inventories.
 
